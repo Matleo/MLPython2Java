@@ -70,7 +70,7 @@ h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
 W_fc2 = weight_variable([1024, 10])
 b_fc2 = bias_variable([10])
 
-y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
+y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2  #mit softmax drum erreiche ich schlechtere Ergebnisse
 y_conv = tf.identity(y_conv,"output")
 
 #Tranin the model
@@ -81,10 +81,10 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    for i in range(200):
+    for i in range(500):
         batch = mnist.train.next_batch(50)
         #alle 100 runs ausgabe
-        if i%50==0:
+        if i%100==0:
             train_accuracy = accuracy.eval(feed_dict={x: batch[0], y_: batch[1], keep_prob: 1.0})
             print('step %d, training accuracy %g' % (i, train_accuracy))
         train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
@@ -92,7 +92,7 @@ with tf.Session() as sess:
     #Auswertung
     print('test accuracy %g' % accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
 
-    saveConfig()
+    #saveConfig()
 
   
 

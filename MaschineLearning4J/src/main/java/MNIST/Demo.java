@@ -21,7 +21,7 @@ public class Demo {
 
     public static void main(String[] args) throws Exception {
         SavedModel model = new SavedModel(importDir,modelTag);
-        String picFile= "/MNIST";
+        String picFile= "/Handwritten";
 
         for(int i=0; i<10;i++){
             float[] inputArray = readJsonPic(picDir+picFile+"-"+i+".json");
@@ -59,8 +59,8 @@ public class Demo {
         float[] imgArr=new float[784];
         try {
             BufferedImage img = ImageIO.read(imgFile);
-            img = Thumbnails.of(img).forceSize(28, 28).outputFormat("png").asBufferedImage();//resize to 28x28
 
+            //img = Thumbnails.of(img).forceSize(28, 28).outputFormat("png").asBufferedImage();//resize to 28x28
             //Thumbnails.of(img).forceSize(28, 28).toFile("thumbnail.png");
 
             int width = img.getWidth();

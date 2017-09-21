@@ -5,14 +5,24 @@ def saveJson(tArray,Pics,i):
     with open('../../Own_dat/'+Pics+'-'+str(i)+'.json', 'w') as outfile:
         json.dump({'results':tArray.tolist()}, outfile)
 
+def printComprimiertesPic(resized_image,i):
+    path = "../../Own_dat/komprimiert-"+str(i)+".png"
+    resized_image = tf.cast(resized_image, tf.uint8)
+    img = tf.image.encode_png(resized_image)
+    write = tf.write_file(path , img)
+    sess.run(write)
+
 def printPredictions(Pics):
     for i in range(0,10):
-        file = tf.read_file('../../Own_dat/'+Pics+'-'+str(i)+'.png')
+        path = '../../Own_dat/'+Pics+'-'+str(i)+'.png'
+        file = tf.read_file(path)
         img = tf.image.decode_png(file, channels=1)
         resized_image = tf.image.resize_images(img, [28, 28])
+        printComprimiertesPic(resized_image,i)
         tensor=tf.reshape(resized_image, [-1])
         tArray=1-sess.run(tensor)/255 #von [0,255] auf [0,1] umdrehen
-        saveJson(tArray,Pics,i)
+
+        #saveJson(tArray,Pics,i)
         determinNumber(tArray,i)
 
 def determinNumber(tArray,i):
