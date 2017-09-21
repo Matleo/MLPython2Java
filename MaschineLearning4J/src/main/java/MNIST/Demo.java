@@ -14,14 +14,14 @@ import java.io.IOException;
 
 
 public class Demo {
-    private static final String importDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Fully Connected NN/SavedModel/export";
+    private static final String importDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/CNN/export";
     private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Own_dat";
     private static final String modelTag = "s";
 
 
     public static void main(String[] args) throws Exception {
         SavedModel model = new SavedModel(importDir,modelTag);
-        String picFile="/MNIST";
+        String picFile= "/MNIST";
 
         for(int i=0; i<10;i++){
             float[] inputArray = readJsonPic(picDir+picFile+"-"+i+".json");

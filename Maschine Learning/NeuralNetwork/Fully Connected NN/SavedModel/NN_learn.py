@@ -88,15 +88,3 @@ print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels,
 
 saveConfig()
 
-
-#----------------------------------------------------------------------------------------------------------
-
-"""for i in range(0,10):
-    file = tf.read_file('./Own_dat/Handwritten-'+str(i)+'.png')
-    img = tf.image.decode_png(file, channels=1)
-    resized_image = tf.image.resize_images(img, [28, 28])
-    tensor=tf.reshape(resized_image, [-1])
-    tArray=1-sess.run(tensor)/255 #von [0,255] auf [0,1] umdrehen
-    determinNumber(tArray,i)
-    #printMNIST(tArray,i)"""
-
