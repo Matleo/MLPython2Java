@@ -2,7 +2,7 @@ import tensorflow as tf
 
 def printPredictions(Pics):
     for i in range(0,10):
-        file = tf.read_file('../Own_dat/'+Pics+'-'+str(i)+'.png')
+        file = tf.read_file('../../Own_dat/'+Pics+'-'+str(i)+'.png')
         img = tf.image.decode_png(file, channels=1)
         resized_image = tf.image.resize_images(img, [28, 28])
         tensor=tf.reshape(resized_image, [-1])

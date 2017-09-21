@@ -1,10 +1,9 @@
 package MNIST;
 
-
 import org.tensorflow.Tensor;
 
-
 import java.nio.FloatBuffer;
+
 
 public class TFWrapper {
 

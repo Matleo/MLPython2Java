@@ -1,6 +1,5 @@
 package MNIST;
 
-
 import net.coobird.thumbnailator.Thumbnails;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,9 +14,9 @@ import java.io.IOException;
 
 
 public class Demo {
-    public static final String importDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/SavedModel/export";
-    public static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Own_dat";
-    public static final String modelTag = "s";
+    private static final String importDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Fully Connected NN/SavedModel/export";
+    private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Own_dat";
+    private static final String modelTag = "s";
 
 
     public static void main(String[] args) throws Exception {
@@ -32,7 +31,7 @@ public class Demo {
         }
     }
 
-    public static float[] readJsonPic(String path){
+    private static float[] readJsonPic(String path){
         JSONParser parser = new JSONParser();
         double[] arr = new double[784];
         float[] picArr = new float[784];
@@ -55,7 +54,7 @@ public class Demo {
     }
 
 
-    public static float[] readPic(String path){
+    private static float[] readPic(String path){
         File imgFile = new File(path);
         float[] imgArr=new float[784];
         try {

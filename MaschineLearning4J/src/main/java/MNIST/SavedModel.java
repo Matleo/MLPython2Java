@@ -1,17 +1,12 @@
 package MNIST;
 
-
 import org.tensorflow.SavedModelBundle;
 import org.tensorflow.Session;
 import org.tensorflow.Tensor;
 
-
-
 import static MNIST.TFWrapper.*;
 
-
 import java.util.List;
-
 
 
 public class SavedModel {
@@ -24,7 +19,7 @@ public class SavedModel {
         this.s=this.sb.session();
     }
 
-    public int predictNumber(float[] inputArray){
+    protected int predictNumber(float[] inputArray){
 
         Tensor input = toTensor(inputArray);
         Tensor dKeep = Tensor.create(1f);

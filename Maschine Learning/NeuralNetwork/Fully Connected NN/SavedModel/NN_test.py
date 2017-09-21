@@ -1,15 +1,18 @@
 import tensorflow as tf
 import json
 
+def saveJson(tArray,Pics,i):
+    with open('../../Own_dat/'+Pics+'-'+str(i)+'.json', 'w') as outfile:
+        json.dump({'results':tArray.tolist()}, outfile)
+
 def printPredictions(Pics):
     for i in range(0,10):
-        file = tf.read_file('../Own_dat/'+Pics+'-'+str(i)+'.png')
+        file = tf.read_file('../../Own_dat/'+Pics+'-'+str(i)+'.png')
         img = tf.image.decode_png(file, channels=1)
         resized_image = tf.image.resize_images(img, [28, 28])
         tensor=tf.reshape(resized_image, [-1])
         tArray=1-sess.run(tensor)/255 #von [0,255] auf [0,1] umdrehen
-        with open('../Own_dat/'+Pics+'-'+str(i)+'.json', 'w') as outfile:
-            json.dump({'results':tArray.tolist()}, outfile)
+        saveJson(tArray,Pics,i)
         determinNumber(tArray,i)
 
 def determinNumber(tArray,i):

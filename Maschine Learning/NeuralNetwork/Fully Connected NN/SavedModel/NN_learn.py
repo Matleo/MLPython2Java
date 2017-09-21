@@ -1,14 +1,20 @@
-import numpy as np
+import os
+import shutil
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
-mnist = input_data.read_data_sets("../MNIST_data/", one_hot=True)
+mnist = input_data.read_data_sets("../../MNIST_data/", one_hot=True)
 
 
 def saveConfig():
-    export_dir = "./export/model"
-    saver = tf.train.Saver()
-    saver.save(sess, export_dir)
+    export_dir = "./export"
+    if os.path.exists(export_dir):
+        shutil.rmtree(export_dir)
+    builder = tf.saved_model.builder.SavedModelBuilder(export_dir)
+    builder.add_meta_graph_and_variables(sess,"s")
+    builder.save()
+
+
 
 
 #----------------------------------------------------------------------------------------------------------
@@ -65,14 +71,14 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 
 #start training
-for i in range(1000):
+for i in range(10000):
     batch_xs, batch_ys = mnist.train.next_batch(100) #gib mir 100 x,y aus den Daten(für Effizienz)
     #feed_dict replaces the placeholder tensors x and y_ with the training examples
     sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys, dKeep:0.75})
 
     #aktuelle Genauigkeit und loss
-    if i % 200 == 0:
-        print(sess.run([accuracy,cross_entropy], feed_dict={x: mnist.train.images, y_: mnist.train.labels, dKeep:1.0}))
+    if i % 500 == 0:
+        print("epoche "+i+": "+sess.run([accuracy,cross_entropy], feed_dict={x: mnist.train.images, y_: mnist.train.labels, dKeep:1.0}))
 
 print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels, dKeep:1.0}))
 
@@ -82,4 +88,15 @@ print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels,
 
 saveConfig()
 
+
+#----------------------------------------------------------------------------------------------------------
+
+"""for i in range(0,10):
+    file = tf.read_file('./Own_dat/Handwritten-'+str(i)+'.png')
+    img = tf.image.decode_png(file, channels=1)
+    resized_image = tf.image.resize_images(img, [28, 28])
+    tensor=tf.reshape(resized_image, [-1])
+    tArray=1-sess.run(tensor)/255 #von [0,255] auf [0,1] umdrehen
+    determinNumber(tArray,i)
+    #printMNIST(tArray,i)"""
 

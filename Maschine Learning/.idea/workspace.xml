@@ -11,15 +11,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Maschine_Learning$NN_test__1_.coverage" NAME="NN_test (1) Coverage Results" MODIFIED="1505926918312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/saver" />
+    <SUITE FILE_PATH="coverage/Maschine_Learning$NN_test__1_.coverage" NAME="NN_test (1) Coverage Results" MODIFIED="1506005976061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$numRec2.coverage" NAME="numRec2 Coverage Results" MODIFIED="1505838232293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork" />
-    <SUITE FILE_PATH="coverage/Maschine_Learning$NN_test.coverage" NAME="NN_test Coverage Results" MODIFIED="1505922130820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork" />
+    <SUITE FILE_PATH="coverage/Maschine_Learning$NN_test.coverage" NAME="NN_test Coverage Results" MODIFIED="1506005497281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/saver" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$NN_test__2_.coverage" NAME="NN_test (2) Coverage Results" MODIFIED="1505999880659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/SavedModel" />
-    <SUITE FILE_PATH="coverage/Maschine_Learning$NN_learn.coverage" NAME="NN_learn Coverage Results" MODIFIED="1505922060343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork" />
+    <SUITE FILE_PATH="coverage/Maschine_Learning$NN_learn.coverage" NAME="NN_learn Coverage Results" MODIFIED="1506005465648" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/saver" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$NN_learn__1_.coverage" NAME="NN_learn (1) Coverage Results" MODIFIED="1505991614985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/SavedModel" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$NeuralNetwork.coverage" NAME="NeuralNetwork Coverage Results" MODIFIED="1505739556967" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$PMMLTest.coverage" NAME="PMMLTest Coverage Results" MODIFIED="1505736774202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Maschine_Learning$NN_learn__2_.coverage" NAME="NN_learn (2) Coverage Results" MODIFIED="1505926726043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/saver" />
+    <SUITE FILE_PATH="coverage/Maschine_Learning$NN_learn__2_.coverage" NAME="NN_learn (2) Coverage Results" MODIFIED="1506005722008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$lowLevelNN.coverage" NAME="lowLevelNN Coverage Results" MODIFIED="1505838239695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$PMML_Demo.coverage" NAME="PMML Demo Coverage Results" MODIFIED="1505911708582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$test.coverage" NAME="test Coverage Results" MODIFIED="1505827111767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -27,20 +27,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
       <file leaf-file-name="NN_learn.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NeuralNetwork/SavedModel/NN_learn.py">
+        <entry file="file://$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel/NN_learn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1321">
-              <caret line="20" column="56" lean-forward="true" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
-              <folding />
+            <state relative-caret-position="2025">
+              <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="NN_test.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NeuralNetwork/SavedModel/NN_test.py">
+        <entry file="file://$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel/NN_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="496">
-              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="125">
+              <caret line="5" column="55" lean-forward="true" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -84,6 +86,10 @@
         <option value="$PROJECT_DIR$/NeuralNetwork/saver/NN_test.py" />
         <option value="$PROJECT_DIR$/NeuralNetwork/SavedModel/NN_learn.py" />
         <option value="$PROJECT_DIR$/NeuralNetwork/SavedModel/NN_test.py" />
+        <option value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/saver/NN_learn.py" />
+        <option value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/saver/NN_test.py" />
+        <option value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel/NN_learn.py" />
+        <option value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel/NN_test.py" />
       </list>
     </option>
   </component>
@@ -93,9 +99,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="1910" />
-    <option name="width" value="1276" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="3166" />
+    <option name="width" value="2204" />
     <option name="height" value="1410" />
   </component>
   <component name="ProjectView">
@@ -133,6 +139,13 @@
               <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
               <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
               <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
+              <item name="Fully Connected NN" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
+              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
+              <item name="Fully Connected NN" type="462c0819:PsiDirectoryNode" />
               <item name="SavedModel" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -168,25 +181,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.NN_test (2)">
-    <configuration name="NN_learn (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NeuralNetwork/SavedModel" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Maschine Learning" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/SavedModel/NN_learn.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
+  <component name="RunManager" selected="Python.NN_test (1)">
     <configuration name="NN_learn (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -194,13 +189,31 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NeuralNetwork/saver" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Maschine Learning" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/saver/NN_learn.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel/NN_learn.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="NN_learn" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/saver" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Maschine Learning" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/saver/NN_learn.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -212,13 +225,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NeuralNetwork/saver" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Maschine Learning" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/saver/NN_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel/NN_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -248,13 +261,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NeuralNetwork" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/saver" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Maschine Learning" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\lema\IdeaProjects\Maschine Learning\NeuralNetwork\saver\NN_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/saver/NN_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -341,19 +354,19 @@
       <listeners />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.NN_test" />
-      <item index="1" class="java.lang.String" itemvalue="Python.NN_learn (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.NN_learn (2)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.NN_test (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Python.NN_test (2)" />
+      <item index="0" class="java.lang.String" itemvalue="Python.NN_test (2)" />
+      <item index="1" class="java.lang.String" itemvalue="Python.NN_learn" />
+      <item index="2" class="java.lang.String" itemvalue="Python.NN_test" />
+      <item index="3" class="java.lang.String" itemvalue="Python.NN_learn (2)" />
+      <item index="4" class="java.lang.String" itemvalue="Python.NN_test (1)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.NN_test (2)" />
-        <item index="1" class="java.lang.String" itemvalue="Python.NN_learn (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Python.NN_test (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python.NN_learn (2)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.NN_test" />
+        <item index="0" class="java.lang.String" itemvalue="Python.NN_test (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.NN_learn (2)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.NN_test" />
+        <item index="3" class="java.lang.String" itemvalue="Python.NN_learn" />
+        <item index="4" class="java.lang.String" itemvalue="Python.NN_test (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -378,15 +391,15 @@
       <workItem from="1505895649236" duration="1312000" />
       <workItem from="1505908352864" duration="49000" />
       <workItem from="1505911002178" duration="14879000" />
-      <workItem from="1505983287668" duration="7744000" />
+      <workItem from="1505983287668" duration="8925000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65188000" />
+    <option name="totallyTimeSpent" value="66369000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1910" y="0" width="1276" height="1410" extended-state="0" />
+    <frame x="1909" y="-11" width="3462" height="1422" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -396,12 +409,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3095429" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30659252" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3094099" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1127907" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -441,9 +454,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -473,9 +484,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1800">
           <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -490,9 +499,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1875">
           <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -522,9 +529,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1875">
           <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -539,9 +544,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1875">
           <caret line="78" column="37" lean-forward="false" selection-start-line="78" selection-start-column="36" selection-end-line="78" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -556,9 +559,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1950">
           <caret line="78" column="37" lean-forward="false" selection-start-line="78" selection-start-column="36" selection-end-line="78" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -566,9 +567,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="925">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -583,9 +582,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="925">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -600,9 +597,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -610,9 +605,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -673,9 +666,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -689,8 +680,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/NeuralNetwork/SavedModel/NN_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
+        <state relative-caret-position="750">
           <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/saver/NN_learn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-300">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/saver/NN_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="35" lean-forward="false" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel/NN_learn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2025">
+          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel/NN_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="55" lean-forward="true" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
