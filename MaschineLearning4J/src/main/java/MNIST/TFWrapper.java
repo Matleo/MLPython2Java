@@ -38,6 +38,4 @@ public class TFWrapper {
         }
         return maxIndex;
     }
-
-
 }

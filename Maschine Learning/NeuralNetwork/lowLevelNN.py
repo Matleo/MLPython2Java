@@ -105,12 +105,12 @@ for i in range(0,epochs):
 print("Training done")
 print("-----------------------\n")
 #Testing-----------------------------------------------------
-x_test,y_test = createSample(5)
+x_test,y_test = createSample(10)
 y=sigmoid(np.dot(x_test,W)+b)
 for i in range(0,len(x_test)):
     printPic(x_test[i])
     if np.argmax(y[i]) == 0:
         print("Vorraussage: %s"%"KREUZ")
     else:
-        print("Vorraussage: %s"%"DIAMAND")
+        print("Vorraussage: %s"%"DIAMOND")
     print("-----------------------")

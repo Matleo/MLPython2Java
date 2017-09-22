@@ -14,9 +14,9 @@ import java.io.IOException;
 
 
 public class Demo {
-    private static final String importDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/CNN/export";
-    private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Own_dat";
-    private static final String modelTag = "s";
+    private static final String importDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Tensorflow/CNN/export";
+    private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Data/Own_dat";
+    private static final String modelTag = "serve";
 
 
     public static void main(String[] args) throws Exception {
@@ -24,8 +24,9 @@ public class Demo {
         String picFile= "/Handwritten";
 
         for(int i=0; i<10;i++){
-            float[] inputArray = readJsonPic(picDir+picFile+"-"+i+".json");
+            float[] inputArray = readPic(picDir+picFile+"-"+i+".png");
             int predict = model.predictNumber(inputArray);
+
 
             System.out.println(i+": Die abgebildete Zahl ist wahrscheinlich eine: "+predict);
         }
@@ -60,7 +61,7 @@ public class Demo {
         try {
             BufferedImage img = ImageIO.read(imgFile);
 
-            //img = Thumbnails.of(img).forceSize(28, 28).outputFormat("png").asBufferedImage();//resize to 28x28
+            img = Thumbnails.of(img).forceSize(28, 28).asBufferedImage();//resize to 28x28
             //Thumbnails.of(img).forceSize(28, 28).toFile("thumbnail.png");
 
             int width = img.getWidth();
@@ -69,7 +70,7 @@ public class Demo {
             Raster raster = img.getData();
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
-                    imgArrInt[i][j] = raster.getSample(i, j, 0);//returns Pixel at [i][j]
+                    imgArrInt[i][j] = raster.getSample(j, i, 0);//returns Pixel at (i,j), für getSample indice umgedreht
                 }
             }
 
