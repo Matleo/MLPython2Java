@@ -12,26 +12,56 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-
+/**
+ * Execution Class to load a SavedModel from Tensorflow or Tensorflow.Estimator to recognize the MNSIT data Set, and test it against downloaded pictures
+ */
 public class Demo {
-    private static final String importDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Tensorflow/CNN/export";
-    private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Data/Own_dat";
-    private static final String modelTag = "serve";
+    private static String importDir1 = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Estimator/MNISTClassifier/export/";
+    private static String importDir2 = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Tensorflow/CNN/export/";
+    private static String importDir3 = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Tensorflow/Feed Forward NN/SavedModel/export/";
 
+    private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Data/Own_dat"; //where the test pics are stored
+    private static final String picFile= "/MNIST"; //which pics to test
+    private static final String modelTag = "serve"; //default Tag under which the Metagraph is stored in the SavedModel
+    private static boolean estimator = false; //if it is an estimator model
+
+
+    //which Model to load from file
+    public enum Model {
+        Estimator_DNN , Tensorflow_CNN , Tensorflow_FFNN
+    }
 
     public static void main(String[] args) throws Exception {
-        SavedModel model = new SavedModel(importDir,modelTag);
-        String picFile= "/Handwritten";
+        //decide which Model to load
+        Model whichModel = Model.Tensorflow_FFNN;
+        String importDir="";
+        switch (whichModel){
+            case Estimator_DNN: importDir = importDir1;
+                break;
+            case Tensorflow_CNN: importDir = importDir2;
+                break;
+            case Tensorflow_FFNN: importDir = importDir3;
+                break;
+        }
 
+        //if it is an Estimator Model, fetching output and importDir need to be adapted
+        if(importDir.contains("/Estimator/")) {
+            importDir = IRIS.Demo.getTimestampDir(importDir);
+            estimator=true;
+        }
+
+        SavedModel model = new SavedModel(importDir,modelTag);
+
+        //run inference
         for(int i=0; i<10;i++){
             float[] inputArray = readPic(picDir+picFile+"-"+i+".png");
-            int predict = model.predictNumber(inputArray);
-
+            int predict = model.predictNumber(inputArray,estimator);
 
             System.out.println(i+": Die abgebildete Zahl ist wahrscheinlich eine: "+predict);
         }
     }
 
+    //unused function to load the test pictures from a previously saved json Array
     private static float[] readJsonPic(String path){
         JSONParser parser = new JSONParser();
         double[] arr = new double[784];
@@ -54,7 +84,11 @@ public class Demo {
         return picArr;
     }
 
-
+    /**
+     * Function to read a grayscale picture from file
+     * @param path the full path of where to find the picture
+     * @return float Array with each float in (0,1), where 1 represents black and 0 is white
+     */
     private static float[] readPic(String path){
         File imgFile = new File(path);
         float[] imgArr=new float[784];
@@ -62,7 +96,7 @@ public class Demo {
             BufferedImage img = ImageIO.read(imgFile);
 
             img = Thumbnails.of(img).forceSize(28, 28).asBufferedImage();//resize to 28x28
-            //Thumbnails.of(img).forceSize(28, 28).toFile("thumbnail.png");
+            //Thumbnails.of(img).forceSize(28, 28).toFile("thumbnail.png");//print resized picture
 
             int width = img.getWidth();
             int height = img.getHeight();

@@ -10,13 +10,19 @@ def saveConfig():
     export_dir = "./export"
     if os.path.exists(export_dir):
         shutil.rmtree(export_dir)
+
+    signature = tf.saved_model.signature_def_utils.build_signature_def(
+        inputs = {'input': tf.saved_model.utils.build_tensor_info(x)},
+        outputs = {'output': tf.saved_model.utils.build_tensor_info(y3)},
+    )
+
     builder = tf.saved_model.builder.SavedModelBuilder(export_dir)
-    builder.add_meta_graph_and_variables(sess,"s")
+    builder.add_meta_graph_and_variables(sess,[tf.saved_model.tag_constants.SERVING],signature_def_map={tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature})
     builder.save()
 
 
 
-
+save = False
 #----------------------------------------------------------------------------------------------------------
 
 
@@ -86,6 +92,6 @@ print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels,
 
 
 #----------------------------------------------------------------------------------------------------------
-
-saveConfig()
+if save == True:
+    saveConfig()
 

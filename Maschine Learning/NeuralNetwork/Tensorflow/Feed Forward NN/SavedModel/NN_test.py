@@ -39,7 +39,7 @@ import_dir = "./export"
 
 sess = tf.Session()
 
-tf.saved_model.loader.load(sess, "s", import_dir)
+tf.saved_model.loader.load(sess, ["serve"], import_dir)
 
 
 graph = tf.get_default_graph()

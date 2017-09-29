@@ -3,7 +3,7 @@ import os
 import shutil
 
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets('..../../Data/MNIST_data', one_hot=True)
+mnist = input_data.read_data_sets('../../Data/MNIST_data', one_hot=True)
 
 
 sess = tf.InteractiveSession()
@@ -32,6 +32,7 @@ def saveConfig():
     builder.add_meta_graph_and_variables(sess,[tf.saved_model.tag_constants.SERVING])
     builder.save()
 
+save = False
 #---------------------------------------------------------------------------
 						
 # Create the model
@@ -81,7 +82,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    for i in range(10000):
+    for i in range(100):
         batch = mnist.train.next_batch(50)
         #alle 100 runs ausgabe
         if i%100==0:
@@ -92,7 +93,8 @@ with tf.Session() as sess:
     #Auswertung
     print('test accuracy %g' % accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
 
-    #saveConfig()
+    if save == True:
+        saveConfig()
 
   
 

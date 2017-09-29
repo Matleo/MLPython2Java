@@ -32,4 +32,4 @@ x = graph.get_tensor_by_name("input:0")
 dKeep = graph.get_tensor_by_name("dropoutRate:0")
 
 
-printPredictions("Font")
+printPredictions("Handwritten")

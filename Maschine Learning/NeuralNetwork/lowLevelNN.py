@@ -53,22 +53,25 @@ def matMul(x,y):
                 for k in range(0,x.shape[1]):
                     z[i][j]+=x[i][k]*y[k][j]
     return z
-def gradients(x,y_,weights,biases):
+
+def gradientsWolfgang(x,y_,weights,biases):
     rows = weights.shape[0]#9
     cols = weights.shape[1]#2
-
     nabla_w = np.zeros((rows,cols))
-    for i in range(0,cols):#0 bis 1
-        for j in range(0,rows):#0 bis 8
+    for j in range(0,rows):#0 bis 8
+        for i in range(0,cols):#0 bis 1
             dC_dm_ij = 0
             for k in range(0,len(x)):
+                #x hat 50x9 und enthält alle Bilder
+                #x[k] hat 1x9 und enthält floats für Bild k
+                #W hat 9x2 und MM ergibt Ergebnis 1x2 ob Kreuz oder Diamant
                 deltay_i=(sigmoid(np.dot(x[k],W)+biases) - y_[k])[i]
                 sigma_prime_i=sigmoid_prime(np.dot(x[k],weights)+biases)[i]
                 dC_dm_ij+=deltay_i*sigma_prime_i*x[k][j]
             nabla_w[j][i]=dC_dm_ij
 
     nabla_b = np.zeros(cols)
-    for i in range(0,cols):#0 bis 2
+    for i in range(0,cols):#0 bis 1
         dC_db_ij = 0
         for k in range(0,len(x)):
             deltay_i=(sigmoid(np.dot(x[k],W)+biases) - y_[k])[i]
@@ -86,24 +89,23 @@ b = 2*np.random.rand(2)-1
 
 
 
-epochs = 100
+epochs = 10
 eta = 0.5
+
 
 #Training-----------------------------------------------------
 print("Training initiallized...")
 for i in range(0,epochs):
-    if i%10==0:
-        eta=eta*0.8
     y=sigmoid(np.dot(x,W)+b)
     cost=np.sum(np.square(y-y_)/2)
-    if i%10==0:
-        print("Cost: %f" % cost)
+    print("Cost: %f" % cost)
 
-    nw,nb=gradients(x,y_,W,b)
+    nw,nb=gradientsWolfgang(x,y_,W,b)
     W=W-eta*nw
     b=b-eta*nb
 print("Training done")
 print("-----------------------\n")
+
 #Testing-----------------------------------------------------
 x_test,y_test = createSample(10)
 y=sigmoid(np.dot(x_test,W)+b)

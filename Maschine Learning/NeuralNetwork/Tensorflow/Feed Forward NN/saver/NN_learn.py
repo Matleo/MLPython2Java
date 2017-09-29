@@ -9,7 +9,7 @@ def saveConfig():
     saver = tf.train.Saver()
     saver.save(sess, export_dir)
 
-
+save = False
 #----------------------------------------------------------------------------------------------------------
 
 
@@ -78,7 +78,7 @@ print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels,
 
 
 #----------------------------------------------------------------------------------------------------------
-
-saveConfig()
+if save == True:
+    saveConfig()
 
 
