@@ -21,7 +21,7 @@ public class Demo {
     private static String importDir3 = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Tensorflow/Feed Forward NN/SavedModel/export/";
 
     private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Data/Own_dat"; //where the test pics are stored
-    private static final String picFile= "/MNIST"; //which pics to test
+    private static final String picFile= "/Handwritten"; //which pics to test
     private static final String modelTag = "serve"; //default Tag under which the Metagraph is stored in the SavedModel
     private static boolean estimator = false; //if it is an estimator model
 
@@ -33,7 +33,7 @@ public class Demo {
 
     public static void main(String[] args) throws Exception {
         //decide which Model to load
-        Model whichModel = Model.Tensorflow_FFNN;
+        Model whichModel = Model.Estimator_DNN;
         String importDir="";
         switch (whichModel){
             case Estimator_DNN: importDir = importDir1;
