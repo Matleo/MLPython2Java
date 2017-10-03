@@ -14,6 +14,7 @@
         <!-- The maven compiler plugin defaults to a lower version -->
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <dl4j-version>0.9.1</dl4j-version>
     </properties>
     <dependencies>
         <dependency>
@@ -34,17 +35,17 @@
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-core</artifactId>
-            <version>0.9.1</version>
+            <version>${dl4j-version}</version>
         </dependency>
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-nlp</artifactId>
-            <version>0.9.1</version>
+            <version>${dl4j-version}</version>
         </dependency>
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-modelimport</artifactId>
-            <version>0.9.1</version>
+            <version>${dl4j-version}</version>
         </dependency>
         <dependency>
             <groupId>org.bytedeco</groupId>
