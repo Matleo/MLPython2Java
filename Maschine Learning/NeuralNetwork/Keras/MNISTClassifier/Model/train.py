@@ -18,7 +18,7 @@ images_test= mnist.test.images.reshape(mnist.test.images.shape[0], 28, 28, 1)
 
 #Convolution/Pooling is only to extract Features from the image, the Dense Layers serve as classifier
 
-inputs = Input(shape=(28,28,1))
+inputs = Input(shape=(input_shape))
 layer1 = Conv2D(nb_filter=32,nb_row=5,nb_col=5, activation='relu')(inputs)
 layer2 = MaxPooling2D(pool_size=(2,2))(layer1)
 layer3 = Conv2D(nb_filter=64,nb_row=5,nb_col=5, activation='relu')(layer2)

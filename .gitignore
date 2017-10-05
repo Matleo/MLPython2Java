@@ -3,7 +3,8 @@ micro-nn/
 DL4j-test/
 UdacityLessons/
 Maschine Learning/Udacity_Lessons/
-
+MaschineLearning4J/src/main/java/IRIS/
+Maschine Learning/NeuralNetwork/Estimator/IrisClassifier/
 
 # Created by https://www.gitignore.io/api/java,maven,intellij
 

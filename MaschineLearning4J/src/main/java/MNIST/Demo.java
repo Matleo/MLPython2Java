@@ -14,11 +14,12 @@ import java.io.IOException;
 
 /**
  * Execution Class to load a SavedModel from Tensorflow or Tensorflow.Estimator to recognize the MNSIT data Set, and test it against downloaded pictures
+ * excluded from Git -> Estimator MNSIT model as example
  */
 public class Demo {
-    private static String importDir1 = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Estimator/MNISTClassifier/export/";
-    private static String importDir2 = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Tensorflow/CNN/export/";
-    private static String importDir3 = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Tensorflow/Feed Forward NN/SavedModel/export/";
+    private static String importDir1 = "../Maschine Learning/NeuralNetwork/Estimator/MNISTClassifier/export/";
+    private static String importDir2 = "../Maschine Learning/NeuralNetwork/Tensorflow/CNN/export/";
+    private static String importDir3 = "../Maschine Learning/NeuralNetwork/Tensorflow/Feed Forward NN/SavedModel/export/";
 
     private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Data/Own_dat"; //where the test pics are stored
     private static final String picFile= "/Handwritten"; //which pics to test
@@ -33,7 +34,7 @@ public class Demo {
 
     public static void main(String[] args) throws Exception {
         //decide which Model to load
-        Model whichModel = Model.Estimator_DNN;
+        Model whichModel = Model.Tensorflow_FFNN;
         String importDir="";
         switch (whichModel){
             case Estimator_DNN: importDir = importDir1;
