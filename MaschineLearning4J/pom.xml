@@ -9,11 +9,11 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <exec.mainClass>MNIST.Demo</exec.mainClass>
+        <exec.mainClass>Tensorflow.MNISTClassifier</exec.mainClass>
         <!-- The sample code requires at least JDK 1.7. -->
         <!-- The maven compiler plugin defaults to a lower version -->
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <dl4j-version>0.9.1</dl4j-version>
     </properties>
     <dependencies>
@@ -56,6 +56,16 @@
             <groupId>org.nd4j</groupId>
             <artifactId>nd4j-native-platform</artifactId>
             <version>0.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.6.4</version>
         </dependency>
     </dependencies>
 </project>

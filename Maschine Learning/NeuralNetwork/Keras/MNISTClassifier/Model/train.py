@@ -3,7 +3,7 @@ from keras.layers import Input, Dense, Dropout, Reshape, Conv2D, MaxPooling2D, F
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets('../../../Data/MNIST_data', one_hot=True)
 
-save = False
+save = True
 
 batch_size = 128
 num_classes = 10
@@ -16,7 +16,6 @@ images_train = mnist.train.images.reshape(mnist.train.images.shape[0], 28, 28, 1
 images_test= mnist.test.images.reshape(mnist.test.images.shape[0], 28, 28, 1)
 
 
-#Convolution/Pooling is only to extract Features from the image, the Dense Layers serve as classifier
 
 inputs = Input(shape=(input_shape))
 layer1 = Conv2D(nb_filter=32,nb_row=5,nb_col=5, activation='relu')(inputs)

@@ -1,3 +1,5 @@
+import json
+
 import tensorflow as tf
 import os
 import shutil
@@ -24,6 +26,27 @@ def max_pool_2x2(x):
                         strides=[1, 2, 2, 1], padding='SAME')
 
 
+def getPredictions(Pics):
+    predictions = []
+    for i in range(0,10):
+        path = '../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
+        file = tf.read_file(path)
+        img = tf.image.decode_png(file, channels=1)
+        resized_image = tf.image.resize_images(img, [28, 28])
+        tensor=tf.reshape(resized_image, [-1])
+        tArray=1-sess.run(tensor)/255 #von [0,255] auf [0,1] umdrehen
+
+        pred = determinNumber(tArray)
+        predictions.append(pred)
+    return predictions
+
+def determinNumber(tArray):
+    output=sess.run(tf.reshape(tArray, [1,784]))
+    guessed= sess.run(y_conv, feed_dict={x:output,keep_prob:1})
+    guessedIndex= sess.run(tf.argmax(y_conv,1), feed_dict={x:output,keep_prob:1})
+    guessedIndex=list(guessedIndex)[0]#um von set auf int zu kommen
+    return int(guessedIndex)
+
 def saveConfig():
     export_dir = "./export"
     if os.path.exists(export_dir):
@@ -32,6 +55,24 @@ def saveConfig():
     builder.add_meta_graph_and_variables(sess,[tf.saved_model.tag_constants.SERVING])
     builder.save()
 
+
+    #statistics:
+    diction = {}
+    diction["steps"] = steps
+    diction["accuracy"] = round(float(acc),4)
+
+    picCategories = ["Handwritten","Computer","MNIST"]
+    picDic = {}
+    for picCat in picCategories:
+        predictions = getPredictions(picCat)
+        picDic[picCat] = predictions
+    diction["picPredictions"] = picDic;
+    with open("./export/statistics.json","w") as outfile:
+        json.dump(diction,outfile)
+
+    print("\nSaved Configuration to dir: ./%s" % export_dir)
+
+
 save = False
 #---------------------------------------------------------------------------
 						
@@ -39,7 +80,8 @@ save = False
 x = tf.placeholder(tf.float32, [None, 784],name="input")
 
 # Define loss and optimizer
-y_ = tf.placeholder(tf.float32, [None, 10])		
+y_ = tf.placeholder(tf.float32, [None, 10])
+y_ = tf.identity(y_,"y_")
 
 W_conv1 = weight_variable([5, 5, 1, 32])
 b_conv1 = bias_variable([32])
@@ -82,7 +124,8 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    for i in range(100):
+    steps = 5000
+    for i in range(steps):
         batch = mnist.train.next_batch(50)
         #alle 100 runs ausgabe
         if i%100==0:
@@ -91,7 +134,8 @@ with tf.Session() as sess:
         train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
 
     #Auswertung
-    print('test accuracy %g' % accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
+    acc = accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0})
+    print('test accuracy %g' % acc)
 
     if save == True:
         saveConfig()

@@ -32,12 +32,11 @@ public class MNISTClassifier {
 
 
     public static void main(String[] args) throws UnsupportedKerasConfigurationException, IOException, InvalidKerasConfigurationException {
-        String launch = "Sequential";
-
-        if(launch.equals("Model")){
-            launchModelCNN();
-        }else{
+        String model = args[0].toLowerCase();
+        if(model.equals("s")|| model.contains("sequential")){
             launchSequentialDense();
+        }else{
+            launchModelCNN();
         }
 
 

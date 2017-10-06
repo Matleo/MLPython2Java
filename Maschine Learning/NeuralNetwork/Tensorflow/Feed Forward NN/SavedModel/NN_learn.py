@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 import tensorflow as tf
@@ -5,6 +6,26 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 mnist = input_data.read_data_sets("../../../Data/MNIST_data/", one_hot=True)
 
+def getPredictions(Pics):
+    predictions = []
+    for i in range(0,10):
+        path = '../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
+        file = tf.read_file(path)
+        img = tf.image.decode_png(file, channels=1)
+        resized_image = tf.image.resize_images(img, [28, 28])
+        tensor=tf.reshape(resized_image, [-1])
+        tArray=1-sess.run(tensor)/255 #von [0,255] auf [0,1] umdrehen
+
+        pred = determinNumber(tArray)
+        predictions.append(pred)
+    return predictions
+
+def determinNumber(tArray):
+    output=sess.run(tf.reshape(tArray, [1,784]))
+    guessed= sess.run(y3, feed_dict={x:output,dKeep:1})
+    guessedIndex= sess.run(tf.argmax(y3,1), feed_dict={x:output,dKeep:1})
+    guessedIndex=list(guessedIndex)[0]#um von set auf int zu kommen
+    return int(guessedIndex)
 
 def saveConfig():
     export_dir = "./export"
@@ -20,6 +41,21 @@ def saveConfig():
     builder.add_meta_graph_and_variables(sess,[tf.saved_model.tag_constants.SERVING],signature_def_map={tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature})
     builder.save()
 
+    #statistics:
+    diction = {}
+    diction["steps"] = int(steps)
+    diction["accuracy"] = round(float(acc),4)
+
+    picCategories = ["Handwritten","Computer","MNIST"]
+    picDic = {}
+    for picCat in picCategories:
+        predictions = getPredictions(picCat)
+        picDic[picCat] = predictions
+    diction["picPredictions"] = picDic;
+    with open("./export/statistics.json","w") as outfile:
+        json.dump(diction,outfile)
+
+    print("\nSaved Configuration to dir: ./%s" % export_dir)
 
 
 save = False
@@ -49,6 +85,7 @@ y2=tf.nn.dropout(y2d,dKeep)
 y3 = tf.nn.softmax(tf.matmul(y2,W3) + b3)
 y3=tf.identity(y3,"output")
 y_ = tf.placeholder(tf.float32, [None, 10]) #actual labels
+y_=tf.identity(y_,"y_")
 
 
 #measures how inefficient the predictions are
@@ -77,17 +114,19 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 
 #start training
-for i in range(1000):
+steps =10000
+for i in range(steps):
     batch_xs, batch_ys = mnist.train.next_batch(100) #gib mir 100 x,y aus den Daten(für Effizienz)
     #feed_dict replaces the placeholder tensors x and y_ with the training examples
     sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys, dKeep:0.75})
 
     #aktuelle Genauigkeit und loss
     if i % 500 == 0:
-        print("epoche "+str(i)+":", end='')
+        print("step "+str(i)+":", end='')
         print(sess.run([accuracy,cross_entropy], feed_dict={x: mnist.train.images, y_: mnist.train.labels, dKeep:1.0}))
 
-print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels, dKeep:1.0}))
+acc = sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels, dKeep:1.0})
+print('test accuracy %g' % acc)
 
 
 

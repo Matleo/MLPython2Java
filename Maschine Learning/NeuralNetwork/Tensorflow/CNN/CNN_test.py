@@ -1,4 +1,8 @@
 import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+mnist = input_data.read_data_sets('../../Data/MNIST_data', one_hot=True)
+
+
 
 def determinNumber(tArray,i):
     output=sess.run(tf.reshape(tArray, [1,784]))
@@ -17,6 +21,12 @@ def printPredictions(Pics):
         tensor=tf.reshape(resized_image, [-1])
         tArray=1-sess.run(tensor)/255 #von [0,255] auf [0,1] umdrehen
         determinNumber(tArray,i)
+def evaluate():
+    y_ = graph.get_tensor_by_name("y_:0")
+    correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+    with sess.as_default():
+        print('test accuracy %g' % accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels, dKeep: 1.0}))
 
 
 import_dir = "./export"
@@ -33,3 +43,5 @@ dKeep = graph.get_tensor_by_name("dropoutRate:0")
 
 
 printPredictions("Handwritten")
+
+evaluate()
