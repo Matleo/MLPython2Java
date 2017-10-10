@@ -94,7 +94,9 @@ Often it is advisable to add a Signature to the SavedModel, describing the set o
 ```
 This signature can then be inspected, using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel). For our SavedModel, the output looks like: 
 
+
 ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/SavedModelCLI.png)
+
 
 ## Inference as a Service
 **Todo**
