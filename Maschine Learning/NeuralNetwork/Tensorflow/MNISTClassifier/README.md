@@ -112,7 +112,7 @@ The import is almost identical to what we did with `tensorflow.train.Saver()`, o
 
 Now you can grab the input and output tensors from the session, like before, and start making predictions, without having to train the model again. The full code can be viewed
 
-You can apply the workflow for any model you like. For validation purpose, i tried saving and reloading a Convolutional Neural Network. The only thing to change was how to build the model. You can view the CNN example [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN)
+You can apply the workflow to any model you like. For validation purpose, i tried saving and reloading a Convolutional Neural Network for the same MNIST example. The only thing to change was how to build the model. You can view the CNN example [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN)
 
 For more information, please refer to the full [documentation](https://www.tensorflow.org/programmers_guide/saved_model#apis_to_build_and_load_a_savedmodel)
 
