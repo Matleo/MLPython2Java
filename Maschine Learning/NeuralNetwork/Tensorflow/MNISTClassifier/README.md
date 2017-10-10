@@ -63,7 +63,7 @@ For any Tensorflow model, this is achievable with the `tf.saved_model` class. An
 The model used for this example is the same as in the example for the `tensorflow.train.Saver()`. So the only thing to change, is the exporting and importing of the model, where we can now import the model into Java aswell, using the [Tensorflow Java API](https://www.tensorflow.org/api_docs/java/reference/org/tensorflow/package-summary).
 
 #### Export
-All the work happens in these few lines of code ([full example](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel/NN_train.py)):
+All the work happens in these few lines of code ([see full example](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel/NN_train.py)):
 ```python
     sess = tf.InteractiveSession()
 
@@ -93,6 +93,7 @@ Often it is advisable to add a Signature to the SavedModel, describing the set o
     builder.save()
 ```
 This signature can then be inspected, using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel). For our SavedModel, the output looks like: 
+
 ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/SavedModelCLI.png)
 
 ## Inference as a Service
