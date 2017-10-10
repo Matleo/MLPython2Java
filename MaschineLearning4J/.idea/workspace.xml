@@ -16,11 +16,10 @@
       <file leaf-file-name="MNISTClassifier.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/MNISTClassifier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="42" column="4" lean-forward="false" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+            <state relative-caret-position="303">
+              <caret line="67" column="39" lean-forward="false" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#evaluateArguments#0;class#MNISTClassifier#0" expanded="false" />
                 <element signature="method#determinModel#0;class#MNISTClassifier#0" expanded="false" />
                 <element signature="method#printHelp#0;class#MNISTClassifier#0" expanded="false" />
                 <element signature="method#evaluate#0;class#MNISTClassifier#0" expanded="false" />
@@ -34,8 +33,8 @@
       <file leaf-file-name="SavedModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/SavedModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="39" column="48" lean-forward="false" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
+            <state relative-caret-position="0">
+              <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -46,8 +45,8 @@
       <file leaf-file-name="TensorflowUtilities.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/TensorflowUtilities.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            <state relative-caret-position="0">
+              <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -88,6 +87,7 @@
       <find>log.info</find>
       <find>estimator</find>
       <find>using defa</find>
+      <find>Tensorflow</find>
     </findStrings>
     <replaceStrings>
       <replace>log.info</replace>
@@ -145,7 +145,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1912" />
     <option name="y" value="-8" />
     <option name="width" value="3456" />
@@ -654,15 +654,15 @@
       <workItem from="1507212400354" duration="13739000" />
       <workItem from="1507283382170" duration="19218000" />
       <workItem from="1507556644508" duration="10082000" />
-      <workItem from="1507625652197" duration="2499000" />
+      <workItem from="1507625652197" duration="3060000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121449000" />
+    <option name="totallyTimeSpent" value="122010000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="3456" height="1416" extended-state="6" />
+    <frame x="1912" y="-8" width="3456" height="1416" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1029,20 +1029,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/TensorflowUtilities.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/SavedModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        <state relative-caret-position="0">
+          <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/SavedModel.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/TensorflowUtilities.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="39" column="48" lean-forward="false" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
+        <state relative-caret-position="0">
+          <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1051,11 +1051,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/MNISTClassifier.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="42" column="4" lean-forward="false" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+        <state relative-caret-position="303">
+          <caret line="67" column="39" lean-forward="false" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#evaluateArguments#0;class#MNISTClassifier#0" expanded="false" />
             <element signature="method#determinModel#0;class#MNISTClassifier#0" expanded="false" />
             <element signature="method#printHelp#0;class#MNISTClassifier#0" expanded="false" />
             <element signature="method#evaluate#0;class#MNISTClassifier#0" expanded="false" />

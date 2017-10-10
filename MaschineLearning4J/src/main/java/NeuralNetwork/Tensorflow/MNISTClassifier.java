@@ -37,7 +37,7 @@ public class MNISTClassifier {
     private static String predictPicDir = "";//if not "", will be used to use trained model to predict the picture
 
     private static final String modelTag = "serve"; //default Tag under which the Metagraph is stored in the SavedModel
-    private static String modelType = "NeuralNetwork/Tensorflow"; //define what kind of model is going to be loaded
+    private static String modelType = "Tensorflow"; //define what kind of model is going to be loaded
 
 
     public static void main(String[] args) throws Exception {
@@ -65,7 +65,7 @@ public class MNISTClassifier {
         switch (args.length) {
             case 0:
                 System.out.println("Using default model: Tensorflow_FFNN");
-                modelType = "NeuralNetwork/Tensorflow";
+                modelType = "Tensorflow";
                 importDir = importDir3;//default Tensorflow_FFNN
                 break;
             case 1:
@@ -83,7 +83,7 @@ public class MNISTClassifier {
                 } else if (args[0].equals("-predict") || args[0].equals("-p")) {
                     predictPicDir = args[1];
                     System.out.println("Using default model: Tensorflow_FFNN");
-                    modelType = "NeuralNetwork/Tensorflow";
+                    modelType = "Tensorflow";
                     importDir = importDir3;//default Tensorflow_FFNN
                 } else {
                     System.out.println("You have passed invalid arguments");
@@ -93,7 +93,7 @@ public class MNISTClassifier {
                 break;
             case 3:
                 System.out.println("Using default model: Tensorflow_FFNN");
-                modelType = "NeuralNetwork/Tensorflow";
+                modelType = "Tensorflow";
                 importDir = importDir3;//default Tensorflow_FFNN
                 if (((args[0].equals("-predict") || args[0].equals("-p")) && (args[2].equals("--noEval")))) {
                     predictPicDir = args[1];
@@ -161,10 +161,10 @@ public class MNISTClassifier {
     private static String determinModel(String model) {
         switch (model) {
             case "t_ffnn":
-                modelType = "NeuralNetwork/Tensorflow";
+                modelType = "Tensorflow";
                 return importDir3;
             case "t_cnn":
-                modelType = "NeuralNetwork/Tensorflow";
+                modelType = "Tensorflow";
                 return importDir2;
             case "e_ffnn":
                 modelType = "Estimator";

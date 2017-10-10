@@ -1,23 +1,23 @@
-# Operationalisierung von Python ML Modellen
-Dieses Projekt wurde von Matthias Leopold als Praktikant bei der Zuehlke Engineering AG Schlieren erstellt, um die bestehenden Möglichkeiten zu aggregieren, ein in Python trainiertes Machine Learning Modell in Produktion zu bringen.
+# Operationalization of python ML models
+This project was set up by Matthias Leopold as an intern at Zuehlke Engineering AG Schlieren, to gather the options to go live with a trained Python machine learning model.
 
-## Ordnerstruktur und Features
-Das Projekt ist in zwei Teilprojekte geteilt: 
-1. [Machine Learning (Python Teil)](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning)
-2. [Machine Learning 4J (Java Teil)](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J)
+## Project structure
+The project is split into two sub-projects: 
+1. [Machine Learning (Python part)](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning)
+2. [Machine Learning 4J (Java part)](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J)
 
-Die Teilprojekte sind jeweils nach Modelltypen sortiert. Es wurden folgende Modelle betrachtet *(Links zum Python Teil)*:
+The sub-projects are themselves ordered by model type. The following models were considered *(links go to the Python part)*:
 * [Artificial Neural Networks](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork)
 * [Decision Trees]()
 * [Support Vector Machines]()
 * [Naive Bayes]()
 * [Association Rule Learning]()
 
-Für jeden Modelltyp wurden seperat zwei Lösungsparadigmen getestet:
-1. **Model as a Service**: Das gesamte ML Modell soll aus Python in Java migriert werden
-2. **Inference as a Service**: Das Modell soll aus Python deployed werden und die Abfrage durch eine Schnittstelle ansprechbar sein
+For each model type two seperate approaches were executed:
+1. **Model as a Service**: The whole ML model is supposed to be transfered from Python to Java, to execute predictions directly in Java
+2. **Inference as a Service**: The ML model is supposed to be deployed from Python and an inference service is supposed to be made available
 
-## Voraussetzungen
-* Python 3.6.2 oder neuer
-* Java 1.8 oder neuer
-* weitere modellspezifische Voraussetzungen sind den detaillierteren Readme.md zu entnehmen
+## Prerequisites
+* Python 3.6.2 or newer
+* Java 1.8 or newer
+* Additional model specific prerequesites are described in the proper specific Readme.md
