@@ -84,17 +84,36 @@ Often it is advisable to add a Signature to the SavedModel, describing the set o
                 'dropout': tf.saved_model.utils.build_tensor_info(dKeep)},
         outputs={'output': tf.saved_model.utils.build_tensor_info(y3)},
     )
+    signatureMap = {
+        tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature}
 
     builder = tf.saved_model.builder.SavedModelBuilder(export_dir)
     builder.add_meta_graph_and_variables(sess, 
-        [tf.saved_model.tag_constants.SERVING], 
-        signature_def_map={
-            tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature})
+		[tf.saved_model.tag_constants.SERVING], 
+		signature_def_map=signatureMap)
     builder.save()
 ```
-This signature can then be inspected, using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel). For our SavedModel, the output looks like: 
+This signature can then be inspected, using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel). For our SavedModel, the output looks as following: 
 
 ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/SavedModelCLI_example.png)
+
+In all my examples, i will additionally save some statistics in a seperate json file, for later usage in validating the Java results and to see, if the predictions from both technologies match
+
+#### Import
+In the following, i will shortly describe, how to import a SavedModel into Python, for the Java part, please refer to [this](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow).
+
+The import is almost identical to what we did with `tensorflow.train.Saver()`, only one line of code is new:
+```python
+    import_dir = "./export"
+    sess = tf.Session()
+    tf.saved_model.loader.load(sess, ["serve"], import_dir)
+```
+
+Now you can grab the input and output tensors from the session, like before, and start making predictions, without having to train the model again. The full code can be viewed
+
+You can apply the workflow for any model you like. For validation purpose, i tried saving and reloading a Convolutional Neural Network. The only thing to change was how to build the model. You can view the CNN example [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN)
+
+For more information, please refer to the full [documentation](https://www.tensorflow.org/programmers_guide/saved_model#apis_to_build_and_load_a_savedmodel)
 
 ## Inference as a Service
 **Todo**

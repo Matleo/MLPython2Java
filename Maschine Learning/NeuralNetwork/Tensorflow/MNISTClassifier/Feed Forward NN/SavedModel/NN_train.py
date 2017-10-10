@@ -21,7 +21,6 @@ def getPredictions(Pics):
 
 def determinNumber(tArray):
     output = sess.run(tf.reshape(tArray, [1, 784]))
-    guessed = sess.run(y3, feed_dict={x: output, dKeep: 1})
     guessedIndex = sess.run(tf.argmax(y3, 1), feed_dict={x: output, dKeep: 1})
     guessedIndex = list(guessedIndex)[0]
     return int(guessedIndex)
@@ -29,28 +28,29 @@ def determinNumber(tArray):
 
 def saveConfig():
     export_dir = "./export"
-    #if directory exists, remove it
+    # if directory exists, remove it
     if os.path.exists(export_dir):
         shutil.rmtree(export_dir)
 
-    #signature of inputs and outputs of the model
+    # signature of inputs and outputs of the model
     signature = tf.saved_model.signature_def_utils.build_signature_def(
         inputs={'input': tf.saved_model.utils.build_tensor_info(x),
                 'dropout': tf.saved_model.utils.build_tensor_info(dKeep)},
         outputs={'output': tf.saved_model.utils.build_tensor_info(y3)},
     )
+    signatureMap = {
+        tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature}
 
-    builder = tf.saved_model.builder.SavedModelBuilder(export_dir)#initiate builder
-    builder.add_meta_graph_and_variables(sess, [tf.saved_model.tag_constants.SERVING], signature_def_map={
-        tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature})
-    builder.save()#execute saving
+    builder = tf.saved_model.builder.SavedModelBuilder(export_dir)  # initiate builder
+    builder.add_meta_graph_and_variables(sess, [tf.saved_model.tag_constants.SERVING], signature_def_map=signatureMap)
+    builder.save()  # execute saving
 
     # save statistics to compare with java results later:
     diction = {}
     diction["steps"] = int(steps)
     diction["accuracy"] = round(float(acc), 4)
 
-    picCategories = ["Handwritten", "Computer", "MNIST"]
+    picCategories = ["Handwritten", "Computer", "MNIST", "Font"]
     picDic = {}
     for picCat in picCategories:
         predictions = getPredictions(picCat)

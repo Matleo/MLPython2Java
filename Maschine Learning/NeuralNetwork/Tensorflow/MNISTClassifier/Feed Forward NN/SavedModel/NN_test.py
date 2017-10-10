@@ -36,9 +36,7 @@ if __name__ == "__main__":
     mnist = input_data.read_data_sets("../../../../../Data/MNIST_data/", one_hot=True)
 
     import_dir = "./export"
-
     sess = tf.Session()
-
     tf.saved_model.loader.load(sess, ["serve"], import_dir)
 
     graph = tf.get_default_graph()
