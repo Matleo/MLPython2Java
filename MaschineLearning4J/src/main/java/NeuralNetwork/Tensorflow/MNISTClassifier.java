@@ -11,7 +11,6 @@ import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.factory.Nd4j;
 import org.tensorflow.Tensor;
-
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileReader;
@@ -46,7 +45,6 @@ public class MNISTClassifier {
         for (String a : args) {
             System.out.print(" " + a);
         }
-
         evaluateArguments(args);
 
         System.out.println("\nLoaded model from: " + importDir);
