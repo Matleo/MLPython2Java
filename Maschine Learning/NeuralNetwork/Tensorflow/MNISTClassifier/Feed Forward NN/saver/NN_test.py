@@ -2,7 +2,7 @@ import tensorflow as tf
 
 
 # reads a set of pictures from png file and prints prediction for these images
-# Pics is a String, fitting the existing pictures in Data/Own_dat. May be any of "Handwritten"/"MNSIT"/"Computer".
+# Pics is a String, fitting the existing pictures in Data/Own_dat. May be any of "Handwritten"/"MNSIT"/"Computer"/"Font".
 # These Images are taken from google pictures
 def printPredictions(Pics):
     for i in range(0, 10):
