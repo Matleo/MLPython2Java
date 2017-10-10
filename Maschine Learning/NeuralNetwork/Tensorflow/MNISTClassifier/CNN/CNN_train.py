@@ -1,9 +1,7 @@
 import json
-
 import tensorflow as tf
 import os
 import shutil
-
 from tensorflow.examples.tutorials.mnist import input_data
 
 
