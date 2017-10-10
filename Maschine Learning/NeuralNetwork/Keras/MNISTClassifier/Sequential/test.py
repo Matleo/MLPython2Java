@@ -19,3 +19,4 @@ model = keras.models.load_model("./export/my_model.h5")
 loss,accuracity=model.evaluate(mnist.test.images,mnist.test.labels,batch_size=len(mnist.test.images))
 
 print("accuracity on test set: %f %%"%(accuracity*100))
+

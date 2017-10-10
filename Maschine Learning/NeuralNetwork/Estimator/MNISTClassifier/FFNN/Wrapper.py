@@ -1,0 +1,22 @@
+import tensorflow as tf
+
+# Wrapper for DNNClassifier. Bug in 1.3, otherwise can`t initialize ServingInputReceiver with float input
+class Wrapper(tf.estimator.Estimator):
+    def __init__(self, **kwargs):
+        dnn = tf.estimator.DNNClassifier(**kwargs)
+
+        def model_fn(mode, features, labels):
+            spec = dnn._call_model_fn(features, labels, mode)
+            export_outputs = None
+            if spec.export_outputs:#when calling export_savedmodel (when mode==infer)
+                export_outputs = {
+                    "serving_default": tf.estimator.export.PredictOutput(
+                        {"probabilities": tf.identity(spec.export_outputs["serving_default"].scores,"output"),
+                         "class": tf.identity(spec.export_outputs["serving_default"].classes,"class")})}
+
+            # Replace export_outputs, was ClassificationOutput, taking a String as input. Now is PredictOutput, taking float[]
+            copy = list(spec)
+            copy[4] = export_outputs
+            return tf.estimator.EstimatorSpec(mode, *copy)
+
+        super(Wrapper, self).__init__(model_fn, kwargs["model_dir"], dnn.config)
