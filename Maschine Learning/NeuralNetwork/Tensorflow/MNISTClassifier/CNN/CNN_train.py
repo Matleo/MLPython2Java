@@ -5,10 +5,8 @@ import os
 import shutil
 
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets('../../Data/MNIST_data', one_hot=True)
 
 
-sess = tf.InteractiveSession()
 
 def weight_variable(shape):
   initial = tf.truncated_normal(shape, stddev=0.1)
@@ -29,7 +27,7 @@ def max_pool_2x2(x):
 def getPredictions(Pics):
     predictions = []
     for i in range(0,10):
-        path = '../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
+        path = '../../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
         file = tf.read_file(path)
         img = tf.image.decode_png(file, channels=1)
         resized_image = tf.image.resize_images(img, [28, 28])
@@ -66,7 +64,7 @@ def saveConfig():
     for picCat in picCategories:
         predictions = getPredictions(picCat)
         picDic[picCat] = predictions
-    diction["picPredictions"] = picDic;
+    diction["picPredictions"] = picDic
     with open("./export/statistics.json","w") as outfile:
         json.dump(diction,outfile)
 
@@ -74,6 +72,7 @@ def saveConfig():
 
 
 save = False
+mnist = input_data.read_data_sets('../../../../Data/MNIST_data', one_hot=True)
 #---------------------------------------------------------------------------
 						
 # Create the model
