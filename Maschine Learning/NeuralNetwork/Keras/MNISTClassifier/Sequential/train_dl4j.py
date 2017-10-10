@@ -2,7 +2,7 @@ from keras.models import Sequential
 from keras.layers import Dense,Dropout,Activation
 
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets('../../../Data/MNIST_data', one_hot=True)
+mnist = input_data.read_data_sets('../../../../Data/MNIST_data', one_hot=True)
 
 #unused Method to store model and weights seperatly
 def saveModel():

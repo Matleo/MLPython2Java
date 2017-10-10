@@ -4,7 +4,7 @@ import tensorflow as tf
 
 def printPredictions(Pics):
     for i in range(0,10):
-        path = '../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
+        path = '../../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
         file = tf.read_file(path)
         img = tf.image.decode_png(file, channels=1)
         resized_image = tf.image.resize_images(img, [28, 28])

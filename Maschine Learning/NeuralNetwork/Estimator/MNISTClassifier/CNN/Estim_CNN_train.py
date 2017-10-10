@@ -10,7 +10,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 def getPredictions(Pics):
     predictions = []
     for i in range(0,10):
-        path = '../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
+        path = '../../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
         file = tf.read_file(path)
         img = tf.image.decode_png(file, channels=1)
         resized_image = tf.image.resize_images(img, [28, 28])
@@ -97,7 +97,7 @@ def model_fn(features, labels, mode):
 
 if __name__ == "__main__":
     save = True
-    mnist = input_data.read_data_sets("../../../Data/MNIST_data/",one_hot=True)
+    mnist = input_data.read_data_sets("../../../../Data/MNIST_data/",one_hot=True)
 
     feature_columns = [tf.feature_column.numeric_column(key="input",dtype=tf.float32, shape=784)]
 

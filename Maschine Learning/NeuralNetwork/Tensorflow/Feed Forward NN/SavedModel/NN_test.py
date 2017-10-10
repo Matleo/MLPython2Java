@@ -2,15 +2,15 @@ import tensorflow as tf
 import json
 from tensorflow.examples.tutorials.mnist import input_data
 
-mnist = input_data.read_data_sets("../../../Data/MNIST_data/", one_hot=True)
+mnist = input_data.read_data_sets("../../../../Data/MNIST_data/", one_hot=True)
 
 
 def saveJson(tArray,Pics,i):
-    with open('../../Own_dat/'+Pics+'-'+str(i)+'.json', 'w') as outfile:
+    with open('../../../../Own_dat/'+Pics+'-'+str(i)+'.json', 'w') as outfile:
         json.dump({'results':tArray.tolist()}, outfile)
 
 def printComprimiertesPic(resized_image,i):
-    path = "../../Own_dat/komprimiert-"+str(i)+".png"
+    path = "../../../../Own_dat/komprimiert-"+str(i)+".png"
     resized_image = tf.cast(resized_image, tf.uint8)
     img = tf.image.encode_png(resized_image)
     write = tf.write_file(path , img)
@@ -18,7 +18,7 @@ def printComprimiertesPic(resized_image,i):
 
 def printPredictions(Pics):
     for i in range(0,10):
-        path = '../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
+        path = '../../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
         file = tf.read_file(path)
         img = tf.image.decode_png(file, channels=1)
         resized_image = tf.image.resize_images(img, [28, 28])

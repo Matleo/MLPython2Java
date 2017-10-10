@@ -3,7 +3,7 @@ from keras.layers import Input, Dense, Dropout, Conv2D, MaxPooling2D, Flatten
 from tensorflow.examples.tutorials.mnist import input_data
 
 
-mnist = input_data.read_data_sets('../../../Data/MNIST_data', one_hot=True)
+mnist = input_data.read_data_sets('../../../../Data/MNIST_data', one_hot=True)
 
 
 

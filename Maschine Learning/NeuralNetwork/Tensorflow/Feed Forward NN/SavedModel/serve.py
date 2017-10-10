@@ -26,7 +26,7 @@ def predict():
 
 
 def predictPic(picName, i,sess,y3,x,dKeep):
-    path = '../../../Data/Own_dat/'+picName+'-'+str(i)+'.png'
+    path = '../../../../Data/Own_dat/'+picName+'-'+str(i)+'.png'
     file = tf.read_file(path)
     img = tf.image.decode_png(file, channels=1)
     resized_image = tf.image.resize_images(img, [28, 28])

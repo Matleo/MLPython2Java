@@ -6,7 +6,7 @@ import numpy as np
 
 
 
-mnist = input_data.read_data_sets('../../../Data/MNIST_data', one_hot=True)
+mnist = input_data.read_data_sets('../../../../Data/MNIST_data', one_hot=True)
 images_test= mnist.test.images.reshape(mnist.test.images.shape[0], 28, 28, 1)
 
 

@@ -9,12 +9,12 @@ from keras.models import Sequential
 from keras.layers import Dense,Dropout,Input
 
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets('../../../Data/MNIST_data', one_hot=True)
+mnist = input_data.read_data_sets('../../../../Data/MNIST_data', one_hot=True)
 
 def getPredictions(Pics):
     predictions = []
     for i in range(0,10):
-        path = '../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
+        path = '../../../../Data/Own_dat/'+Pics+'-'+str(i)+'.png'
         file = tf.read_file(path)
         img = tf.image.decode_png(file, channels=1)
         resized_image = tf.image.resize_images(img, [28, 28])
