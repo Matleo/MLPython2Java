@@ -27,7 +27,8 @@ The important code snippet from the [export code](https://github.com/Matleo/MLPy
     saver = tf.train.Saver()
     saver.save(sess, export_dir)
 ```
-Which creates multiple files in the sub directory "export" with the name "model".xxx. 
+This creates multiple files in the sub directory "export" with the name "model".xxx. 
+
 I explicitly showed how to create the input tensors `x` and `dKeep` and the output tensor `y3`, because we will need the names of these tensors later for the import. Note that the name of the output tensor needs to be changed, by recreating the tensor with a different name, using `tf.identity()`.
 
 #### Import
