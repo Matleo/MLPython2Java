@@ -42,7 +42,7 @@ public class SavedModel {
         Tensor learningPhase = Tensor.create(false);
 
         List<Tensor> resultList;
-        if (modelType== "Tensorflow") {
+        if (modelType=="Tensorflow") {
             resultList = this.s.runner().feed(input, inputTensor).feed(dropout, dKeep).fetch(output).run();
         } else if(modelType=="Estimator"){
             resultList = this.s.runner().feed(input, inputTensor).fetch(output).run();

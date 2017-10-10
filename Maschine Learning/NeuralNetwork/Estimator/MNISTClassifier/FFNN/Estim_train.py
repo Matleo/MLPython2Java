@@ -46,7 +46,7 @@ def saveConfig(export_dir):
     diction["steps"] = int(steps)
     diction["accuracy"] = round(float(accuracy),4)
 
-    picCategories = ["Handwritten","Computer","MNIST"]
+    picCategories = ["Handwritten","Computer","MNIST","Font"]
     picDic = {}
     for picCat in picCategories:
         predictions = getPredictions(picCat)

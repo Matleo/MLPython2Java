@@ -53,7 +53,7 @@ def saveConfig():
     diction["epochs"] = epochs
     diction["accuracy"] = round(float(accuracity),4)
 
-    picCategories = ["Handwritten","Computer","MNIST"]
+    picCategories = ["Handwritten","Computer","MNIST","Font"]
     picDic = {}
     for picCat in picCategories:
         predictions = getPredictions(picCat)

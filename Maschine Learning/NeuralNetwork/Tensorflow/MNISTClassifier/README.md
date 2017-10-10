@@ -97,7 +97,7 @@ This signature can then be inspected, using the [SavedModel CLI](https://www.ten
 
 ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/SavedModelCLI_example.png)
 
-In all my examples, i will additionally save some statistics in a seperate json file, for later usage in validating the Java results and to see, if the predictions from both technologies match
+**Note:** I will additionally save some statistics in seperate json files for each of my examples (accuracy against MNSIT test set and predictions for some downloaded pictures). These statistics are later used for validating the Java results and to see, if the predictions from both technologies match.
 
 #### Import
 In the following, i will shortly describe, how to import a SavedModel into Python, for the Java part, please refer to [this](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow).

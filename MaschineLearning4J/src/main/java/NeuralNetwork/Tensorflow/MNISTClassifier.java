@@ -11,6 +11,7 @@ import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.factory.Nd4j;
 import org.tensorflow.Tensor;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileReader;
@@ -24,10 +25,10 @@ import java.util.Map;
  * Execution Class to load a SavedModel from Tensorflow or Tensorflow.Estimator to recognize the MNSIT data Set, and test it against downloaded pictures
  */
 public class MNISTClassifier {
-    private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/NeuralNetwork/Data/Own_dat/"; //where the test pics are stored
+    private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/Data/Own_dat/"; //where the test pics are stored
     private static String importDir1 = "../Maschine Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/export/";
-    private static String importDir2 = "../Maschine Learning/NeuralNetwork/Tensorflow/CNN/export/";
-    private static String importDir3 = "../Maschine Learning/NeuralNetwork/Tensorflow/Feed Forward NN/SavedModel/export/";
+    private static String importDir2 = "../Maschine Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN/export/";
+    private static String importDir3 = "../Maschine Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/export/";
     private static String importDir4 = "../Maschine Learning/NeuralNetwork/Estimator/MNISTClassifier/CNN/export/";
     private static String importDir5 = "../Maschine Learning/NeuralNetwork/Keras/MNISTClassifier/Model/export/";
     private static String importDir6 = "../Maschine Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential/export/";
@@ -246,7 +247,6 @@ public class MNISTClassifier {
             JSONObject picPredictionsJson = (JSONObject) obj.get("picPredictions");
 
             //make own prediction on pictures
-
             Object[] picCats = picPredictionsJson.keySet().toArray();
             for (Object picCatObj : picCats) {
                 String picCat = (String) picCatObj;//name of the picture category
