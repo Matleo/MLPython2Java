@@ -27,9 +27,9 @@ The important code snippet from the [export code](https://github.com/Matleo/MLPy
     saver = tf.train.Saver()
     saver.save(sess, export_dir)
 ```
-This creates multiple files in the sub directory "export" with the name "model".xxx. 
+The `saver.save()` creates multiple files in the sub directory "export" with the name "model".xxx. 
 
-I explicitly showed how to create the input tensors `x` and `dKeep` and the output tensor `y3`, because we will need the names of these tensors later for the import. Note that the name of the output tensor needs to be changed, by recreating the tensor with a different name, using `tf.identity()`.
+I explicitly showed how to create the input tensors `x` and `dKeep` and the output tensor `y3`, because we will need the names of these tensors later for the import. Note that the name of the output tensor needs to be changed, by recreating the tensor with a different name, using `tf.identity()`. Since the input tensors are `tf.placeholder()`, we can direcly pass a name as a parameter.
 
 #### Import
 The model, with all its weights and biases, can then be loaded into a newly created session:
@@ -39,7 +39,7 @@ The model, with all its weights and biases, can then be loaded into a newly crea
     saver = tf.train.import_meta_graph(import_dir + ".meta")
     saver.restore(sess, import_dir)
 ```
-Where first, the model structure is loaded into the saver object`(tf.train.import_meta_graph())` from the model.meta file, before the model with it's weights and biases are loaded into the new session`(saver.restore())`.
+Here, firstly the model structure is loaded into the saver object `(tf.train.import_meta_graph())` from the "model.meta" file, before the model with it's weights and biases is loaded into the new session`(saver.restore())`.
 
 To be able to make predictions with the imported model, you will need to grab the input and output tensors from the model, in order to feed/fetch values:
 ```python
@@ -48,20 +48,20 @@ To be able to make predictions with the imported model, you will need to grab th
     x = graph.get_tensor_by_name("input:0")
     dKeep = graph.get_tensor_by_name("dropoutRate:0")
     
-    #actual prediction call (inputArray is an array, read from a png):
+    #actual prediction call (the "inputArray" is an array, read from a .png file):
     prediction = sess.run(y3, feed_dict={x: inputArray, dKeep: 1})
 
 ```
-The `tf.get_default_graph()` gets the actual graph of the imported session. Important to notice is that the names of the tensors need to match the names of the originally exported model (which is shown above). 
+The `tf.get_default_graph()` gets the actual graph of the imported session. Important to notice is that the names of the tensors need to match the names of the originally exported model (which are shown above). 
 
 For more information you can see the example of the [import code](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/saver/NN_test.py) and the full documentation of the [Tensorflow Saver](https://www.tensorflow.org/api_docs/python/tf/train/Saver#restore). 
 
 ### SavedModel
-Saving and reloading a model in python is a usefull tool, but what we want to achieve, is to export a model into a format that is somewhat platform independent, in order to import it into a java environment and to be able to use the model to make predictions, without the need to run python code.
+Saving and reloading a model in python can be very usefull, but what we want to achieve, is to export a model into a format that is somewhat platform independent, in order to import it into a java environment and to be able to use the model to make predictions, without the need to run python code.
 
 For any Tensorflow model, this is achievable with the `tf.saved_model` class. And as you will notice later, saving an Estimator or Keras model is going to be based on *SavedModel* aswell. 
 
-The model used for this example is the same as in the example for the `tensorflow.train.Saver()`. So the only thing to change, is the exporting and importing of the model, where we can now import the model into Java aswell, using the [Tensorflow Java API](https://www.tensorflow.org/api_docs/java/reference/org/tensorflow/package-summary).
+The model used for this example is the same as in the example for the `tensorflow.train.Saver()`. So the only thing to change here, is how to export and import the trained model. Additionally we will now be able to import the model into Java aswell, using the [Tensorflow Java API](https://www.tensorflow.org/api_docs/java/reference/org/tensorflow/package-summary).
 
 #### Export
 All the work happens in these few lines of code ([see full example](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel/NN_train.py)):
@@ -76,9 +76,9 @@ All the work happens in these few lines of code ([see full example](https://gith
             [tf.saved_model.tag_constants.SERVING])
     builder.save()
 ```
-Inside the "export" directory, there will be a "saved_model.pb" file containing the meta graph of the model, and a "variable" sub-directory, containing all variables. 
+Inside the "export" directory  will be a "saved_model.pb" file containing the meta graph of the model, and a "variable" sub-directory, containing all variables. 
 
-Often it is advisable to add a Signature to the SavedModel, describing the set of inputs and outputs from a graph:
+Often it is advisable to add a Signature to the SavedModel, describing the set of inputs and outputs from a model:
 ```python
     signature = tf.saved_model.signature_def_utils.build_signature_def(
         inputs={'input': tf.saved_model.utils.build_tensor_info(x),
@@ -94,27 +94,27 @@ Often it is advisable to add a Signature to the SavedModel, describing the set o
 		signature_def_map=signatureMap)
     builder.save()
 ```
-This signature can then be inspected, using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel). For our SavedModel, the output looks as following: 
+This signature can then be inspected, using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel). For our SavedModel, the output can look as following: 
 
 ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/SavedModelCLI_example.png)
 
-**Note:** I will additionally save some statistics in seperate json files for each of my examples (accuracy against MNSIT test set and predictions for some downloaded pictures). These statistics are later used for validating the Java results and to see, if the predictions from both technologies match.
+**Note:** I will additionally save some statistics in seperate json files for each of my examples (accuracy against MNSIT test set and predictions for some downloaded pictures). These statistics will later be used for validating the Java results and to see, if the predictions from both technologies match.
 
 #### Import
-In the following, i will shortly describe, how to import a SavedModel into Python, for the Java part, please refer to [this](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow).
+In the following, i will shortly describe, how to import a SavedModel into Python, for the Java part, please refer to [here](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow).
 
 The import is almost identical to what we did with `tensorflow.train.Saver()`, only one line of code is new:
 ```python
     import_dir = "./export"
     sess = tf.Session()
-    tf.saved_model.loader.load(sess, ["serve"], import_dir)
+    tf.saved_model.loader.load(sess, ["serve"], import_dir) #new
 ```
 
-Now you can grab the input and output tensors from the session, like before, and start making predictions, without having to train the model again. The full code can be viewed
+Afterwards you can grab the input and output tensors from the session, like before, and start making predictions, without having to train the model again. The full code can be viewed [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel/NN_test.py)
 
 You can apply the workflow to any model you like. For validation purpose, i tried saving and reloading a Convolutional Neural Network for the same MNIST example. The only thing to change was how to build the model. You can view the CNN example [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN)
 
-For more information, please refer to the full [documentation](https://www.tensorflow.org/programmers_guide/saved_model#apis_to_build_and_load_a_savedmodel)
+For more information, please refer to the [official documentation](https://www.tensorflow.org/programmers_guide/saved_model#apis_to_build_and_load_a_savedmodel)
 
 ## Inference as a Service
 **Todo**
