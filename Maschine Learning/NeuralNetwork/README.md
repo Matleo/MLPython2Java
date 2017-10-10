@@ -1,6 +1,7 @@
 # Neural Networks Python
      
-
+     
+	 
 There are several different technologies to build and train a neural network in Python. I have chosen to focus on the following three:
 
 * Low level [Tensorflow](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier) API
