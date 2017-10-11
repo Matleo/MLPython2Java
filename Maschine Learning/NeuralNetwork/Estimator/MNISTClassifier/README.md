@@ -1,13 +1,13 @@
 # Tensorflow Estimator API
 
 The `tensorflow.estimator` framework is a high level API, sitting on top of the low level tensorflow API. Tensorflow 1.3 currently includes the `tf.estimator` and the `tf.contrib.learn.Estimator`. Don't use the second module, as it is deprecated.  
-##Building a model with Estimator
-###Premade  Estimators
+## Building a model with Estimator
+### Premade  Estimators
 Tensorflow comes with a few premade, general Estimators, for regression or classification problems with a linear or dense neural network. You can find a guide on how to create a model with a premade Estimator [here](https://www.tensorflow.org/programmers_guide/estimators). 
 
 I created my [Feed Forward Neural Network](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN) for the MNIST dataset with a premade `DNNClassifier`.
 
-###Customized  Estimators
+### Customized  Estimators
 If you are looking to build a specific NN model, these premade Estimators probably won't fit your needs. This will most likely be the case if you need more granular control over model configuration, such as 
 * the ability to customize the loss function used for optimization
 * or to specify different activation functions for each neural network layer
@@ -17,12 +17,12 @@ In this case you will want to take a look [here](https://www.tensorflow.org/exte
 
 I created my [Convolutional Neural Network](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/CNN) for the MNIST dataset with a customized `Estimator`.
 
-##Model as a Service
+## Model as a Service
 Now comes the interesting part, where i describe, how to save a model, which was created using an `Estimator`. As suggested in the [Tensorflow README.md](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier), we will be using Tensorflow's `SavedModel` structure, to serialize and save our trained model. 
 
 At first i thought this is going to be realy easy, since `Estimator` is built on Tensorflow, one would assume that i could just extract the Tensorflow session and save the model in the exact same manner, as did with the low level Tensorflow model, but sadly this is not the case. The `Estimator` framework is specifically designed to be used for serving a model with [Tensorflow Serving](https://www.tensorflow.org/serving/), which will come in handy later but gave me a little headache when working with the prebuild Estimators.
 
-###DNNClassifier model
+### DNNClassifier model
 Saving a trained model in theory is not very hard and can be done with the following lines of code: 
 ```python
     #classifier = DNNClassifier(...)
