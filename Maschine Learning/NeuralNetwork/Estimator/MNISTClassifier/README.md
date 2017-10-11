@@ -104,7 +104,7 @@ The initialization of the classifier from your own `model_fn()` differs a bit fr
 Finally, to execute the export of the model as a `SavedModel` (after the training), you can use the same procedure as with the premade `DNNClassifier`:
 ```python
     export_dir="export"
-inputs = {"inputKey": tf.placeholder(shape=[None, 784], dtype=tf.float32, name="input")}
+    inputs = {"inputKey": tf.placeholder(shape=[None, 784], dtype=tf.float32, name="input")}
     inputReceiver = tf.estimator.export.build_raw_serving_input_receiver_fn(inputs)
     classifier.export_savedmodel(export_dir, serving_input_receiver_fn=inputReceiver)
 ```
