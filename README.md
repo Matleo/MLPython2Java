@@ -20,4 +20,4 @@ For each model type two seperate approaches were executed:
 ## Prerequisites
 * Python 3.6.2 or newer
 * Java 1.8 or newer
-* Additional model specific prerequesites are described in the proper specific Readme.md
+* **TODO**

@@ -14,12 +14,12 @@ def printPredictions(Pics):
 
 
 def determinNumber(tArray,i):
-    output=sess.run(tf.reshape(tArray, [1,784]))
-    guessed= sess.run(y, feed_dict={x:output})
-    guessedIndex= sess.run(tf.argmax(y,1), feed_dict={x:output})
-    guessedIndex=list(guessedIndex)[0]#um von set auf int zu kommen
-    guessedProb= guessed[0][guessedIndex]*100
-    print("%i: Die abgebildete Zahl ist zu %f%% eine: %d." % (i,guessedProb,guessedIndex))
+    inputArray=sess.run(tf.reshape(tArray, [1,784]))
+    prediction= sess.run(y, feed_dict={x:inputArray})
+    predictionIndex= sess.run(tf.argmax(y,1), feed_dict={x:inputArray})
+    predictionIndex=list(predictionIndex)[0]#um von set auf int zu kommen
+    predictionProb= prediction[0][predictionIndex]*100
+    print("%i: Die abgebildete Zahl ist zu %f%% eine: %d." % (i,predictionProb,predictionIndex))
 
 
 
@@ -34,7 +34,6 @@ if __name__ == "__main__":
 
     tf.saved_model.loader.load(sess, ["serve"], import_dir)
     y = graph.get_tensor_by_name("output:0")
-
     x = graph.get_tensor_by_name("input:0")
 
     printPredictions("Handwritten")

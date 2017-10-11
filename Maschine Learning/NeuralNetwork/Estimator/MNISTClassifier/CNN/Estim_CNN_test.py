@@ -14,9 +14,9 @@ def printPredictions(Pics):
 
 
 def determinNumber(tArray,i):
-    output=sess.run(tf.reshape(tArray, [1,784]))
-    guessed= sess.run(y, feed_dict={x:output})
-    guessedIndex= sess.run(tf.argmax(y,1), feed_dict={x:output})
+    inputArray=sess.run(tf.reshape(tArray, [1,784]))
+    guessed= sess.run(y, feed_dict={x:inputArray})
+    guessedIndex= sess.run(tf.argmax(y,1), feed_dict={x:inputArray})
     guessedIndex=list(guessedIndex)[0]#um von set auf int zu kommen
     guessedProb= guessed[0][guessedIndex]*100
     print("%i: Die abgebildete Zahl ist zu %f%% eine: %d." % (i,guessedProb,guessedIndex))

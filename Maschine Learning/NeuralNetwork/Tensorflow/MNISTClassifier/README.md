@@ -3,11 +3,6 @@ I worked with Tensorflow version 1.3, the full documentation can be found [here]
 
 I am going to focus on describing the workflow to save a Tensorflow model, rather then explaining how the building and training works. If you are looking for an introduction on the MNIST dataset and Tensorflow in general, you might want to read [Tensorflow getting started](https://www.tensorflow.org/get_started/mnist/beginners) and take a look at my commented code [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/saver/NN_learn.py).
 
-### Installation
-Please follow the official [instructions](https://www.tensorflow.org/install/install_windows)
-
-Furthermore you will need:
-* **TODO**
 
 ## Model as a Service
 ### Saver
@@ -98,7 +93,7 @@ This signature can then be inspected, using the [SavedModel CLI](https://www.ten
 
 ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/SavedModelCLI_example.png)
 
-**Note:** I will additionally save some statistics in seperate json files for each of my examples (accuracy against MNSIT test set and predictions for some downloaded pictures). These statistics will later be used for validating the Java results and to see, if the predictions from both technologies match.
+**Note:** I am additionally saving some statistics in seperate json files for each of my examples (accuracy against MNSIT test set and predictions for some downloaded pictures). These statistics will later be used for validating the Java results and to see, if the predictions from both technologies match.
 
 #### Import
 In the following, i will shortly describe, how to import a SavedModel into Python, for the Java part, please refer to [here](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow).

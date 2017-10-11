@@ -3,10 +3,10 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 
 def determinNumber(tArray, i):
-    output = sess.run(tf.reshape(tArray, [1, 784]))
-    guessed = sess.run(y_conv, feed_dict={x: output, dKeep: 1})
+    inputArray = sess.run(tf.reshape(tArray, [1, 784]))
+    guessed = sess.run(y_conv, feed_dict={x: inputArray, dKeep: 1})
     guessed = sess.run(tf.nn.softmax(guessed))
-    guessedIndex = sess.run(tf.argmax(y_conv, 1), feed_dict={x: output, dKeep: 1})
+    guessedIndex = sess.run(tf.argmax(y_conv, 1), feed_dict={x: inputArray, dKeep: 1})
     guessedIndex = list(guessedIndex)[0]  # um von set auf int zu kommen
     guessedProb = guessed[0][guessedIndex] * 100
     print("%i: Die abgebildete Zahl ist zu %f%% eine: %d." % (i, guessedProb, guessedIndex))
