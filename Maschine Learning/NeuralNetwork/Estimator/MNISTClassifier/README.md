@@ -56,7 +56,7 @@ Where `spec.export_outputs["serving_default"].scores` grabs the tensor from the 
 These eplicitly declared names are again important for the import, so we can later get the output vector of the probability for each number by getting the tensor by name "output", and the associated class name vector by name "class". (*Note: for the MNIST example, the class output vector is not very usefull*)
 
 Notice, how we did not pass any `signature ` to the `SavedModel`. The `Estimator` takes care of that. If we inspect the `SavedModel` with the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel), we can see the connection between the signature map keys ("inputKey" , "class" , "scores"), and the tensor names ("input:0" , "class:0" , "output:0"):
-![SavedModel CLI output picture]()
+> ![SavedModel CLI output picture](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/SavedModelCLI.png)
   
 Now we have saved a regular `SavedModel` from our adjusted, premade DNNClassifier, which can imported as usual. There is nothing, that seperates this `SaveModel` from a "normal" SavedModel, constructed with the low level tensorflow API. Just as a quick reminder, this is the way you want to reimport the model into Python:
 ```python
