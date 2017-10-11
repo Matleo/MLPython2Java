@@ -59,7 +59,7 @@ Notice, how we did not pass any `signature ` to the `SavedModel`. The `Estimator
 
 > ![SavedModel CLI output picture](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/SavedModelCLI.png) 
 
-> ![SavedModel CLI output picture](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFN/SavedModelCLI_example.png)
+> ![SavedModel CLI output picture](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/SavedModelCLI_example.png)
 
 
 Now we have saved a regular `SavedModel` from our adjusted, premade DNNClassifier, which can imported as usual. There is nothing, that seperates this `SaveModel` from a "normal" SavedModel, constructed with the low level tensorflow API. Just as a quick reminder, this is the way you want to reimport the model into Python:
