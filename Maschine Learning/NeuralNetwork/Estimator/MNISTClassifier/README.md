@@ -86,10 +86,10 @@ The workflow for a customized Estimator, where you wrote your own `model_fn()` i
 
 I am going to assume that you know how to build a `model_fn()`, if that is not the case, please check my [CNN example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/CNN) for the MNIST dataset and the [official documentation](https://www.tensorflow.org/extend/estimators).
 
-When constructing your `model_fn()`, you only need to make one adaption in order to being able to save your model to a `SavedModel`. You must specify the `export_outputs` element of the `tf.estimator.EstimatorSpec` return value. This is a dict of {name: output} describing the output signatures to be exported, where output is any `ExportOutput`, such as `PredictOutput` or `ClassificationOutput`. As explained earlier, the `ClassificationOutput` doesn't really work for our purpose, so i am going with a `PredictOutput`:
+When constructing your `model_fn()`, you only need to make one adaption in order to being able to save your model to a `SavedModel`. You must specify the `export_outputs` element of the `tf.estimator.EstimatorSpec` return value, if the `model_fn()` is called in prediction mode. This is a dict of {name: output} describing the output signatures to be exported, where output is any `ExportOutput`, such as `PredictOutput` or `ClassificationOutput`. As explained earlier, the `ClassificationOutput` doesn't really work for our purpose, so i am going with a `PredictOutput`:
 ```python
     if mode == tf.estimator.ModeKeys.PREDICT:
-                predictions = {"score": tf.identity(output_layer, "output")}
+        predictions = {"score": tf.identity(output_layer, "output")}
         export_outputs = {"serving_default": tf.estimator.export.PredictOutput(predictions)}
         return tf.estimator.EstimatorSpec(
             mode=mode,
@@ -101,14 +101,14 @@ The initialization of the classifier from your own `model_fn()` differs a bit fr
 ```python
     classifier = tf.estimator.Estimator(model_fn=model_fn)
 ```
-Finally, to execute the export of the model as a `SavedModel`, you can use the same procedure as with the premade `DNNClassifier`:
+Finally, to execute the export of the model as a `SavedModel` (after the training), you can use the same procedure as with the premade `DNNClassifier`:
 ```python
     export_dir="export"
 inputs = {"inputKey": tf.placeholder(shape=[None, 784], dtype=tf.float32, name="input")}
     inputReceiver = tf.estimator.export.build_raw_serving_input_receiver_fn(inputs)
     classifier.export_savedmodel(export_dir, serving_input_receiver_fn=inputReceiver)
 ```
-The directory structure and how to perform the import works the same as above.
+The directory structure and how to perform the import works the same as shown above.
 
 ## Inference as a Service
 **TODO**
