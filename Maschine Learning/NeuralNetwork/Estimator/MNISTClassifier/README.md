@@ -57,8 +57,6 @@ These eplicitly declared names are again important for the import, so we can lat
 
 Notice, how we did not pass any `signature ` to the `SavedModel`. The `Estimator` takes care of that. If we inspect the `SavedModel` with the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel), we can see the connection between the signature map keys ("inputKey" , "class" , "scores"), and the tensor names ("input:0" , "class:0" , "output:0"):
 
-> ![SavedModel CLI output picture](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/SavedModelCLI.png) 
-
 > ![SavedModel CLI output picture](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/SavedModelCLI_example.png)
 
 
