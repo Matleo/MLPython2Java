@@ -21,13 +21,13 @@
     <SUITE FILE_PATH="coverage/Maschine_Learning$testJPMML.coverage" NAME="testJPMML Coverage Results" MODIFIED="1506503804606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Estimator/IrisClassifier" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$test__2_.coverage" NAME="test (2) Coverage Results" MODIFIED="1506526448576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$train__2_.coverage" NAME="train (2) Coverage Results" MODIFIED="1506607267463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Keras/MNISTClassifier" />
-    <SUITE FILE_PATH="coverage/Maschine_Learning$Estim_CNN_test.coverage" NAME="Estim_CNN_test Coverage Results" MODIFIED="1507558393976" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN" />
+    <SUITE FILE_PATH="coverage/Maschine_Learning$Estim_CNN_test.coverage" NAME="Estim_CNN_test Coverage Results" MODIFIED="1507739723753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$GaussianNB.coverage" NAME="GaussianNB Coverage Results" MODIFIED="1506531248810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Udacity_Lessons/ML" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$trainModel.coverage" NAME="trainModel Coverage Results" MODIFIED="1507135104348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Keras/IMDBClassifier" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$cnn_train_dl4j.coverage" NAME="cnn_train_dl4j Coverage Results" MODIFIED="1507565293043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Keras/MNISTClassifier/Model" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$CNN_learn.coverage" NAME="CNN_learn Coverage Results" MODIFIED="1507543331839" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Tensorflow/CNN" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$train.coverage" NAME="train Coverage Results" MODIFIED="1507571338439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Keras/MNISTClassifier/Sequential" />
-    <SUITE FILE_PATH="coverage/Maschine_Learning$Estim_CNN_train.coverage" NAME="Estim_CNN_train Coverage Results" MODIFIED="1507730406037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN" />
+    <SUITE FILE_PATH="coverage/Maschine_Learning$Estim_CNN_train.coverage" NAME="Estim_CNN_train Coverage Results" MODIFIED="1507741208383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$e_m_train.coverage" NAME="e_m_train Coverage Results" MODIFIED="1507285780447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$NN_learn__2_.coverage" NAME="NN_learn (2) Coverage Results" MODIFIED="1506005722008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork/Fully Connected NN/SavedModel" />
     <SUITE FILE_PATH="coverage/Maschine_Learning$lowLevelNN.coverage" NAME="lowLevelNN Coverage Results" MODIFIED="1506677100827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NeuralNetwork" />
@@ -57,41 +57,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Wrapper.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Wrapper.py">
+      <file leaf-file-name="Estim_CNN_train.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+            <state relative-caret-position="351">
+              <caret line="41" column="85" lean-forward="true" selection-start-line="39" selection-start-column="4" selection-end-line="41" selection-end-column="85" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Estim_train.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Estim_train.py">
+      <file leaf-file-name="Estim_CNN_test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-647">
-              <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NN_train.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/NN_train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="44" column="104" lean-forward="false" selection-start-line="44" selection-start-column="87" selection-end-line="44" selection-end-column="104" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Estim_test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Estim_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-197">
-              <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="625">
+              <caret line="26" column="22" lean-forward="false" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -182,13 +162,13 @@
         <option value="$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/CNN/CNN_train.py" />
         <option value="$PROJECT_DIR$/NeuralNetwork/Keras/MNISTClassifier/Model/cnn_train.py" />
         <option value="$PROJECT_DIR$/NeuralNetwork/Keras/MNISTClassifier/Sequential/train.py" />
-        <option value="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_train.py" />
         <option value="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Estim_train.py" />
         <option value="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Wrapper.py" />
         <option value="$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/NN_test.py" />
         <option value="$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/CNN/CNN_test.py" />
-        <option value="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_test.py" />
         <option value="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Estim_test.py" />
+        <option value="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_test.py" />
+        <option value="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_train.py" />
       </list>
     </option>
   </component>
@@ -275,44 +255,6 @@
               <item name="MNISTClassifier" type="462c0819:PsiDirectoryNode" />
               <item name="CNN" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
-              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
-              <item name="Estimator" type="462c0819:PsiDirectoryNode" />
-              <item name="MNISTClassifier" type="462c0819:PsiDirectoryNode" />
-              <item name="FFNN" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
-              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
-              <item name="Tensorflow" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
-              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
-              <item name="Tensorflow" type="462c0819:PsiDirectoryNode" />
-              <item name="MNISTClassifier" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
-              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
-              <item name="Tensorflow" type="462c0819:PsiDirectoryNode" />
-              <item name="MNISTClassifier" type="462c0819:PsiDirectoryNode" />
-              <item name="Feed Forward NN" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
-              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
-              <item name="Tensorflow" type="462c0819:PsiDirectoryNode" />
-              <item name="MNISTClassifier" type="462c0819:PsiDirectoryNode" />
-              <item name="Feed Forward NN" type="462c0819:PsiDirectoryNode" />
-              <item name="SavedModel" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -355,7 +297,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Estim_test">
+  <component name="RunManager" selected="Python.Estim_CNN_train">
     <configuration name="CNN_train" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -370,6 +312,24 @@
       <module name="Maschine Learning" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/CNN/CNN_train.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="Estim_CNN_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Maschine Learning" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -424,24 +384,6 @@
       <module name="Maschine Learning" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Estim_train.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="NN_train" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Maschine Learning" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/NN_train.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -528,19 +470,19 @@
       <listeners />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.NN_train" />
-      <item index="1" class="java.lang.String" itemvalue="Python.CNN_train" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Estim_train" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Estim_CNN_train" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Estim_test" />
+      <item index="0" class="java.lang.String" itemvalue="Python.CNN_train" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Estim_train" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Estim_CNN_train" />
+      <item index="3" class="java.lang.String" itemvalue="Python.Estim_test" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Estim_CNN_test" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Estim_test" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Estim_train" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Estim_CNN_train" />
-        <item index="3" class="java.lang.String" itemvalue="Python.CNN_train" />
-        <item index="4" class="java.lang.String" itemvalue="Python.NN_train" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Estim_CNN_train" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Estim_CNN_test" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Estim_test" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Estim_train" />
+        <item index="4" class="java.lang.String" itemvalue="Python.CNN_train" />
       </list>
     </recent_temporary>
   </component>
@@ -596,12 +538,12 @@
       <workItem from="1507284315180" duration="9979000" />
       <workItem from="1507542537175" duration="28173000" />
       <workItem from="1507625690846" duration="16488000" />
-      <workItem from="1507725863544" duration="7213000" />
+      <workItem from="1507725863544" duration="10448000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="250800000" />
+    <option name="totallyTimeSpent" value="254035000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-5" width="1936" height="1056" extended-state="6" />
@@ -652,7 +594,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -914,22 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorflow/python/estimator/export/export_output.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-309">
-          <caret line="70" column="6" lean-forward="false" selection-start-line="70" selection-start-column="6" selection-end-line="70" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorflow/python/estimator/model_fn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorflow/python/ops/array_ops.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-189">
@@ -938,26 +864,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="72" column="79" lean-forward="false" selection-start-line="72" selection-start-column="66" selection-end-line="72" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.IntelliJIdea2017.2/system/python_stubs/-654428910/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="5246" column="8" lean-forward="false" selection-start-line="5246" selection-start-column="8" selection-end-line="5246" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorflow/python/estimator/estimator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="88" column="6" lean-forward="false" selection-start-line="88" selection-start-column="6" selection-end-line="88" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -986,10 +896,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_test.py">
+    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Estim_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="18" column="66" lean-forward="false" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
+        <state relative-caret-position="-197">
+          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/NN_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="44" column="104" lean-forward="false" selection-start-line="44" selection-start-column="87" selection-end-line="44" selection-end-column="104" />
           <folding />
         </state>
       </provider>
@@ -1002,26 +920,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Estim_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-197">
-          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Estim_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-647">
-          <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="20" />
+        <state relative-caret-position="100">
+          <caret line="42" column="17" lean-forward="false" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/NN_train.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorflow/python/estimator/export/export_output.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="44" column="104" lean-forward="false" selection-start-line="44" selection-start-column="87" selection-end-line="44" selection-end-column="104" />
+        <state relative-caret-position="3575">
+          <caret line="160" column="6" lean-forward="false" selection-start-line="160" selection-start-column="6" selection-end-line="160" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="625">
+          <caret line="26" column="22" lean-forward="false" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorflow/python/estimator/estimator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="240" column="0" lean-forward="false" selection-start-line="240" selection-start-column="0" selection-end-line="240" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorflow/python/estimator/model_fn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-289">
+          <caret line="56" column="20" lean-forward="false" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/CNN/Estim_CNN_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="41" column="85" lean-forward="true" selection-start-line="39" selection-start-column="4" selection-end-line="41" selection-end-column="85" />
           <folding />
         </state>
       </provider>

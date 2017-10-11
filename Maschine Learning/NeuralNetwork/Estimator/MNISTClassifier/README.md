@@ -3,7 +3,7 @@
 The `tensorflow.estimator` framework is a high level API, sitting on top of the low level tensorflow API. Tensorflow 1.3 currently includes the `tf.estimator` and the `tf.contrib.learn.Estimator`. Don't use the second module, as it is deprecated.  
 ## Building a model with Estimator
 ### Premade  Estimators
-Tensorflow comes with a few premade, general Estimators, for regression or classification problems with a linear or dense neural network. You can find a guide on how to create a model with a premade Estimator [here](https://www.tensorflow.org/programmers_guide/estimators). 
+Tensorflow comes with a few premade, general Estimators for regression or classification problems using either a linear model or a dense neural network. You can find a guide on how to create a model with a premade Estimator [here](https://www.tensorflow.org/programmers_guide/estimators). 
 
 I created my [Feed Forward Neural Network](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN) for the MNIST dataset with a premade `DNNClassifier`.
 
@@ -20,7 +20,7 @@ I created my [Convolutional Neural Network](https://github.com/Matleo/MLPython2J
 ## Model as a Service
 Now comes the interesting part, where i describe, how to save a model, which was created using an `Estimator`. As suggested in the [Tensorflow README.md](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier), we will be using Tensorflow's `SavedModel` structure, to serialize and save our trained model. 
 
-At first i thought this is going to be realy easy, since `Estimator` is built on Tensorflow, one would assume that i could just extract the Tensorflow session and save the model in the exact same manner, as did with the low level Tensorflow model, but sadly this is not the case. The `Estimator` framework is specifically designed to be used for serving a model with [Tensorflow Serving](https://www.tensorflow.org/serving/), which will come in handy later but gave me a little headache when working with the prebuild Estimators.
+At first i thought this was going to be pretty easy, since `Estimator` is built on top of `Tensorflow`, one would assume that i could just extract the Tensorflow session and save the model in the exact same manner, as did with the low level Tensorflow model, but sadly this is not the case. The `Estimator` framework is specifically designed to be used for serving a model with [Tensorflow Serving](https://www.tensorflow.org/serving/), which will come in handy later but gave me a little headache when working with the prebuild Estimators.
 
 ### DNNClassifier model
 Saving a trained model in theory is not very hard and can be done with the following lines of code: 
@@ -31,7 +31,7 @@ Saving a trained model in theory is not very hard and can be done with the follo
     inputReceiver = tf.estimator.export.build_raw_serving_input_receiver_fn(inputs)
     classifier.export_savedmodel(export_dir, serving_input_receiver_fn=inputReceiver)
 ```
-The only thing to realy configure is the third line, defining your `inputs` variable. Here you want to specify what your model expects as input, which is in our case, a batch of 784-vectors, containing the pixel informations of one image, to predict what number the image displays. 
+The only thing to realy configure is the third line, defining your `inputs` variable. Here you want to specify what your model expects as input, which is in our case, a batch of 784-vectors, containing the pixel informations of a batch of images, to predict what number the images display. 
 
 Notice that the `name` attribute of the tensor defines the name of the input tensor in the `SavedModel`, which you can grab later using `graph.get_tensor_by_name()`. Whereas the key of the dictionary needs to match the name of the input feature Tensor, previously defined for training and testing. 
 
@@ -42,7 +42,7 @@ Now as i mentioned, this doesn't work out quite that easy, as the premade Estima
 
 >`ValueError: Classification input must be a single string Tensor; got {'inputKey': <tf.Tensor 'input:0' shape=(?, 784) dtype=float32>}`
 
-This results from the `DNNClassifier` using a `ClassificationOutput` for saving the model. And as shown in the error message, the input for such a `ClassificationOutput` needs to be a single string Tensor, because the model expects a serialized `tf.Example` for serving, which we will get into later.
+This results from the `DNNClassifier` using a `ClassificationOutput` for saving the model. And as shown in the error message, the input for such a `ClassificationOutput` needs to be a single string Tensor, because the model expects a serialized `tf.Example` for serving, which we will get into later. Note that this behaviour might change in future versions.
 
 So as a workaround i created a wrapper class for a DNNCLassifier, where i replace the `export_outputs` attribute, of the created `EstimatorSpec`. Instead of a `ClassificationOutput`, i now use a general `PredictionOutput` for the export. The new `export_outputs` looks as following:
 ```python
@@ -53,14 +53,14 @@ export_outputs = {
 ```
 Where `spec.export_outputs["serving_default"].scores` grabs the tensor from the original DNNClassifier, so we essentially just replaced the `ClassificationOutput` object with a `PredictOutput` object and then renamed the output tensors. 
 
-These eplicitly declared names are again important for the import, so we can later get the output vector of the probability for each number by getting the tensor by name "output", and the associated class name vector by name "class". (*Note: for the MNIST example, the class output vector is not very usefull*)
+These eplicitly declared names are again important for the import, so that we can later get the output vector of the probability for each number by getting the tensor by name "output", and the associated class name vector by name "class". (*Note*: for the MNIST example, the class output vector is not very usefull)
 
-Notice, how we did not pass any `signature ` to the `SavedModel`. The `Estimator` takes care of that. If we inspect the `SavedModel` with the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel), we can see the connection between the signature map keys ("inputKey" , "class" , "scores"), and the tensor names ("input:0" , "class:0" , "output:0"):
+Notice, how we did not pass any `signature ` to the `SavedModel`, as the `Estimator` takes care of that automatically. If we inspect the `SavedModel` with the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel), we can see the connection between the signature map keys ("inputKey" , "class" , "scores"), and the tensor names ("input:0" , "class:0" , "output:0"):
 
 > ![SavedModel CLI output picture](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/SavedModelCLI_example.png)
 
 
-Now we have saved a regular `SavedModel` from our adjusted, premade DNNClassifier, which can imported as usual. There is nothing, that seperates this `SaveModel` from a "normal" SavedModel, constructed with the low level tensorflow API. Just as a quick reminder, this is the way you want to reimport the model into Python:
+Now we have saved a regular `SavedModel` from our adjusted, premade DNNClassifier, which can be imported as usual. There is nothing that seperates this `SaveModel` from a "normal" SavedModel, constructed with the low level tensorflow API. Just as a quick reminder, this is the way you want to reimport the model into Python:
 ```python
     import_super_dir = "./export/"
     timestamp=os.listdir(import_super_dir)[0]
@@ -77,11 +77,38 @@ Now we have saved a regular `SavedModel` from our adjusted, premade DNNClassifie
     prediction= sess.run(y, feed_dict={x:inputArray})
 
 ```
-Since the `SavedModel` is not directly contained in the export directory, we need to grab the first (and only) sub-directory and import the session from there. 
+Since the `SavedModel` is not directly contained in the export directory, we need to grab the first (and only) sub-directory and extract the `SavedModel` into a new `session` from there. 
 
 The full example for the DNNClassifier can be found [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN).
 
 ### Customized Estimator
+The workflow for a customized Estimator, where you wrote your own `model_fn()` is just a little different and the saving part does not require any wrapping, since you can define all of the `EstimatorSpec` on your own. 
+
+I am going to assume that you know how to build a `model_fn()`, if that is not the case, please check my [CNN example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/CNN) for the MNIST dataset and the [official documentation](https://www.tensorflow.org/extend/estimators).
+
+When constructing your `model_fn()`, you only need to make one adaption in order to being able to save your model to a `SavedModel`. You must specify the `export_outputs` element of the `tf.estimator.EstimatorSpec` return value. This is a dict of {name: output} describing the output signatures to be exported, where output is any `ExportOutput`, such as `PredictOutput` or `ClassificationOutput`. As explained earlier, the `ClassificationOutput` doesn't really work for our purpose, so i am going with a `PredictOutput`:
+```python
+    if mode == tf.estimator.ModeKeys.PREDICT:
+                predictions = {"score": tf.identity(output_layer, "output")}
+        export_outputs = {"serving_default": tf.estimator.export.PredictOutput(predictions)}
+        return tf.estimator.EstimatorSpec(
+            mode=mode,
+            export_outputs=export_outputs,
+            predictions=predictions
+        )
+```
+The initialization of the classifier from your own `model_fn()` differs a bit from the initialization of a DNNClassifier, such that you don't pass in the model describing parameters, but rather your `model_fn()` and other optional parameters:
+```python
+    classifier = tf.estimator.Estimator(model_fn=model_fn)
+```
+Finally, to execute the export of the model as a `SavedModel`, you can use the same procedure as with the premade `DNNClassifier`:
+```python
+    export_dir="export"
+inputs = {"inputKey": tf.placeholder(shape=[None, 784], dtype=tf.float32, name="input")}
+    inputReceiver = tf.estimator.export.build_raw_serving_input_receiver_fn(inputs)
+    classifier.export_savedmodel(export_dir, serving_input_receiver_fn=inputReceiver)
+```
+The directory structure and how to perform the import works the same as above.
 
 ## Inference as a Service
 **TODO**
