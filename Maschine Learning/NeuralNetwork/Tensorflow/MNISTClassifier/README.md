@@ -91,7 +91,7 @@ Often it is advisable to add a Signature to the SavedModel, describing the set o
 ```
 This signature can then be inspected, using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel). For our SavedModel, the output can look as following: 
 
-![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/SavedModelCLI_example.png)
+![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/SavedModelCLI_example.png)
 
 **Note:** I am additionally saving some statistics in seperate json files for each of my examples (accuracy against MNSIT test set and predictions for some downloaded pictures). These statistics will later be used for validating the Java results and to see, if the predictions from both technologies match.
 

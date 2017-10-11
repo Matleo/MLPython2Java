@@ -67,11 +67,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Estim_train.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Estim_train.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NeuralNetwork/Estimator/MNISTClassifier/FFNN/Estim_train.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-647">
               <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NN_train.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/NN_train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="44" column="104" lean-forward="false" selection-start-line="44" selection-start-column="87" selection-end-line="44" selection-end-column="104" />
               <folding />
             </state>
           </provider>
@@ -272,6 +282,36 @@
               <item name="Estimator" type="462c0819:PsiDirectoryNode" />
               <item name="MNISTClassifier" type="462c0819:PsiDirectoryNode" />
               <item name="FFNN" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
+              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
+              <item name="Tensorflow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
+              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
+              <item name="Tensorflow" type="462c0819:PsiDirectoryNode" />
+              <item name="MNISTClassifier" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
+              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
+              <item name="Tensorflow" type="462c0819:PsiDirectoryNode" />
+              <item name="MNISTClassifier" type="462c0819:PsiDirectoryNode" />
+              <item name="Feed Forward NN" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
+              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
+              <item name="Tensorflow" type="462c0819:PsiDirectoryNode" />
+              <item name="MNISTClassifier" type="462c0819:PsiDirectoryNode" />
+              <item name="Feed Forward NN" type="462c0819:PsiDirectoryNode" />
+              <item name="SavedModel" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -556,12 +596,12 @@
       <workItem from="1507284315180" duration="9979000" />
       <workItem from="1507542537175" duration="28173000" />
       <workItem from="1507625690846" duration="16488000" />
-      <workItem from="1507725863544" duration="7104000" />
+      <workItem from="1507725863544" duration="7213000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="250691000" />
+    <option name="totallyTimeSpent" value="250800000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-5" width="1936" height="1056" extended-state="6" />
@@ -717,6 +757,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-12">
           <caret line="25" column="35" lean-forward="false" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -852,13 +893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/NN_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="35" column="4" lean-forward="false" selection-start-line="35" selection-start-column="4" selection-end-line="45" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/CNN/CNN_train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2086">
@@ -980,6 +1014,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-647">
           <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/NN_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="44" column="104" lean-forward="false" selection-start-line="44" selection-start-column="87" selection-end-line="44" selection-end-column="104" />
           <folding />
         </state>
       </provider>
