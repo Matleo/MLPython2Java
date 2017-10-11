@@ -82,11 +82,11 @@ Since the `SavedModel` is not directly contained in the export directory, we nee
 The full example for the DNNClassifier can be found [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN).
 
 ### Customized Estimator
-The workflow for a customized Estimator, where you wrote your own `model_fn()` is just a little different and the saving part does not require any wrapping, since you can define all of the `EstimatorSpec` on your own. 
+The workflow to save your model, built with a customized Estimator, where you wrote your own `model_fn()` is just a little different then usual and the saving part does not require any "plumbing", since you can define all of the `EstimatorSpec` directly on your own. 
 
 I am going to assume that you know how to build a `model_fn()`, if that is not the case, please check my [CNN example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/CNN) for the MNIST dataset and the [official documentation](https://www.tensorflow.org/extend/estimators).
 
-When constructing your `model_fn()`, you only need to make one adaption in order to being able to save your model to a `SavedModel`. You must specify the `export_outputs` element of the `tf.estimator.EstimatorSpec` return value, if the `model_fn()` is called in prediction mode. This is a dict of {name: output} describing the output signatures to be exported, where output is any `ExportOutput`, such as `PredictOutput` or `ClassificationOutput`. As explained earlier, the `ClassificationOutput` doesn't really work for our purpose, so i am going with a `PredictOutput`:
+When constructing your `model_fn()`, you only need to make one adaption in order to being able to save your model to a `SavedModel`. You must specify the `export_outputs` element of the `tf.estimator.EstimatorSpec` return value, if the `model_fn()` is called in prediction mode. The `export_outputs` is a dict of {name: output} describing the output signatures to be exported, where output is any `ExportOutput`, such as `PredictOutput` or `ClassificationOutput`. As explained earlier, the `ClassificationOutput` doesn't really work for our purpose, so i am going with a `PredictOutput`:
 ```python
     if mode == tf.estimator.ModeKeys.PREDICT:
         predictions = {"score": tf.identity(output_layer, "output")}
