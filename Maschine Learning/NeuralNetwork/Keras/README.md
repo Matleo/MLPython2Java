@@ -1,6 +1,8 @@
 # Keras
 Keras is a high-level neural networks API, written in Python and capable of running on top of TensorFlow. Keras provides two APIs to build a neural network, the `Sequential` and the `Model`. Basically you should use a `Sequential` if your model is simple and essentially just a sequence of layers. If you are trying to build a more complex models, which includes non-sequential connections and multiple inputs/outputs, you should use the functional `Model` API.
 
+I used a `Sequential` to create my [FFNN example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential) and a `Model` to create my [CNN example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential). Additionally i created a [LSTM example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/IMDBClassifier) for IMDB Classification to validate that the export works with complex models aswell.
+
 I will assume that you are familiar with building and training a Keras model, if that is not the case, please refer to the original [documentation](https://keras.io/). 
 
 ## Model as a Service
@@ -26,7 +28,7 @@ The interesting part happes at the [Java part](https://github.com/Matleo/MLPytho
 
 It is important to note, that you can **not** use every Keras element, as the Java import with DL4J only supports a restricted amount of [features](https://deeplearning4j.org/keras-supported-features). This list of features will be available with DL4J v.0.9.2 which is not stable at the moment. I used DL4J v.0.9.1, where there were fewer options available. Because of this reason, and because using an additional (small) framework can often be unsafe, i reccomend using the second method, to extract the Tensorflow `session` and export a `SavedModel`.
 
-You can find my full example for a `Sequential` [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential/train_dl4j.py), and for a `Model` [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Model/cnn_train_dl4j.py). As i was not able to use  all the Keras layers here, i seperated exporting the native Keras model and the Tensorflow `SavedModel` in seperate files. 
+You can find my full example for a `Sequential` [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential/train_dl4j.py), and for a `Model` [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Model/cnn_train_dl4j.py). As i was not able to use  all the Keras layers here, i seperated exporting the native Keras model and the Tensorflow `SavedModel` in seperate files. (*Note*: The LSTM example doesn't work with DL4J on v0.9.1)
 
 ### Exporting a SavedModel
 As mentioned, Keras is a model-level library, providing high-level building blocks for developing deep learning models. It does not handle low-level operations such as tensor products, convolutions and so on itself. Therefore it calls the Tensorflow API to build a `Graph` and run a `Session`. We can access the `Session` by using the `Keras.backend`, which contains the backend engine, in our case `Tensorflow`: 
@@ -60,10 +62,10 @@ Talking about naming the tensors. I did not find a way to rename the tensorflow 
 ```python
     inputs = Input(shape=(784,), name="input_input")
 ```
-Note that i used the same name here as the name assigned to the input of my `Sequential` example.
+Note that i used the same name here as the name assigned to the input of my `Sequential` example. So that the signature of my `Model` [example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Model) and my `Sequential` [example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential) are identical.
 
-With the default tensor names, this is what the signature of our `SavedModel` looks like: 
-
+With the default tensor names, this is what the signature of our `SavedModel` looks like:
 ![SavedModelCLI output picture](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/SavedModelCLI.png)
+
 ## Inference as a Service
 **TODO**
