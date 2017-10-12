@@ -65,6 +65,9 @@ Talking about naming the tensors. I did not find a way to rename the tensorflow 
 Note that i used the same name here as the name assigned to the input of my `Sequential` example. So that the signature of my `Model` [example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Model) and my `Sequential` [example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential) are identical.
 
 With the default tensor names, this is what the signature of our `SavedModel` looks like:
+
+> ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/SavedModelCLI.png)
+
 ![SavedModelCLI output picture](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/SavedModelCLI.png)
 
 ## Inference as a Service
