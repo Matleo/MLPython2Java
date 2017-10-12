@@ -68,7 +68,7 @@ With the default tensor names, this is what the signature of our `SavedModel` lo
 
 > ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/SavedModelCLI.png)
 
-To import the `SavedModel` into Python again, please refer to [this](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier). How to import this `SavedModel` into Java is described [here](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow).
+To import the `SavedModel` into Python again, please refer to [this](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier). You can read about how to import the `SavedModel` into Java [here](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow).
 
 ## Inference as a Service
 **TODO**

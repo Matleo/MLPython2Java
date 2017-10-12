@@ -72,8 +72,8 @@
       <file leaf-file-name="cnn_train.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NeuralNetwork/Keras/MNISTClassifier/Model/cnn_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="79" column="27" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+            <state relative-caret-position="599">
+              <caret line="102" column="0" lean-forward="true" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
                 <element signature="e#367#934#0" expanded="false" />
@@ -242,21 +242,6 @@
               <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
               <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
               <item name="Keras" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
-              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
-              <item name="Keras" type="462c0819:PsiDirectoryNode" />
-              <item name="IMDBClassifier" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Maschine Learning" type="462c0819:PsiDirectoryNode" />
-              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
-              <item name="Keras" type="462c0819:PsiDirectoryNode" />
-              <item name="IMDBClassifier" type="462c0819:PsiDirectoryNode" />
-              <item name="export" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Maschine Learning" type="b2602c69:ProjectViewProjectNode" />
@@ -552,12 +537,12 @@
       <workItem from="1507542537175" duration="28173000" />
       <workItem from="1507625690846" duration="16488000" />
       <workItem from="1507725863544" duration="13101000" />
-      <workItem from="1507801475041" duration="10191000" />
+      <workItem from="1507801475041" duration="11382000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266879000" />
+    <option name="totallyTimeSpent" value="268070000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="3456" height="1416" extended-state="6" />
@@ -957,7 +942,7 @@
         <state relative-caret-position="175">
           <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="10" selection-end-column="19" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#12#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -990,8 +975,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/NeuralNetwork/Keras/MNISTClassifier/Model/cnn_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="79" column="27" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+        <state relative-caret-position="599">
+          <caret line="102" column="0" lean-forward="true" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
             <element signature="e#367#934#0" expanded="false" />
