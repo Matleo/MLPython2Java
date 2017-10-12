@@ -1,9 +1,14 @@
 package NeuralNetwork.Tensorflow;
 
+import org.tensorflow.Graph;
 import org.tensorflow.SavedModelBundle;
 import org.tensorflow.Session;
 import org.tensorflow.Tensor;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 
@@ -14,14 +19,16 @@ public class SavedModel {
     private Session s;
     private static final String input = "input:0";
     private static final String output = "output:0";
-    private static final String kerasOutput = "Softmax:0";
-    private static final String kerasLearningPhase = "keras_learning_phase";
+    private static final String kerasInput = "input_input:0";
+    private static final String kerasOutput = "output/Softmax:0";
+    private static final String kerasLearningPhase = "dropout_1/keras_learning_phase:0";
     private static final String dropout = "dropoutRate:0";
 
 
     public SavedModel(String importDir, String ModelTag) {
         SavedModelBundle sb = SavedModelBundle.load(importDir, ModelTag);
         this.s = sb.session();
+
     }
 
     /**
@@ -47,7 +54,7 @@ public class SavedModel {
         } else if(modelType=="Estimator"){
             resultList = this.s.runner().feed(input, inputTensor).fetch(output).run();
         }else {//KerasModel or KerasSequential
-            resultList = this.s.runner().feed(input, inputTensor).feed(kerasLearningPhase,learningPhase).fetch(kerasOutput).run();
+            resultList = this.s.runner().feed(kerasInput, inputTensor).feed(kerasLearningPhase,learningPhase).fetch(kerasOutput).run();
         }
 
         Tensor result = resultList.get(0);

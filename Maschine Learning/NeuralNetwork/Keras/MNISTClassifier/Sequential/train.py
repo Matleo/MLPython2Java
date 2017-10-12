@@ -4,7 +4,6 @@ import numpy as np
 import shutil
 import os
 
-from keras.engine import InputLayer
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Input
 
@@ -38,8 +37,10 @@ def saveConfig():
             shutil.move(export_dir + nd4jFile, "." + nd4jFile)  # move nd4j model and move it back into export later
         shutil.rmtree(export_dir)
 
+    learningPhase = K.learning_phase()
     signature = tf.saved_model.signature_def_utils.build_signature_def(
-        inputs={'input': tf.saved_model.utils.build_tensor_info(model.input)},
+        inputs={'input': tf.saved_model.utils.build_tensor_info(model.input),
+                'learningPhase':tf.saved_model.utils.build_tensor_info(learningPhase)},
         outputs={'output': tf.saved_model.utils.build_tensor_info(model.output)}
     )
     signatureDef = {tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature}
@@ -49,7 +50,7 @@ def saveConfig():
     builder.save()
 
     if os.path.isfile("." + nd4jFile):
-        shutil.move("." + nd4jFile, export_dir + nd4jFile)  # move nd4j file into export again
+        shutil.move("." + nd4jFile, export_dir + nd4jFile)  # move .h5 file into export again
 
     # statistics:
     diction = {}
@@ -65,7 +66,7 @@ def saveConfig():
     with open("./export/statistics.json", "w") as outfile:
         json.dump(diction, outfile)
 
-    print("\nSaved Configuration to dir: ./%s" % export_dir)
+    print("\nSaved Configuration to dir: %s" % export_dir)
 
 
 if __name__ == "__main__":
@@ -74,9 +75,7 @@ if __name__ == "__main__":
     batch_size = 128
 
     model = Sequential()
-    inputs = Input(shape=(784,), name="input")
-    model.add(InputLayer(input_tensor=inputs))
-    model.add(Dense(550, activation="relu", ))
+    model.add(Dense(550, activation="relu", input_dim=784, name="input"))
     model.add(Dropout(0.75))
     model.add(Dense(300, activation="relu"))
     model.add(Dropout(0.75))
@@ -85,16 +84,18 @@ if __name__ == "__main__":
 
     model.compile(optimizer="rmsprop",
                   loss='categorical_crossentropy',
-                  metrics=['categorical_accuracy'])
+                  metrics=['accuracy'])
 
-    model.fit(mnist.train.images, mnist.train.labels, nb_epoch=epochs, batch_size=batch_size)
+    model.fit(mnist.train.images, mnist.train.labels, epochs=epochs, batch_size=batch_size)
 
-    loss, accuracity = model.evaluate(mnist.test.images, mnist.test.labels, batch_size=len(mnist.test.images))
+    loss, accuracity = model.evaluate(mnist.test.images, mnist.test.labels)
 
-    print("accuracity on test set: %f %%" % (accuracity * 100))
+    print("\naccuracity on test set: %f %%" % (accuracity * 100))
 
     if save == True:
         from keras import backend as K
 
         sess = K.get_session()
+        graph = sess.graph
+
         saveConfig()

@@ -33,18 +33,21 @@ def saveConfig():
             shutil.move(export_dir+nd4jFile,"."+nd4jFile)#move nd4j model and move it into export later
         shutil.rmtree(export_dir)
 
+    learningPhase = K.learning_phase()
     signature = tf.saved_model.signature_def_utils.build_signature_def(
-        inputs = {'input': tf.saved_model.utils.build_tensor_info(inputs)},
-        outputs = {'output': tf.saved_model.utils.build_tensor_info(outputs)},
-
+        inputs={'input': tf.saved_model.utils.build_tensor_info(model.input),
+                'learningPhase':tf.saved_model.utils.build_tensor_info(learningPhase)},
+        outputs={'output': tf.saved_model.utils.build_tensor_info(model.output)}
     )
+    signatureDef = {tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature}
 
     builder = tf.saved_model.builder.SavedModelBuilder(export_dir)
-    builder.add_meta_graph_and_variables(sess,[tf.saved_model.tag_constants.SERVING],signature_def_map={tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature})
+    builder.add_meta_graph_and_variables(sess,[tf.saved_model.tag_constants.SERVING],signature_def_map=signatureDef)
     builder.save()
+
     if os.path.isfile("."+nd4jFile):
         if os.path.isfile("."+nd4jFile):
-            shutil.move("."+nd4jFile,export_dir+nd4jFile)#move nd4j file into export again
+            shutil.move("."+nd4jFile,export_dir+nd4jFile)#move .h5 file back into export
 
     #statistics:
     diction = {}
@@ -60,47 +63,46 @@ def saveConfig():
     with open("./export/statistics.json","w") as outfile:
         json.dump(diction,outfile)
 
+    print("\nSaved Configuration to dir: %s" % export_dir)
 
 
+if __name__=="__main__":
+
+    save = True
+
+    batch_size = 128
+    epochs = 1
+
+    #assume: channel last
+    input_shape = (28, 28, 1)
 
 
-save = True
-
-batch_size = 128
-epochs = 1
-
-#assume: channel last
-input_shape = (28, 28, 1)
-
-
-
-inputs = Input(shape=(784,), name="input")
-reshaped = Reshape(input_shape)(inputs)
-layer1 = Conv2D(nb_filter=32,nb_row=5,nb_col=5, activation='relu')(reshaped)
-layer2 = MaxPooling2D(pool_size=(2,2))(layer1)
-layer3 = Conv2D(nb_filter=64,nb_row=5,nb_col=5, activation='relu')(layer2)
-layer4 = MaxPooling2D(pool_size=(2,2))(layer3)#(?,4,4,64)
-layer4_flat = Flatten()(layer4)
-layer5 = Dense(7 * 7 * 64, activation="relu")(layer4_flat)
-layer6 = Dropout(0.5)(layer5)
-outputs = Dense(10, activation="softmax")(layer6)
+    inputs = Input(shape=(784,), name="input_input")
+    reshaped = Reshape(input_shape)(inputs)
+    layer1 = Conv2D(filters=32,kernel_size=(5,5), activation='relu')(reshaped)
+    layer2 = MaxPooling2D(pool_size=(2,2))(layer1)
+    layer3 = Conv2D(filters=64,kernel_size=(5,5), activation='relu')(layer2)
+    layer4 = MaxPooling2D(pool_size=(2,2))(layer3)#(?,4,4,64)
+    layer4_flat = Flatten()(layer4)
+    layer5 = Dense(7 * 7 * 64, activation="relu")(layer4_flat)
+    layer6 = Dropout(0.5)(layer5)
+    outputs = Dense(10, activation="softmax", name="output")(layer6)
 
 
+    model = Model(input=inputs, output=outputs)
 
+    model.compile(optimizer='rmsprop',
+                  loss='categorical_crossentropy',
+                  metrics=['categorical_accuracy'])
 
-model = Model(input=inputs, output=outputs)
+    model.fit(mnist.train.images,mnist.train.labels,epochs=epochs,batch_size=batch_size)
 
-model.compile(optimizer='rmsprop',
-              loss='categorical_crossentropy',
-              metrics=['categorical_accuracy'])
+    loss,accuracity=model.evaluate(mnist.test.images,mnist.test.labels,batch_size=len(mnist.test.images))
 
-model.fit(mnist.train.images,mnist.train.labels,nb_epoch=epochs,batch_size=batch_size)
+    print("accuracity on test set: %f %%"%(accuracity*100))
 
-loss,accuracity=model.evaluate(mnist.test.images,mnist.test.labels,batch_size=len(mnist.test.images))
-
-print("accuracity on test set: %f %%"%(accuracity*100))
-
-if save == True:
-    from keras import backend as K
-    sess = K.get_session()
-    saveConfig()
+    if save == True:
+        from keras import backend as K
+        sess = K.get_session()
+        graph = sess.graph
+        saveConfig()
