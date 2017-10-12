@@ -141,11 +141,12 @@ public class TensorflowUtilities {
         return imgArr;
     }
 
-    public static void compareMaps(Map<String, int[]> mapJ, Map<String, int[]> mapP) {
+    public static boolean compareMaps(Map<String, int[]> mapJ, Map<String, int[]> mapP) {
         System.out.println("\n\nComparing Java and Python picture predictions...");
         if (mapEquals(mapJ,mapP)) {
             System.out.println("***Success***");
             System.out.println("The python and java predictions match!");
+            return true;
         } else {
             System.out.println("***Failure***");
             System.out.println("The python and java predictions dont match");
@@ -155,6 +156,7 @@ public class TensorflowUtilities {
                 System.out.println("    Java   :" + Arrays.toString(mapJ.get(key)));
                 System.out.println("    Python :" + Arrays.toString(mapP.get(key)));
             }
+            return false;
         }
     }
     private static boolean mapEquals(Map<String, int[]> mapJ, Map<String, int[]> mapP){

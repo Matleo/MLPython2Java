@@ -69,7 +69,6 @@ def saveConfig():
 if __name__=="__main__":
 
     save = True
-
     batch_size = 128
     epochs = 1
 

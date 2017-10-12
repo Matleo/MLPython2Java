@@ -22,23 +22,27 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Execution Class to load a SavedModel from Tensorflow or Tensorflow.Estimator to recognize the MNSIT data Set, and test it against downloaded pictures
+ * Main Class to load a SavedModel from Tensorflow or Tensorflow.Estimator or Keras with Tensorflow backend,
+ * to infer the MNSIT dataset and test the model against additionaldownloaded pictures
+ * pass program arguments:
+ *  -m | -model <value>     specify which SavedModel to use for predictions
+ *  --noEval                pass if the imported model should NOT be evaluated against the saved results from the python model
+ *  -p | -predict <path>    specify of which picture to predict its number
  */
 public class MNISTClassifier {
-    private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/Data/Own_dat/"; //where the test pics are stored
-    private static String importDir1 = "../Maschine Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/export/";
-    private static String importDir2 = "../Maschine Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN/export/";
-    private static String importDir3 = "../Maschine Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/export/";
-    private static String importDir4 = "../Maschine Learning/NeuralNetwork/Estimator/MNISTClassifier/CNN/export/";
-    private static String importDir5 = "../Maschine Learning/NeuralNetwork/Keras/MNISTClassifier/Model/export/";
-    private static String importDir6 = "../Maschine Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential/export/";
-
-    private static String importDir = "";//which model to use
-    private static boolean eval = true; //if results in java/python should be compared
-    private static String predictPicDir = "";//if not "", will be used to use trained model to predict the picture
-
+    private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/Data/Own_dat/"; //where the test pictures are stored
+    private static final String importDir1 = "../Maschine Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/export/";
+    private static final String importDir2 = "../Maschine Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN/export/";
+    private static final String importDir3 = "../Maschine Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/export/";
+    private static final String importDir4 = "../Maschine Learning/NeuralNetwork/Estimator/MNISTClassifier/CNN/export/";
+    private static final String importDir5 = "../Maschine Learning/NeuralNetwork/Keras/MNISTClassifier/Model/export/";
+    private static final String importDir6 = "../Maschine Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential/export/";
     private static final String modelTag = "serve"; //default Tag under which the Metagraph is stored in the SavedModel
-    private static String modelType = "Tensorflow"; //define what kind of model is going to be loaded
+
+    private static String importDir = "";//which model to use, will be filled by the evaluateArguments() function
+    private static boolean eval = true; //if results in java/python should be compared
+    private static String predictPicDir = "";//will maybe be filled by the evaluateArguments() function. What picture to predict number of
+    private static String modelType = "Tensorflow"; //define what kind of model is going to be loaded, will maybe be filled by evaluateArguments() function. Tensorflow is default
 
 
     public static void main(String[] args) throws Exception {
@@ -52,7 +56,7 @@ public class MNISTClassifier {
         SavedModel model = new SavedModel(importDir, modelTag);
 
 
-        if (eval) evaluate(model, modelType);
+        if (eval) evaluate(model);
 
         if (!predictPicDir.equals("")) {
             predict(model, predictPicDir);
@@ -60,7 +64,11 @@ public class MNISTClassifier {
     }
 
 
-    //assign correct values to importdir and picFile, according to input program arguments
+    /**
+     * Assign correct values to importdir, predictPicFile and modelType, according to input program arguments
+     *
+     * @param args program arguments forwarded in the main method
+     */
     private static void evaluateArguments(String[] args) {
         System.out.println();
         switch (args.length) {
@@ -159,6 +167,12 @@ public class MNISTClassifier {
         }
     }
 
+    /**
+     * Utility function to evaluate program argument modelType
+     *
+     * @param model input String for the model parameter
+     * @return String of according importDir, of where to import the ML model
+     */
     private static String determinModel(String model) {
         switch (model) {
             case "t_ffnn":
@@ -212,9 +226,15 @@ public class MNISTClassifier {
 
     }
 
-    //evaluates the predictions against the mnist data set -> returns accuracy
-    //accuracies match for t_ffnn and t_cnn
-    private static void evaluate(SavedModel model, String modelType) throws IOException {
+
+    /**
+     * Evaluates the Java predictions against the mnist data set and previously saved results from the Python predictions
+     *
+     * @param model loaded SavedModel
+     * @return wether the Java predictions match the Python predictions
+     * @throws IOException when can not open the statistics.json file
+     */
+    private static boolean evaluate(SavedModel model) throws IOException {
 
         System.out.println("\nEvaluating against the MNSIT Dataset...");
         Evaluation evaluator = new Evaluation(10); //create an evaluation object with 10 possible classes
@@ -224,6 +244,7 @@ public class MNISTClassifier {
             DataSet next = mnistTest.next(); //(1,784)
             INDArray next2 = next.getFeatureMatrix();//(1,784)
             float[] array = new float[next2.shape()[1]];
+            //convert INDArray to float[]:
             for (int i = 0; i < next2.shape()[1]; i++) {
                 array[i] = next2.getFloat(i);
             }
@@ -242,12 +263,13 @@ public class MNISTClassifier {
         Map<String, int[]> picPredictionsP = new HashMap<>();
 
         try {
+            //read out statistics.json:
             JSONObject obj = (JSONObject) parser.parse(new FileReader(importDir + "/statistics.json"));
             pyAccuracy = (double) obj.get("accuracy");
             JSONObject picPredictionsJson = (JSONObject) obj.get("picPredictions");
 
             //make own prediction on pictures
-            Object[] picCats = picPredictionsJson.keySet().toArray();
+            Object[] picCats = picPredictionsJson.keySet().toArray(); //names of all picture category (MNIST,Font,Computer,Handwritten)
             for (Object picCatObj : picCats) {
                 String picCat = (String) picCatObj;//name of the picture category
                 JSONArray jsonPredictionsP = (JSONArray) picPredictionsJson.get(picCat);
@@ -256,7 +278,7 @@ public class MNISTClassifier {
                     predictionsP[i] = (int) (long) (jsonPredictionsP.get(i));
                 }
 
-                int[] predictionsJ = getPredictions(model, picCat);//java predictions
+                int[] predictionsJ = getPredictions(model, picCat);//make java predictions
 
                 picPredictionsP.put(picCat, predictionsP);
                 picPredictionsJ.put(picCat, predictionsJ);
@@ -278,8 +300,13 @@ public class MNISTClassifier {
             System.out.println("Python accuracy: " + pyAccuracy);
         }
 
-        TensorflowUtilities.compareMaps(picPredictionsJ, picPredictionsP);
+        boolean picPredictionsMatch = TensorflowUtilities.compareMaps(picPredictionsJ, picPredictionsP);
 
+        if (match && picPredictionsMatch) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private static void predict(SavedModel model, String pathfile) {
