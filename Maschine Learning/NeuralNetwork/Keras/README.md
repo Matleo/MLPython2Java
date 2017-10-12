@@ -68,7 +68,5 @@ With the default tensor names, this is what the signature of our `SavedModel` lo
 
 > ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/SavedModelCLI.png)
 
-> ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel/SavedModelCLI_example.png)
-
 ## Inference as a Service
 **TODO**
