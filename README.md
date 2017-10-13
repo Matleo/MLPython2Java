@@ -1,4 +1,4 @@
-# Operationalization of python ML models
+# Operationalization of Python ML models
 This project was set up by Matthias Leopold as an intern at Zuehlke Engineering AG Schlieren, to gather the options to go live with a trained Python machine learning model.
 
 ## Project structure
@@ -11,7 +11,6 @@ The sub-projects are themselves ordered by model type. The following models were
 * [Decision Trees]()
 * [Support Vector Machines]()
 * [Naive Bayes]()
-* [Association Rule Learning]()
 
 For each model type two seperate approaches were executed:
 1. **Model as a Service**: The whole ML model is supposed to be transfered from Python to Java, to execute predictions directly in Java
