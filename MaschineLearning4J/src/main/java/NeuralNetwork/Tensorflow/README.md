@@ -5,21 +5,21 @@ In the following i will describe, how to use a model for inference that was prev
 ## Project setup
 For this project i am using the `Tensorflow Java`, the `Coobird Thumbnailator` and the `Googlecode Json-Simple` libraries. To add these to your maven project, simply add these dependencies to your `pom.xml`:
 ```xml
-        <dependency>
-            <groupId>org.tensorflow</groupId>
-            <artifactId>tensorflow</artifactId>
-            <version>1.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>net.coobird</groupId>
-            <artifactId>thumbnailator</artifactId>
-            <version>0.4.8</version>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
+    <dependency>
+        <groupId>org.tensorflow</groupId>
+        <artifactId>tensorflow</artifactId>
+        <version>1.3.0</version>
+    </dependency>
+    <dependency>
+        <groupId>net.coobird</groupId>
+        <artifactId>thumbnailator</artifactId>
+        <version>0.4.8</version>
+    </dependency>
+    <dependency>
+        <groupId>com.googlecode.json-simple</groupId>
+        <artifactId>json-simple</artifactId>
+        version>1.1.1</version>
+    </dependency>
 ```
 
 ### Class structure
@@ -46,8 +46,8 @@ As stated, the whole action of loading and using a `SavedModel` to make predicti
 
 The only thing we really need to load from the `SavedModel` is it's `Session`. After loading the `Session` we can start using it to make predictions:
 ```java
-        SavedModelBundle sb = SavedModelBundle.load(importDir, ModelTag);
-        this.session = sb.session();
+    SavedModelBundle sb = SavedModelBundle.load(importDir, ModelTag);
+    this.session = sb.session();
 ```
 * `importdir` is a `String`, containing the path of the directory of where to load the `SavedModel` from
 * `modelTag` is a `String`, containing the tag of the appropriate `MetaGraph`, which we want to load from the `SavedModel`. In my example, this will always be the constant String `"serve"`, which i used to save the `SavedModels`.
@@ -57,11 +57,11 @@ Now, to use the loaded `Session` for inference, let me remind you, that it is ve
 In my examples, the important `Tensor` names look as following:
 ```java
     #Tensorflow or Estimator:
-	private static final String input = "input:0";
+    private static final String input = "input:0";
     private static final String output = "output:0";
     private static final String dropout = "dropoutRate:0";
 	
-	#Keras:
+    #Keras:
     private static final String kerasInput = "input_input:0";
     private static final String kerasOutput = "output/Softmax:0";
     private static final String kerasLearningPhase = "dropout_1/keras_learning_phase:0";
@@ -70,10 +70,10 @@ Note that the names for a `Keras` model differ, and that i set the names of the 
 
 After loading a selected image into a `float[]`, you can load that array into a `Tensor`, feed it to the `Session` and fetch the output `Tensor`:
 ```java
-        float[] inputArray = TensorflowUtilities.readPic(pathfile);
-        Tensor inputTensor = TensorflowUtilities.toTensor(inputArray); #create Tensor from float[]
+    float[] inputArray = TensorflowUtilities.readPic(pathfile);
+    Tensor inputTensor = TensorflowUtilities.toTensor(inputArray); #create Tensor from float[]
         
-        List<Tensor> resultList = this.session.runner().feed(input, inputTensor).fetch(output).run();
+    List<Tensor> resultList = this.session.runner().feed(input, inputTensor).fetch(output).run();
 
 ```
 Afterwards you can read the `resultList`, which will contain the corresponding score/probabilities for the prediction of the given image.
