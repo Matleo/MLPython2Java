@@ -13,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="MNISTClassifier.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MNISTClassifier.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/MNISTClassifier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="203" column="140" lean-forward="false" selection-start-line="203" selection-start-column="140" selection-end-line="203" selection-end-column="140" />
+            <state relative-caret-position="270">
+              <caret line="208" column="111" lean-forward="false" selection-start-line="208" selection-start-column="111" selection-end-line="208" selection-end-column="111" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;method#evaluateArguments#0;class#MNISTClassifier#0" expanded="false" />
@@ -29,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SavedModel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SavedModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/SavedModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-183">
-              <caret line="81" column="67" lean-forward="true" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="67" />
+            <state relative-caret-position="221">
+              <caret line="81" column="52" lean-forward="true" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#predict#0;class#SavedModel#0" expanded="false" />
@@ -47,13 +47,12 @@
       <file leaf-file-name="TensorflowUtilities.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/TensorflowUtilities.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="91" column="36" lean-forward="false" selection-start-line="91" selection-start-column="29" selection-end-line="91" selection-end-column="36" />
+            <state relative-caret-position="246">
+              <caret line="100" column="13" lean-forward="false" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
               <folding>
                 <element signature="method#toTensor#0;class#TensorflowUtilities#0" expanded="false" />
                 <element signature="method#maxIndex#0;class#TensorflowUtilities#0" expanded="false" />
                 <element signature="method#readJsonPic#0;class#TensorflowUtilities#0" expanded="false" />
-                <element signature="method#readPic#0;class#TensorflowUtilities#0" expanded="false" />
                 <element signature="method#compareMaps#0;class#TensorflowUtilities#0" expanded="false" />
               </folding>
             </state>
@@ -215,6 +214,32 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
+              <item name="Tensorflow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MaschineLearning4J" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MaschineLearning4J" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MaschineLearning4J" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MaschineLearning4J" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MaschineLearning4J" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MaschineLearning4J" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MaschineLearning4J" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MaschineLearning4J" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
               <item name="NeuralNetwork" type="462c0819:PsiDirectoryNode" />
               <item name="Tensorflow" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -701,12 +726,12 @@
       <workItem from="1507556644508" duration="10082000" />
       <workItem from="1507625652197" duration="5256000" />
       <workItem from="1507802805308" duration="6940000" />
-      <workItem from="1507904312241" duration="7349000" />
+      <workItem from="1507904312241" duration="8319000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138495000" />
+    <option name="totallyTimeSpent" value="139465000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="7" />
@@ -1032,20 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/TensorflowUtilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="91" column="36" lean-forward="false" selection-start-line="91" selection-start-column="29" selection-end-line="91" selection-end-column="36" />
-          <folding>
-            <element signature="method#toTensor#0;class#TensorflowUtilities#0" expanded="false" />
-            <element signature="method#maxIndex#0;class#TensorflowUtilities#0" expanded="false" />
-            <element signature="method#readJsonPic#0;class#TensorflowUtilities#0" expanded="false" />
-            <element signature="method#readPic#0;class#TensorflowUtilities#0" expanded="false" />
-            <element signature="method#compareMaps#0;class#TensorflowUtilities#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/tensorflow/libtensorflow/1.3.0/libtensorflow-1.3.0-sources.jar!/org/tensorflow/SavedModelBundle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
@@ -1080,29 +1091,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/SavedModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="81" column="52" lean-forward="true" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#predict#0;class#SavedModel#0" expanded="false" />
+            <element signature="method#getPredictions#0;class#SavedModel#0" expanded="false" />
+            <element signature="method#evaluate#0;class#SavedModel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/TensorflowUtilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="100" column="13" lean-forward="false" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
+          <folding>
+            <element signature="method#toTensor#0;class#TensorflowUtilities#0" expanded="false" />
+            <element signature="method#maxIndex#0;class#TensorflowUtilities#0" expanded="false" />
+            <element signature="method#readJsonPic#0;class#TensorflowUtilities#0" expanded="false" />
+            <element signature="method#compareMaps#0;class#TensorflowUtilities#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/MNISTClassifier.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="203" column="140" lean-forward="false" selection-start-line="203" selection-start-column="140" selection-end-line="203" selection-end-column="140" />
+        <state relative-caret-position="270">
+          <caret line="208" column="111" lean-forward="false" selection-start-line="208" selection-start-column="111" selection-end-line="208" selection-end-column="111" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#evaluateArguments#0;class#MNISTClassifier#0" expanded="false" />
             <element signature="method#evaluateArguments#0;class#MNISTClassifier#0" expanded="false" />
             <element signature="docComment;method#determinModel#0;class#MNISTClassifier#0" expanded="false" />
             <element signature="method#determinModel#0;class#MNISTClassifier#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/NeuralNetwork/Tensorflow/SavedModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-183">
-          <caret line="81" column="67" lean-forward="true" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#predict#0;class#SavedModel#0" expanded="false" />
-            <element signature="method#getPredictions#0;class#SavedModel#0" expanded="false" />
-            <element signature="method#evaluate#0;class#SavedModel#0" expanded="false" />
           </folding>
         </state>
       </provider>

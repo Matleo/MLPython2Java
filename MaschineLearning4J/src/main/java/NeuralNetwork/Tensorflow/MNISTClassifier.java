@@ -206,7 +206,7 @@ public class MNISTClassifier {
         System.out.println("    --noEval                pass if the imported model should NOT be evaluated against the saved results from the python model");
         System.out.println("                            if you pass this argument, you need to specify -p");
         System.out.println("    -p | -predict <path>    specify of which picture to predict its number");
-        System.out.println("                            path can be relative to this project or absolute and pointing to a .png File");
+        System.out.println("                            needs to be a absolute path and pointing to a .png file");
         System.out.println("                            if you don't pass this argument, no prediction will be executed");
 
     }
