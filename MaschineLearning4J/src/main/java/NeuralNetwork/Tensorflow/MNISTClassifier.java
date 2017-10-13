@@ -1,33 +1,17 @@
 package NeuralNetwork.Tensorflow;
 
-import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
-import org.deeplearning4j.eval.Evaluation;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.dataset.DataSet;
-import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
-import org.nd4j.linalg.factory.Nd4j;
-import org.tensorflow.Tensor;
-
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Main Class to load a SavedModel from Tensorflow or Tensorflow.Estimator or Keras with Tensorflow backend,
  * to infer the MNSIT dataset and test the model against additionaldownloaded pictures
  * pass program arguments:
- *  -m | -model <value>     specify which SavedModel to use for predictions
- *  --noEval                pass if the imported model should NOT be evaluated against the saved results from the python model
- *  -p | -predict <path>    specify of which picture to predict its number
+ * -m | -model <value>     specify which SavedModel to use for predictions
+ * --noEval                pass if the imported model should NOT be evaluated against the saved results from the python model
+ * -p | -predict <path>    specify of which picture to predict its number
  */
 public class MNISTClassifier {
     private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/Data/Own_dat/"; //where the test pictures are stored
@@ -41,8 +25,8 @@ public class MNISTClassifier {
 
     private static String importDir = "";//which model to use, will be filled by the evaluateArguments() function
     private static boolean eval = true; //if results in java/python should be compared
-    private static String predictPicDir = "";//will maybe be filled by the evaluateArguments() function. What picture to predict number of
-    private static String modelType = "Tensorflow"; //define what kind of model is going to be loaded, will maybe be filled by evaluateArguments() function. Tensorflow is default
+    private static String predictPicFile = "";//will maybe be filled by the evaluateArguments() function. What picture to predict number of
+    private static String modelType = ""; //define what kind of model is going to be loaded, will be filled by evaluateArguments() function. "Tensorflow" is default
 
 
     public static void main(String[] args) throws Exception {
@@ -52,14 +36,15 @@ public class MNISTClassifier {
         }
         evaluateArguments(args);
 
+        SavedModel model = new SavedModel(importDir, modelTag, modelType);
         System.out.println("\nLoaded model from: " + importDir);
-        SavedModel model = new SavedModel(importDir, modelTag);
 
 
-        if (eval) evaluate(model);
+        if (eval) model.evaluate(importDir,picDir);
 
-        if (!predictPicDir.equals("")) {
-            predict(model, predictPicDir);
+        if (!predictPicFile.equals("")) {
+            int prediction = model.predictImage(predictPicFile);
+            System.out.println("\nThe given picture at " + predictPicFile + " is probably a: " + prediction);
         }
     }
 
@@ -90,7 +75,7 @@ public class MNISTClassifier {
                 if (args[0].equals("-model") || args[0].equals("-m")) {
                     importDir = determinModel(args[1]);
                 } else if (args[0].equals("-predict") || args[0].equals("-p")) {
-                    predictPicDir = args[1];
+                    predictPicFile = args[1];
                     System.out.println("Using default model: Tensorflow_FFNN");
                     modelType = "Tensorflow";
                     importDir = importDir3;//default Tensorflow_FFNN
@@ -105,10 +90,10 @@ public class MNISTClassifier {
                 modelType = "Tensorflow";
                 importDir = importDir3;//default Tensorflow_FFNN
                 if (((args[0].equals("-predict") || args[0].equals("-p")) && (args[2].equals("--noEval")))) {
-                    predictPicDir = args[1];
+                    predictPicFile = args[1];
                     eval = false;
                 } else if ((args[1].equals("-predict") || args[1].equals("-p")) && (args[0].equals("--noEval"))) {
-                    predictPicDir = args[2];
+                    predictPicFile = args[2];
                     eval = false;
                 } else {
                     System.out.println("You have passed invalid arguments");
@@ -118,10 +103,10 @@ public class MNISTClassifier {
                 break;
             case 4:
                 if ((args[0].equals("-predict") || args[0].equals("-p")) && (args[2].equals("-model") || args[2].equals("-m"))) {
-                    predictPicDir = args[1];
+                    predictPicFile = args[1];
                     importDir = determinModel(args[3]);
                 } else if ((args[2].equals("-predict") || args[2].equals("-p")) && (args[0].equals("-model") || args[0].equals("-m"))) {
-                    predictPicDir = args[3];
+                    predictPicFile = args[3];
                     importDir = determinModel(args[1]);
                 } else {
                     System.out.println("You have passed invalid arguments");
@@ -152,7 +137,7 @@ public class MNISTClassifier {
 
 
                     eval = false;
-                    predictPicDir = args[indexP + 1];
+                    predictPicFile = args[indexP + 1];
                     importDir = determinModel(args[indexM + 1]);
                 } else {
                     System.out.println("You have passed invalid arguments");
@@ -216,7 +201,7 @@ public class MNISTClassifier {
     private static void printHelp() {
         System.out.println("Valid arguments include: ");
         System.out.println("    -m | -model <value>     specify which SavedModel to use for predictions");
-        System.out.println("                            value can be any of \"t_ffnn\" / \"t_cnn\" / \"e_ffnn\"/ \"e_cnn\"");
+        System.out.println("                            value can be any of \"t_ffnn\" / \"t_cnn\" / \"e_ffnn\"/ \"e_cnn\" / \"k_ffnn\"/ \"k_cnn\"");
         System.out.println("                            if you don't pass this argument, default Tensorflow_FeedForwardNeuralNet will be used");
         System.out.println("    --noEval                pass if the imported model should NOT be evaluated against the saved results from the python model");
         System.out.println("                            if you pass this argument, you need to specify -p");
@@ -227,102 +212,7 @@ public class MNISTClassifier {
     }
 
 
-    /**
-     * Evaluates the Java predictions against the mnist data set and previously saved results from the Python predictions
-     *
-     * @param model loaded SavedModel
-     * @return wether the Java predictions match the Python predictions
-     * @throws IOException when can not open the statistics.json file
-     */
-    private static boolean evaluate(SavedModel model) throws IOException {
-
-        System.out.println("\nEvaluating against the MNSIT Dataset...");
-        Evaluation evaluator = new Evaluation(10); //create an evaluation object with 10 possible classes
-        DataSetIterator mnistTest = new MnistDataSetIterator(1, false, 123);
-
-        while (mnistTest.hasNext()) {
-            DataSet next = mnistTest.next(); //(1,784)
-            INDArray next2 = next.getFeatureMatrix();//(1,784)
-            float[] array = new float[next2.shape()[1]];
-            //convert INDArray to float[]:
-            for (int i = 0; i < next2.shape()[1]; i++) {
-                array[i] = next2.getFloat(i);
-            }
-            Tensor output = model.getOutput(array, modelType);
-            float[] outputArray = TensorflowUtilities.toArray(output);
-
-            INDArray outputNDArray = Nd4j.create(outputArray);
-            evaluator.eval(next.getLabels(), outputNDArray); //check the prediction against the true class
-        }
 
 
-        double javAccuracy = evaluator.accuracy();
-        double pyAccuracy = -1;
-        JSONParser parser = new JSONParser();
-        Map<String, int[]> picPredictionsJ = new HashMap<>();
-        Map<String, int[]> picPredictionsP = new HashMap<>();
 
-        try {
-            //read out statistics.json:
-            JSONObject obj = (JSONObject) parser.parse(new FileReader(importDir + "/statistics.json"));
-            pyAccuracy = (double) obj.get("accuracy");
-            JSONObject picPredictionsJson = (JSONObject) obj.get("picPredictions");
-
-            //make own prediction on pictures
-            Object[] picCats = picPredictionsJson.keySet().toArray(); //names of all picture category (MNIST,Font,Computer,Handwritten)
-            for (Object picCatObj : picCats) {
-                String picCat = (String) picCatObj;//name of the picture category
-                JSONArray jsonPredictionsP = (JSONArray) picPredictionsJson.get(picCat);
-                int[] predictionsP = new int[10];//python predictions
-                for (int i = 0; i < jsonPredictionsP.size(); i++) {
-                    predictionsP[i] = (int) (long) (jsonPredictionsP.get(i));
-                }
-
-                int[] predictionsJ = getPredictions(model, picCat);//make java predictions
-
-                picPredictionsP.put(picCat, predictionsP);
-                picPredictionsJ.put(picCat, predictionsJ);
-            }
-
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(evaluator.stats());
-        boolean match = (javAccuracy == pyAccuracy);
-        if (match) {
-            System.out.println("\n***Success***");
-            System.out.println("The calculated accuracy on the MNIST dataset in java and python match");
-        } else {
-            System.out.println("\nSomething went wrong, the accuracy calculated in java and python don't match");
-            System.out.println("Java accuracy: " + javAccuracy);
-            System.out.println("Python accuracy: " + pyAccuracy);
-        }
-
-        boolean picPredictionsMatch = TensorflowUtilities.compareMaps(picPredictionsJ, picPredictionsP);
-
-        if (match && picPredictionsMatch) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private static void predict(SavedModel model, String pathfile) {
-        if (!pathfile.contains(".png")) pathfile = pathfile + ".png";
-        float[] inputArray = TensorflowUtilities.readPic(pathfile);
-        int predict = model.predictNumber(inputArray, modelType);
-        System.out.println("\nThe given picture at " + pathfile + " is probably a: " + predict);
-    }
-
-    private static int[] getPredictions(SavedModel model, String pics) {
-        int[] predictions = new int[10];
-        for (int i = 0; i < 10; i++) {
-            float[] inputArray = TensorflowUtilities.readJsonPic(picDir + pics + "-" + i + ".json");
-            int predict = model.predictNumber(inputArray, modelType);
-            predictions[i] = predict;
-        }
-        return predictions;
-    }
 }

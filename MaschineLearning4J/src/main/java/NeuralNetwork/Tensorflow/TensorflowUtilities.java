@@ -5,7 +5,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.tensorflow.Tensor;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
@@ -23,46 +22,33 @@ public class TensorflowUtilities {
 
     /**
      * Converts a float Array to a Tensor
-     *
      * @param array array to convert to a Tensor
      * @return Tensor representing the Array
      */
-    public static Tensor toTensor(float[] array) {
+    protected static Tensor toTensor(float[] array) {
         long[] shape = {1, 784};
         FloatBuffer fb = FloatBuffer.wrap(array);
         Tensor t = Tensor.create(shape, fb);
-
         return t;
     }
 
     /**
      * Converts a Tensor to a float Array
-     *
      * @param t Tensor to convert
      * @return Array representing the Tensor
      */
-    public static float[] toArray(Tensor t) {
+    protected static float[] toArray(Tensor t) {
         FloatBuffer fb = FloatBuffer.allocate(t.numElements());
         t.writeTo(fb);
         return fb.array();
     }
 
-    /**
-     * Function to print a Tensors values
-     *
-     * @param t Tensor to print
-     */
-    public static void printTensor(Tensor t) {
-        for (float f : toArray(t)) {
-            System.out.println(f);
-        }
-    }
 
     /**
      * @param array array to iterate over to find max value
      * @return index of maximum value in array
      */
-    public static int maxIndex(float[] array) {
+    protected static int maxIndex(float[] array) {
         float max = Float.MIN_VALUE;
         int maxIndex = -1;
         for (int i = 0; i < array.length; i++) {
@@ -76,11 +62,10 @@ public class TensorflowUtilities {
 
     /**
      * Function to load the test pictures from a previously saved json Array
-     *
      * @param path the full path of where to find the picture
      * @return float Array with each float in (0,1), where 1 represents black and 0 is white
      */
-    public static float[] readJsonPic(String path) {
+    protected static float[] readJsonPic(String path) {
         JSONParser parser = new JSONParser();
         float[] picArr = new float[784];
         try {
@@ -100,12 +85,11 @@ public class TensorflowUtilities {
     }
 
     /**
-     * Unused function to read a grayscale picture from file
-     *
+     * function to read a grayscale picture from file
      * @param path the full path of where to find the picture
      * @return float Array with each float in (0,1), where 1 represents black and 0 is white
      */
-    public static float[] readPic(String path) {
+    protected static float[] readPic(String path) {
         File imgFile = new File(path);
         float[] imgArr = new float[784];
         try {
@@ -141,9 +125,30 @@ public class TensorflowUtilities {
         return imgArr;
     }
 
-    public static boolean compareMaps(Map<String, int[]> mapJ, Map<String, int[]> mapP) {
+
+    /**
+     * Compares two maps of String->int[] to evaluate if they are equal
+     * @param mapJ map containing Java predictions
+     * @param mapP map containing Python predictions
+     * @return returns whether the maps contain equal content
+     */
+    protected static boolean compareMaps(Map<String, int[]> mapJ, Map<String, int[]> mapP) {
         System.out.println("\n\nComparing Java and Python picture predictions...");
-        if (mapEquals(mapJ,mapP)) {
+        boolean match = true;
+        if(mapJ.size()!=mapP.size()){
+            System.out.println("The size of the maps don't match!");
+            return false;
+        }
+
+        for (String key : mapJ.keySet()) {
+            int[] predJ = mapJ.get(key);
+            int[] predP = mapP.get(key);
+            for (int i = 0; i < mapJ.get(key).length; i++) {
+                if (predJ[i] != predP[i]) match=false;
+            }
+        }
+
+        if (match) {
             System.out.println("***Success***");
             System.out.println("The python and java predictions match!");
             return true;
@@ -159,14 +164,7 @@ public class TensorflowUtilities {
             return false;
         }
     }
-    private static boolean mapEquals(Map<String, int[]> mapJ, Map<String, int[]> mapP){
-        for (String key : mapJ.keySet()) {
-            int[] predJ = mapJ.get(key);
-            int[] predP = mapP.get(key);
-            for(int i=0; i<mapJ.get(key).length;i++){
-                if(predJ[i]!=predP[i])return false;
-            }
-        }
-        return true;
-    }
+
+
+
 }
