@@ -7,7 +7,7 @@ Maschine Learning/NeuralNetwork/Estimator/IrisClassifier/
 Maschine Learning/NeuralNetwork/Data/IRIS_data/
 Maschine Learning/NeuralNetwork/lowLevelNN.py
 MaschineLearning4J/src/main/java/IRIS/
-MaschineLearning4J/src/main/java/DL4Jexample.java
+MaschineLearning4J/src/main/java/NeuralNetwork/DL4J/DL4Jexample.java
 
 
 # Created by https://www.gitignore.io/api/java,maven,intellij
