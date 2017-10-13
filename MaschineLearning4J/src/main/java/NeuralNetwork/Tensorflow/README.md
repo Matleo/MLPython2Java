@@ -41,8 +41,7 @@ This class implements the *Model as a Service* idea. Here we are actually using 
 This class contains a few utility functions to be used by the other two classes, like converting a `Tensor` to a `float[]` and the other way around, reading a .png file into a `float[]` or providing an equivalent funtion to the `numpy.argmax()`.
 
 #### IMDBClassifier.java:
-Small additionaly example, to load the created [LSTM](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/IMDBClassifier), trained with the [IMDB dataset](https://keras.io/datasets/#imdb-movie-reviews-sentiment-classification). You can find the training code [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/IMDBClassifier).
-
+Small additionaly example, to load the created [LSTM](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/IMDBClassifier), trained with the [IMDB dataset](https://keras.io/datasets/#imdb-movie-reviews-sentiment-classification). The purpose of this example is to show that it is possible to export complex models using the `SavedModel`.
 ## Model as a Service
 
 As stated, the whole action of loading and using a `SavedModel` to make predictions happens in the `SavedModel.java` class, using the Tensorflow Java API.
