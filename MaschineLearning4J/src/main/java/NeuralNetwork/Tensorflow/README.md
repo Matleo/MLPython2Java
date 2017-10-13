@@ -23,9 +23,9 @@ For this project i am using the `Tensorflow Java`, the `Coobird Thumbnailator` a
 ```
 
 ### Class structure
-To make use of a `SavedModel` i created three Java classes:
+To make use of a `SavedModel` i created four Java classes:
 #### MNISTClassifier.java:
-The main class, to execute either loading the whole model and making a prediction using the Tensorflow Java API, or send a request to receive the inference from a service.   
+The main class for the MNIST classification, to either execute loading the whole model and making a prediction using the Tensorflow Java API, or send a request to receive the inference from a service.   
 Depending on the program parameter that you pass, different tasks will be executed. With passing "-h" you can print this help again:
 
 Valid arguments include:
@@ -39,7 +39,10 @@ This class implements the *Model as a Service* idea. Here we are actually using 
 
 #### TensorflowUtilities.java:
 This class contains a few utility functions to be used by the other two classes, like converting a `Tensor` to a `float[]` and the other way around, reading a .png file into a `float[]` or providing an equivalent funtion to the `numpy.argmax()`.
-                            
+
+#### IMDBClassifier.java:
+Small additionaly example, to load the created [LSTM](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/IMDBClassifier), trained with the [IMDB dataset](https://keras.io/datasets/#imdb-movie-reviews-sentiment-classification). You can find the training code [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/IMDBClassifier).
+
 ## Model as a Service
 
 As stated, the whole action of loading and using a `SavedModel` to make predictions happens in the `SavedModel.java` class, using the Tensorflow Java API.
