@@ -8,11 +8,11 @@ The project is split into two sub-projects:
 
 The sub-projects are themselves ordered by model type. The following models were considered *(links go to the Python part)*:
 * [Artificial Neural Networks](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork)
-* [Decision Trees]()
-* [Support Vector Machines]()
-* [Naive Bayes]()
+* [TODO: Naive Bayes]()
+* [TODO: Decision Trees]()
+* [TODO: Support Vector Machines]()
 
-For each model type two seperate approaches were executed:
+For each model type two seperate approaches were evaluated:
 1. **Model as a Service**: The whole ML model is supposed to be transfered from Python to Java, to execute predictions directly in Java
 2. **Inference as a Service**: The ML model is supposed to be deployed from Python and an inference service is supposed to be made available
 
