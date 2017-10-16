@@ -17,6 +17,8 @@ For each model type two seperate approaches were evaluated:
 2. **Inference as a Service**: The ML model is supposed to be deployed from Python and an inference service is supposed to be made available
 
 ## Prerequisites
-* Python 3.6.2 or newer
-* Java 1.8 or newer
+* Python 3.6.2
+* Java 1.8
+* Tensorflow 1.3
+* [TensorFlow Serving prerequisites](https://www.tensorflow.org/serving/setup) 
 * **TODO**
