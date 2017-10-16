@@ -10,7 +10,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 tf.app.flags.DEFINE_integer('training_iteration', 1000,
                             'number of training iterations.')
-tf.app.flags.DEFINE_integer('model_version', 1, 'version number of the model.')
+tf.app.flags.DEFINE_integer('model_version', 2, 'version number of the model.')
 tf.app.flags.DEFINE_string('work_dir', '/tmp', 'Working directory.')
 FLAGS = tf.app.flags.FLAGS
 
