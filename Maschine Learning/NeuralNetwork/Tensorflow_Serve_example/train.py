@@ -5,7 +5,7 @@ import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
 def saveConfig():
-    export_dir = "./export"
+    export_dir = "./export/1"
     # if directory exists, remove it
     if os.path.exists(export_dir):
         shutil.rmtree(export_dir)
