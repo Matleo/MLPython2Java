@@ -30,7 +30,8 @@ def do_inference(dataFrame):
     image, label = dataFrame
     request.inputs['images'].CopyFrom(
         tf.contrib.util.make_tensor_proto(image[0], shape=[1, image[0].size]))
-
+    request.inputs['dropout'].CopyFrom(
+        tf.contrib.util.make_tensor_proto(1.0))
     result_future = stub.Predict.future(request, 5.0)  # 5 seconds
     result_future.add_done_callback(create_accept_response(label))
 

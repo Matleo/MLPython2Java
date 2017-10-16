@@ -5,7 +5,7 @@ import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
 def saveConfig():
-    export_dir = "./export/1"
+    export_dir = "./export/3"
     # if directory exists, remove it
     if os.path.exists(export_dir):
         shutil.rmtree(export_dir)
@@ -26,10 +26,12 @@ def saveConfig():
             method_name=tf.saved_model.signature_constants.CLASSIFY_METHOD_NAME))
 
     prediction_inputs = tf.saved_model.utils.build_tensor_info(x)
+    dropout = tf.saved_model.utils.build_tensor_info(dKeep)
 
     prediction_signature = (
         tf.saved_model.signature_def_utils.build_signature_def(
-            inputs={'images': prediction_inputs},
+            inputs={'images': prediction_inputs,
+                    'dropout':dropout},
             outputs={'scores': outputs_scores},
             method_name=tf.saved_model.signature_constants.PREDICT_METHOD_NAME))
     signatureMap = {
@@ -92,7 +94,7 @@ if __name__ == "__main__":
         sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys, dKeep: 0.75})
 
         if i % 500 == 0:
-            print("step " + str(i) + ":", end='')
+            print("step " + str(i) + ": ")
             print(sess.run([accuracy, cross_entropy],
                            feed_dict={x: mnist.train.images, y_: mnist.train.labels, dKeep: 1.0}))
 
