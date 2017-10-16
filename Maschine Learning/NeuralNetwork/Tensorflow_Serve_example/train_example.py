@@ -21,14 +21,14 @@ def main(_):
               '[--model_version=y] export_dir')
         sys.exit(-1)
     if FLAGS.training_iteration <= 0:
-        print 'Please specify a positive value for training iteration.'
+        print('Please specify a positive value for training iteration.')
         sys.exit(-1)
     if FLAGS.model_version <= 0:
-        print 'Please specify a positive value for version number.'
+        print('Please specify a positive value for version number.')
         sys.exit(-1)
 
     # Train model
-    print 'Training model...'
+    print('Training model...')
     mnist = input_data.read_data_sets(FLAGS.work_dir, one_hot=True)
     sess = tf.InteractiveSession()
     serialized_tf_example = tf.placeholder(tf.string, name='tf_example')
@@ -44,17 +44,17 @@ def main(_):
     train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
     values, indices = tf.nn.top_k(y, 10)
     table = tf.contrib.lookup.index_to_string_table_from_tensor(
-        tf.constant([str(i) for i in xrange(10)]))
+        tf.constant([str(i) for i in range(10)]))
     prediction_classes = table.lookup(tf.to_int64(indices))
     for _ in range(FLAGS.training_iteration):
         batch = mnist.train.next_batch(50)
         train_step.run(feed_dict={x: batch[0], y_: batch[1]})
     correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, 'float'))
-    print 'training accuracy %g' % sess.run(
+    print('training accuracy %g' % sess.run(
         accuracy, feed_dict={x: mnist.test.images,
-                             y_: mnist.test.labels})
-    print 'Done training!'
+                             y_: mnist.test.labels}))
+    print('Done training!')
 
     # Export model
     # WARNING(break-tutorial-inline-code): The following code snippet is
@@ -64,7 +64,7 @@ def main(_):
     export_path = os.path.join(
         tf.compat.as_bytes(export_path_base),
         tf.compat.as_bytes(str(FLAGS.model_version)))
-    print 'Exporting trained model to', export_path
+    print('Exporting trained model to', export_path)
     builder = tf.saved_model.builder.SavedModelBuilder(export_path)
 
     # Build the signature_def_map.
@@ -110,7 +110,7 @@ def main(_):
 
     builder.save()
 
-    print 'Done exporting!'
+    print('Done exporting!')
 
 
 if __name__ == '__main__':
