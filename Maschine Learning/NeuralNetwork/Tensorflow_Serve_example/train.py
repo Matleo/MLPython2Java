@@ -11,7 +11,7 @@ def saveConfig():
         shutil.rmtree(export_dir)
 
     classification_inputs = tf.saved_model.utils.build_tensor_info(serialized_tf_example)
-    classification_outputs_scores = tf.saved_model.utils.build_tensor_info(y3)
+    outputs_scores = tf.saved_model.utils.build_tensor_info(y3)
 
     classification_signature = (
         tf.saved_model.signature_def_utils.build_signature_def(
@@ -21,11 +21,20 @@ def saveConfig():
             },
             outputs={
                 tf.saved_model.signature_constants.CLASSIFY_OUTPUT_SCORES:
-                    classification_outputs_scores
+                    outputs_scores
             },
             method_name=tf.saved_model.signature_constants.CLASSIFY_METHOD_NAME))
+
+    prediction_inputs = tf.saved_model.utils.build_tensor_info(x)
+
+    prediction_signature = (
+        tf.saved_model.signature_def_utils.build_signature_def(
+            inputs={'images': prediction_inputs},
+            outputs={'scores': outputs_scores},
+            method_name=tf.saved_model.signature_constants.PREDICT_METHOD_NAME))
     signatureMap = {
-        tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: classification_signature}
+        tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: classification_signature,
+        'predict_images': prediction_signature}
 
     builder = tf.saved_model.builder.SavedModelBuilder(export_dir)  # initiate builder
     builder.add_meta_graph_and_variables(sess, [tf.saved_model.tag_constants.SERVING], signature_def_map=signatureMap)
@@ -41,7 +50,7 @@ if __name__ == "__main__":
     steps = 1000
 
     serialized_tf_example = tf.placeholder(dtype=tf.string, name='tf_example')
-    feature_configs = {'input': tf.FixedLenFeature(shape=[784], dtype=tf.float32),}
+    feature_configs = {'input': tf.FixedLenFeature(shape=[784], dtype=tf.float32)}
     tf_example = tf.parse_example(serialized_tf_example, feature_configs)
     x = tf.identity(tf_example['input'], name='input')  # use tf.identity() to assign name
     y_ = tf.placeholder(dtype=tf.float32, shape=[None, 10])
