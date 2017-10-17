@@ -1,4 +1,4 @@
-package NeuralNetwork.Tensorflow;
+package NeuralNetwork.Tensorflow.MNIST;
 
 import net.coobird.thumbnailator.Thumbnails;
 import org.json.simple.JSONArray;

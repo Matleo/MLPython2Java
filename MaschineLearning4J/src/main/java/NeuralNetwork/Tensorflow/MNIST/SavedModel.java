@@ -1,4 +1,4 @@
-package NeuralNetwork.Tensorflow;
+package NeuralNetwork.Tensorflow.MNIST;
 
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
 import org.deeplearning4j.eval.Evaluation;

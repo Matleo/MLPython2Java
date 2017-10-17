@@ -13,7 +13,9 @@ def printPredictions(Pics):
         path = '../../../../../Data/Own_dat/' + Pics + '-' + str(i) + '.png'
         file = tf.read_file(path)
         img = tf.image.decode_png(file, channels=1)
+        import numpy as np
         resized_image = tf.image.resize_images(img, [28, 28])
+        print(np.array(sess.run(resized_image)).shape)
         tensor = tf.reshape(resized_image, [-1])
         tArray = 1 - sess.run(tensor) / 255  # von [0,255] auf [0,1] umdrehen
 

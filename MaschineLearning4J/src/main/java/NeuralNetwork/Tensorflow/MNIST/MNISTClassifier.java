@@ -1,4 +1,4 @@
-package NeuralNetwork.Tensorflow;
+package NeuralNetwork.Tensorflow.MNIST;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -14,7 +14,7 @@ import java.util.List;
  * -p | -predict <path>    specify of which picture to predict its number
  */
 public class MNISTClassifier {
-    private static final String picDir = "C:/Users/lema/IdeaProjects/Maschine Learning/Data/Own_dat/"; //where the test pictures are stored
+    private static final String picDir = "../Maschine Learning/Data/Own_dat/"; //where the test pictures are stored
     private static final String importDir1 = "../Maschine Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/export/";
     private static final String importDir2 = "../Maschine Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN/export/";
     private static final String importDir3 = "../Maschine Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed Forward NN/SavedModel/export/";
