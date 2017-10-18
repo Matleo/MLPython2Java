@@ -1,5 +1,6 @@
 import tensorflow as tf
 import json
+import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data
 
 
@@ -13,23 +14,18 @@ def printPredictions(Pics):
         path = '../../../../../Data/Own_dat/' + Pics + '-' + str(i) + '.png'
         file = tf.read_file(path)
         img = tf.image.decode_png(file, channels=1)
-        import numpy as np
         resized_image = tf.image.resize_images(img, [28, 28])
-        print(np.array(sess.run(resized_image)).shape)
         tensor = tf.reshape(resized_image, [-1])
         tArray = 1 - sess.run(tensor) / 255  # von [0,255] auf [0,1] umdrehen
-
-        #saveJson(tArray,Pics,i)
         determinNumber(tArray, i)
 
 
 def determinNumber(tArray, i):
     inputArray = sess.run(tf.reshape(tArray, [1, 784]))
-    guessed = sess.run(y3, feed_dict={x: inputArray, dKeep: 1})
-    guessedIndex = sess.run(tf.argmax(y3, 1), feed_dict={x: inputArray, dKeep: 1})
-    guessedIndex = list(guessedIndex)[0]  # um von set auf int zu kommen
-    guessedProb = guessed[0][guessedIndex] * 100
-    print("%i: Die abgebildete Zahl ist zu %f%% eine: %d." % (i, guessedProb, guessedIndex))
+    score = sess.run(y3, feed_dict={x: inputArray, dKeep: 1})[0]
+    predictedIndex = np.argmax(score)
+    predictedProb = score[predictedIndex] * 100
+    print("%i: Die abgebildete Zahl ist zu %f%% eine: %d." % (i, predictedProb, predictedIndex))
 
 
 
