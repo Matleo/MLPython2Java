@@ -3,12 +3,14 @@ import tensorflow as tf
 import numpy as np
 import os
 
-tf.app.flags.DEFINE_string('model', 't_ffnn', 'Which model to load for serving.')
 
 app = Flask(__name__)
 
 @app.route("/predict", methods=['POST'])
 def predict():
+    if not "modelType" in app.config:
+        load_model("t_ffnn")
+
     req = request.get_json()
     picArray = req["picArray"]
     reshaped_Array = reshapePic(picArray)
@@ -21,6 +23,9 @@ def predict():
 
 @app.route("/")
 def predict_example():
+    if not "modelType" in app.config:
+        load_model("t_ffnn")
+
     model = app.config.get("modelType")
     graph = app.config.get("graph")
     sess = app.config.get("session")
@@ -30,7 +35,8 @@ def predict_example():
     path = '../../Data/Own_dat/' + picName + '-' + str(i) + '.png'
     file = tf.read_file(path)
     pic = tf.image.decode_png(file, channels=1)
-    reshaped_Array = reshapePic(sess.run(pic))
+    with tf.Session() as session:
+        reshaped_Array = reshapePic(session.run(pic))
     return predictPic(reshaped_Array, model, graph, sess)
 
 
@@ -91,10 +97,7 @@ def reshapePic(pic):
     reshaped_Array = sess.run(tf.reshape(tArray, [1, 784]))
     return reshaped_Array
 
-
-if __name__ == "__main__":
-    model = tf.app.flags.FLAGS.model
-
+def load_model(model):
     sess = tf.Session()
     import_dir = getImportDir(model)
     tf.saved_model.loader.load(sess, ["serve"], import_dir)
@@ -103,5 +106,8 @@ if __name__ == "__main__":
     app.config["modelType"] = model
     app.config["session"] = sess
     app.config["graph"] = graph
+
+if __name__ == "__main__":
+    load_model("t_ffnn")
 
     app.run(debug=True, port=8000)

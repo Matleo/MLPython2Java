@@ -26,9 +26,12 @@ import java.util.Arrays;
 
 public class InferenceClient {
     private static final String picDir = "../Maschine Learning/Data/Own_dat/";
-    private static final String Server_URI = "http://localhost:8000/predict";
+    private static final String Local_URI = "http://localhost:8000/predict";
+    private static final String Heroku_URI = "https://stark-savannah-40830.herokuapp.com/predict";
+
     public static void main(String[] args) {
-        String picFile = "MNIST-8.png";//default
+        String Server_URI = Heroku_URI;
+        String picFile = "MNIST-2.png";//default
         if(args.length>0){
             if(!args[0].contains(".png"))args[0]=args[0]+".png";
             File f = new File(picDir+args[0]);
