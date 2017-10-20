@@ -165,7 +165,7 @@ public class SavedModel {
         boolean match = (javAccuracy == pyAccuracy);
         if (match) {
             System.out.println("\n***Success***");
-            System.out.println("The calculated accuracy on the MNIST dataset in java and python match");
+            System.out.println("The calculated accuracy on the MNIST dataset in Java and Python match");
         } else {
             System.out.println("\nSomething went wrong, the accuracy calculated in java and python don't match");
             System.out.println("Java accuracy: " + javAccuracy);
