@@ -100,11 +100,11 @@ public class TensorflowUtilities {
 
             int width = img.getWidth();
             int height = img.getHeight();
-            int[][] imgArrInt = new int[width][height];//alle Pixel eines grayscale IMG in int(0,255)
+            int[][] imgArrInt = new int[height][width];//alle Pixel eines grayscale IMG in int(0,255)
             Raster raster = img.getData();
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    imgArrInt[i][j] = raster.getSample(j, i, 0);//returns Pixel at (i,j), für getSample indice umgedreht
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    imgArrInt[i][j] = raster.getSample(j, i, 0);//because original pic is width x heigth
                 }
             }
 

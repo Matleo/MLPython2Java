@@ -1,5 +1,5 @@
 import tensorflow as tf
-
+import numpy as np
 
 # reads a set of pictures from png file and prints prediction for these images
 # Pics is a String, fitting the existing pictures in Data/Own_dat. May be any of "Handwritten"/"MNSIT"/"Computer"/"Font".
@@ -17,11 +17,10 @@ def printPredictions(Pics):
 # actual prediction function, where tArray is a 784 vector
 def determinNumber(tArray, i):
     inputArray = sess.run(tf.reshape(tArray, [1, 784]))
-    prediction = sess.run(y3, feed_dict={x: inputArray, dKeep: 1})
-    predictionIndex = sess.run(tf.argmax(y3, 1), feed_dict={x: inputArray, dKeep: 1})
-    predictionIndex = list(predictionIndex)[0]  # get int from returned set
-    predictionProb = prediction[0][predictionIndex] * 100
-    print("%i: The given image is with %f%% a: %d." % (i, predictionProb, predictionIndex))
+    score = sess.run(y3, feed_dict={x: inputArray, dKeep: 1})[0]
+    pred = np.argmax(score)
+    predProb = score[pred] * 100
+    print("%i: The given picture is a %d with probability of: %f%%." % (i, pred, predProb))
 
 
 if __name__ == "__main__":

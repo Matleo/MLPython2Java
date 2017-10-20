@@ -1,5 +1,6 @@
 import os
 import tensorflow as tf
+import numpy as np
 
 
 def printPredictions(Pics):
@@ -15,11 +16,10 @@ def printPredictions(Pics):
 
 def determinNumber(tArray, i):
     inputArray = sess.run(tf.reshape(tArray, [1, 784]))
-    guessed = sess.run(y, feed_dict={x: inputArray})
-    guessedIndex = sess.run(tf.argmax(y, 1), feed_dict={x: inputArray})
-    guessedIndex = list(guessedIndex)[0]  # um von set auf int zu kommen
-    guessedProb = guessed[0][guessedIndex] * 100
-    print("%i: Die abgebildete Zahl ist zu %f%% eine: %d." % (i, guessedProb, guessedIndex))
+    score = sess.run(y, feed_dict={x: inputArray})[0]
+    pred = np.argmax(score)
+    predProb = score[pred] * 100
+    print("%i: The given picture is a %d with probability of: %f%%." % (i, pred, predProb))
 
 
 if __name__ == "__main__":
@@ -34,4 +34,4 @@ if __name__ == "__main__":
     y = graph.get_tensor_by_name("output:0")
     x = graph.get_tensor_by_name("input:0")
 
-    printPredictions("Handwritten")
+    printPredictions("MNIST")

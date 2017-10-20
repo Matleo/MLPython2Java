@@ -1,15 +1,13 @@
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
-
+import numpy as np
 
 def determinNumber(tArray, i):
     inputArray = sess.run(tf.reshape(tArray, [1, 784]))
-    guessed = sess.run(y_conv, feed_dict={x: inputArray, dKeep: 1})
-    guessed = sess.run(tf.nn.softmax(guessed))
-    guessedIndex = sess.run(tf.argmax(y_conv, 1), feed_dict={x: inputArray, dKeep: 1})
-    guessedIndex = list(guessedIndex)[0]  # um von set auf int zu kommen
-    guessedProb = guessed[0][guessedIndex] * 100
-    print("%i: Die abgebildete Zahl ist zu %f%% eine: %d." % (i, guessedProb, guessedIndex))
+    score = sess.run(y_conv, feed_dict={x: inputArray, dKeep: 1})[0]
+    pred = np.argmax(score)
+    predProb = score[pred] * 100
+    print("%i: The given picture is a %d with probability of: %f%%." % (i, pred, predProb))
 
 
 def printPredictions(Pics):

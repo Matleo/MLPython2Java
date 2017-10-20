@@ -16,9 +16,9 @@ def printPredictions(Pics):
 def determinNumber(tArray, i):
     inputArray = sess.run(tf.reshape(tArray, [1, 784]))
     score = sess.run(y, feed_dict={x: inputArray, learningPhase: False})[0]
-    predictedIndex = np.argmax(score)
-    predictedProb = score[predictedIndex] * 100
-    print("%i: Die abgebildete Zahl ist zu %f%% eine: %d." % (i, predictedProb, predictedIndex))
+    pred = np.argmax(score)
+    predProb = score[pred] * 100
+    print("%i: The given picture is a %d with probability of: %f%%." % (i, pred, predProb))
 
 if __name__=="__main__":
     mnist = input_data.read_data_sets('../../../../Data/MNIST_data', one_hot=True)

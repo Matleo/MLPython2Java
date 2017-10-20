@@ -31,7 +31,7 @@ public class InferenceClient {
 
     public static void main(String[] args) {
         String Server_URI = Heroku_URI;
-        String picFile = "MNIST-2.png";//default
+        String picFile = "Font-2.png";//default
         if(args.length>0){
             if(!args[0].contains(".png"))args[0]=args[0]+".png";
             File f = new File(picDir+args[0]);
@@ -138,7 +138,6 @@ public class InferenceClient {
                     imgArrInt[i][j] = raster.getSample(j, i, 0);//because original pic is width x heigth
                 }
             }
-            return imgArrInt;
         } catch (IOException e) {
             e.printStackTrace();
         }
