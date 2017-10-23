@@ -52,10 +52,7 @@ To get started with using a pretrained machine learning model from Python in Jav
 
 ### Inference as a Service
 In order to being able to use a pretrained model as a service, you can follow this workflow:
-1. Decide which model you want to use and pass it as script parameter to the [flask application](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving/Flask_Serving.py). The syntax looks as following:
-	```bash
-		--model <value>
-	```
+1. Decide which model you want to use and pass it as script parameter to the [flask application](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving/Flask_Serving.py). The syntax looks as following:	`--model <value>`
 	<value> can be any of: t_ffnn / t_cnn / e_ffnn / e_cnn / k_ffnn / k_cnn, where for example t_ffnn will load the tensorflow feed forward neural network. t_ffnn is the default value if you do not pass any.
 	
 ## Prerequisites
