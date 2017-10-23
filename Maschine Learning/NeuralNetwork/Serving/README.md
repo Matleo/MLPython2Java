@@ -1,14 +1,17 @@
 # Serving a NN model with flask
 After we created, trained and saved our model for MNIST classification, we can now start using it to provide a RESTful API. Before continuing here, please make sure that you have read about how to [save a SavedModel](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier).
 
-Running the [Flask_Serving](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving/Flask_Serving.py) script will start an application, which loads a previously trained and saved model and provides a RESTful API at `localhost:8000`, using the [flask](http://flask.pocoo.org/) microframework.
+Running the [Flask_Serving.py](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving/Flask_Serving.py) script will start an application, which loads a previously trained and saved model and provides a RESTful API at `localhost:8000`, using the [flask](http://flask.pocoo.org/) microframework.
 
 ## Loading the model
-To specify, which model you want to load and serve, pass the script argument `--model` with a value in one of: `t_ffnn` , `t_cnn` , `e_ffnn` , `e_cnn` , `k_ffnn` , `k_cnn`. This input will be evaluated by the `getImportDir(model)` function, which will determine from which directory to load the `SavedModel`.
+To specify, which model you want to load and serve, pass the script argument `--model` with a value of either: `t_ffnn` , `t_cnn` , `e_ffnn` , `e_cnn` , `k_ffnn` or `k_cnn`. This input will be evaluated by the `getImportDir(model)` function, which will determine from which directory to load the `SavedModel`.
 
 Loading one of the saved models happens in the `load_model(model)` function, which takes the value of the script argument as parameter. What this function does is nothing but reloading the previously exported `SavedModel` from the file system and storing it into the configuration of the flask application, so that the model can be accessed later. The actual reloading can be done in this one line of code:
 ```python
-    tf.saved_model.loader.load(session, ["serve"], import_dir)
+    sess = tf.Session()
+    import_dir = getImportDir(model)
+    tf.saved_model.loader.load(session, ["serve"], import_dir) #actual loading
+	graph = tf.get_default_graph()
 ```
 Afterwards, storing the session into the application configuration can be done by accessing the `app.config` dictionary:
 ```python
@@ -19,8 +22,8 @@ Afterwards, storing the session into the application configuration can be done b
 
 ## Providing a RESTful API
 My example apllication will respond to two routes: 
-* When calling `localhost:8000/`, you will get a JSON returned, representing the prediction for the [Data/Own_dat/MNIST-0.png](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/Data/Own_dat/MNIST-0.png) file, this route is only used for demonstration purposes. 
-* The more important route is `localhost:8000/predict`, which is used for the actual prediction request. It will expect a JSON as request parameter, containing a 2-dimensional integer array, representing the pixel values of a grayscale picture. Inside the 2D array, each array in the second dimension should contain the pixel information of a row of the picture (so the array should be of shape: [heigth][length])
+* When calling `localhost:8000/`, you will get a JSON returned, representing the prediction for the [Data/Own_dat/MNIST-0.png](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/Data/Own_dat/MNIST-0.png) file, this route is used for demonstration purposes only. 
+* The important route is `localhost:8000/predict`, which is used for the actual prediction request. It will expect a JSON as request parameter, containing a 2-dimensional integer array, representing the pixel values of a grayscale picture. Inside the 2D array, each array in the second dimension should contain the pixel information of a row of the picture (so the array should be of shape: [heigth][length])
 
 ### Define application and route
 With flask, you can create your application by calling the `Flask()` constructor:
