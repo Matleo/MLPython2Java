@@ -3,8 +3,9 @@ import tensorflow as tf
 import numpy as np
 import os
 
-
 app = Flask(__name__)
+tf.app.flags.DEFINE_string('model', "t_ffnn", 'SavedModel to load for prediction')
+
 
 @app.route("/predict", methods=['POST'])
 def predict():
@@ -108,6 +109,8 @@ def load_model(model):
     app.config["graph"] = graph
 
 if __name__ == "__main__":
-    load_model("t_ffnn")
+
+    model = tf.app.flags.FLAGS.model
+    load_model(model)
 
     app.run(debug=True, port=8000)

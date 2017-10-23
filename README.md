@@ -6,11 +6,9 @@ The project is split into two sub-projects:
 1. [Machine Learning (Python part)](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning)
 2. [Machine Learning 4J (Java part)](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J)
 
-The sub-projects are themselves ordered by model type. The following models were considered *(links go to the Python part)*:
+Each sub-project itself is ordered by model type. The following models were considered *(links go to the Python part)*:
 * [Artificial Neural Networks](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork)
-* [TODO: Naive Bayes]()
-* [TODO: Decision Trees]()
-* [TODO: Support Vector Machines]()
+* [TODO: Random Forest]()
 
 For each model type two seperate approaches were evaluated:
 1. **Model as a Service**: The whole ML model is supposed to be transfered from Python to Java, to execute predictions directly in Java
@@ -48,9 +46,18 @@ To get started with using a pretrained machine learning model from Python in Jav
 
 		Comparing Java and Python picture predictions...
 		***Success***
-		The python and java predictions match!
+		The Python and Java predictions match!
     ```
 	For more information on how to use this program, please pass in `-h` as program parameter or refer to the [README](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow) 
+
+### Inference as a Service
+In order to being able to use a pretrained model as a service, you can follow this workflow:
+1. Decide which model you want to use and pass it as script parameter to the [flask application](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving/Flask_Serving.py). The syntax looks as following:
+	```bash
+		--model <value>
+	```
+	<value> can be any of: t_ffnn / t_cnn / e_ffnn / e_cnn / k_ffnn / k_cnn, where for example t_ffnn will load the tensorflow feed forward neural network. t_ffnn is the default value if you do not pass any.
+	
 ## Prerequisites
 * Python 3.6.2
 * Tensorflow 1.3
