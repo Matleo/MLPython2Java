@@ -108,7 +108,4 @@ Finally, to execute the export of the model as a `SavedModel` (after the trainin
     inputReceiver = tf.estimator.export.build_raw_serving_input_receiver_fn(inputs)
     classifier.export_savedmodel(export_dir, serving_input_receiver_fn=inputReceiver)
 ```
-The directory structure and how to perform the import works the same as shown above.
-
-## Inference as a Service
-**TODO**
+Performing the import and using the model for predictions works the same as shown above.

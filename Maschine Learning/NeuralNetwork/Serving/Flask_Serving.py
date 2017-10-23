@@ -12,8 +12,8 @@ def predict():
     if not "modelType" in app.config:
         load_model("t_ffnn")
 
-    req = request.get_json()
-    picArray = req["picArray"]
+    json = request.get_json()
+    picArray = json["picArray"]
     reshaped_Array = reshapePic(picArray)
 
     model = app.config.get("modelType")
@@ -21,6 +21,7 @@ def predict():
     sess = app.config.get("session")
 
     return predictPic(reshaped_Array, model, graph, sess)
+
 
 @app.route("/")
 def predict_example():
@@ -87,16 +88,19 @@ def getImportDir(model):
 
 
 def reshapePic(pic):
+    #1. As Tensorflow expects the input Tensor to be channel last, we need to wrap every pixels value into an array individually
     for i in range(len(pic)):
         for j in range(len(pic[i])):
             pic[i][j] = [pic[i][j]]
-    resized_image = tf.image.resize_images(pic, [28, 28])
-    tensor = tf.reshape(resized_image, [-1])
 
-    sess = tf.Session()
-    tArray = 1 - sess.run(tensor) / 255  # von [0,255] auf [0,1] umdrehen
-    reshaped_Array = sess.run(tf.reshape(tArray, [1, 784]))
+    resized_image = tf.image.resize_images(pic, [28, 28]) #2. resize to 28x28
+    tensor = tf.reshape(resized_image, [-1]) #3. flatten
+
+    with tf.Session() as sess:
+        tArray = 1 - sess.run(tensor) / 255  # 4. reverse [0,255] to [0,1]
+        reshaped_Array = sess.run(tf.reshape(tArray, [1, 784])) #make batch of size 1
     return reshaped_Array
+
 
 def load_model(model):
     sess = tf.Session()
@@ -108,8 +112,8 @@ def load_model(model):
     app.config["session"] = sess
     app.config["graph"] = graph
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     model = tf.app.flags.FLAGS.model
     load_model(model)
 

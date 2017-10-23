@@ -102,7 +102,7 @@ The import is almost identical to what we did with `tensorflow.train.Saver()`, o
 ```python
     import_dir = "./export"
     sess = tf.Session()
-    tf.saved_model.loader.load(sess, ["serve"], import_dir) #new
+    tf.saved_model.loader.load(sess, ["serve"], import_dir)
 ```
 
 Afterwards you can grab the input and output tensors from the session, like before, and start making predictions, without having to train the model again. The full code can be viewed [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel/NN_test.py).
@@ -110,6 +110,3 @@ Afterwards you can grab the input and output tensors from the session, like befo
 You can apply the workflow to any model you like. For validation purpose, i tried saving and reloading a Convolutional Neural Network for the same MNIST example. The only thing to change was how to build the model. You can view the CNN example [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN)
 
 For more information, please refer to the [official documentation](https://www.tensorflow.org/programmers_guide/saved_model#apis_to_build_and_load_a_savedmodel)
-
-## Inference as a Service
-**Todo**
