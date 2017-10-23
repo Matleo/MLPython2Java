@@ -30,7 +30,7 @@ public class InferenceClient {
     private static final String Heroku_URI = "https://stark-savannah-40830.herokuapp.com/predict";
 
     public static void main(String[] args) {
-        String Server_URI = Heroku_URI;
+        String Server_URI = Local_URI;
         String picFile = "Font-2.png";//default
         if(args.length>0){
             if(!args[0].contains(".png"))args[0]=args[0]+".png";

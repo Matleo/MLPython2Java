@@ -9,6 +9,7 @@ Maschine Learning/NeuralNetwork/lowLevelNN.py
 MaschineLearning4J/src/main/java/IRIS/
 MaschineLearning4J/src/main/java/NeuralNetwork/DL4J/DL4Jexample.java
 */.idea/
+Maschine Learning/NeuralNetwork/Serving/Tensorflow_Serving/
 
 # Created by https://www.gitignore.io/api/java,maven,intellij
 
