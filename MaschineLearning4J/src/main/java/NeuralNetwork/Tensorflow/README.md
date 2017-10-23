@@ -18,7 +18,7 @@ For this project i am using the `Tensorflow Java`, the `Coobird Thumbnailator` a
     <dependency>
         <groupId>com.googlecode.json-simple</groupId>
         <artifactId>json-simple</artifactId>
-        version>1.1.1</version>
+        <version>1.1.1</version>
     </dependency>
 ```
 

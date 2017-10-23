@@ -1,4 +1,4 @@
-package NeuralNetwork.Tensorflow;
+package NeuralNetwork;
 
 import com.google.common.io.Files;
 import org.apache.commons.io.IOUtils;
