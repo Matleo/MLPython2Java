@@ -11,20 +11,20 @@ In the [DL4J](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearn
 Whereas in the [Tensorflow](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow) subdirecory, you will find the code using the [Java Tensorflow API](https://www.tensorflow.org/api_docs/java/reference/org/tensorflow/package-summary) to import a `SavedModel`.
 
 ## Inference as a Service
-After you have built and served a RESTful API for making predictions of given images (like [this](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving)), you can use the [InferenceClient.java](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/NeuralNetwork/InferenceClient.java) to send such a request. This will post a 2-dimensional integer array, representing the grayscale pixels of an image and get the prediction of what number is most likely displayed as respond.
+After you have built and served a RESTful API for making predictions of given images (as done [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving)), you can use the [InferenceClient.java](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/NeuralNetwork/InferenceClient.java) to send such a request. This will post a 2-dimensional integer array, representing the grayscale pixels of an image and get the prediction of what number is most likely displayed as response.
 ### Dependency
-You will have to add the `apache httpclient` and `json-simple` dependency to your pom.xml:
+Firstly, you will have to add the `apache httpclient` and `json-simple` dependency to your pom.xml:
 ```maven
-	<dependency>
-		<groupId>org.apache.httpcomponents</groupId>
-		<artifactId>httpclient</artifactId>
-		<version>4.5.2</version>
-	</dependency>
-	<dependency>
-		<groupId>com.googlecode.json-simple</groupId>
-		<artifactId>json-simple</artifactId>
-		<version>1.1.1</version>
-	</dependency>
+<dependency>
+	<groupId>org.apache.httpcomponents</groupId>
+	<artifactId>httpclient</artifactId>
+	<version>4.5.2</version>
+</dependency>
+<dependency>
+	<groupId>com.googlecode.json-simple</groupId>
+	<artifactId>json-simple</artifactId>
+	<version>1.1.1</version>
+</dependency>
 ```
 ### Usage
 
