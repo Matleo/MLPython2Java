@@ -15,16 +15,16 @@ After you have built and served a RESTful API for making predictions of given im
 ### Dependency
 Firstly, you will have to add the `apache httpclient` and `json-simple` dependency to your pom.xml:
 ```maven
-<dependency>
-	<groupId>org.apache.httpcomponents</groupId>
-	<artifactId>httpclient</artifactId>
-	<version>4.5.2</version>
-</dependency>
-<dependency>
-	<groupId>com.googlecode.json-simple</groupId>
-	<artifactId>json-simple</artifactId>
-	<version>1.1.1</version>
-</dependency>
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.5.2</version>
+	</dependency>
+	<dependency>
+		<groupId>com.googlecode.json-simple</groupId>
+		<artifactId>json-simple</artifactId>
+		<version>1.1.1</version>
+	</dependency>
 ```
 ### Usage
 
@@ -33,7 +33,7 @@ As Program parameter you can pass in either an absolute path name to a .png file
 
 If the service is running correctly, the output will look something like:
 ```java
-	Infering the webservice with default picture: ../Maschine 							Learning/Data/Own_dat/MNIST-5.png
+	Infering the webservice with default picture: ../Maschine Learning/Data/Own_dat/MNIST-5.png
 	Response status line: HTTP/1.1 200 OK
 	Response content: {
 		"prediction": 5, 
@@ -47,13 +47,13 @@ After evaluating the program parameters, the program works as follows:
 	File imgFile = new File(path); //"path" is the filepath to the .png
 	BufferedImage img = ImageIO.read(imgFile);
 	Raster raster = img.getData();
-    imgArrInt = new int[img.getHeight][img.getWidth];
+	imgArrInt = new int[img.getHeight][img.getWidth];
  	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 			imgArrInt[i][j] = raster.getSample(j, i, 0);
 		}
 	}
-    return imgArrInt;
+	return imgArrInt;
 ```
 *Note*: `raster.getSample(j, i, 0)` returns the value of the pixel at width=j and heigth=i. As we want to return an array of shape [heigth][width], the indices needs to be reversed.  
 
@@ -82,8 +82,7 @@ After evaluating the program parameters, the program works as follows:
 
 4. Send the HTTP Post request to the RESTful API and receive the response:
 ```java
-	CloseableHttpResponse response = null;
-	response = httpclient.execute(httpPost);
+	CloseableHttpResponse response = httpclient.execute(httpPost);
 ```
 
 5. Read out the HTTP response:
