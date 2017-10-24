@@ -29,19 +29,18 @@ public class InferenceClient {
     private static final String Heroku_URI = "https://stark-savannah-40830.herokuapp.com/predict";
 
     private static String path = "";
-    private static String Server_URI = Local_URI; //set either to Local_URI or Heroku_URI
+    private static String Server_URI = Heroku_URI; //set either to Local_URI or Heroku_URI
     private static String picFile = "MNIST-5.png";//default
 
     public static void main(String[] args) {
         evaluateArguments(args);
 
+
+        //1. read picture
         int[][] picture = readPic(path);
 
 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-
-        //Define request: pass int array representing the picture
-        HttpPost httpPost = new HttpPost(Server_URI);
+        //2. Define json object
         JSONObject json = new JSONObject();
         JSONArray picArray = new JSONArray();
         for (int i = 0; i < picture.length; i++) {
@@ -53,11 +52,19 @@ public class InferenceClient {
         }
         json.put("picArray", picArray);
         String JSON_STRING = json.toJSONString();
+
+
+        //3. create post request with json as parameter
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(Server_URI);
+
         StringEntity requestEntity = new StringEntity(
                 JSON_STRING,
                 ContentType.APPLICATION_JSON);
         httpPost.setEntity(requestEntity);
 
+
+        //4. send request and hope for a response
         CloseableHttpResponse response = null;
         try {
             //get response from server
@@ -66,8 +73,9 @@ public class InferenceClient {
             e.printStackTrace();
         }
 
+        
         try {
-            //read out the response
+            //5. read out the response
             System.out.println("Response status line: " + response.getStatusLine());
             HttpEntity entity = response.getEntity();
             InputStream is = entity.getContent();
@@ -138,7 +146,6 @@ public class InferenceClient {
      * Evaluates the given program parameters to determin the path of the picture used for prediction
      *
      * @param args String[] forwarded from the program arguments
-     * @return String of the path to the picture used for prediction
      */
     private static void evaluateArguments(String[] args) {
         if (args.length > 0) {
