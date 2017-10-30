@@ -1,5 +1,3 @@
-package NeuralNetwork;
-
 import com.google.common.io.Files;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
@@ -35,10 +33,8 @@ public class InferenceClient {
     public static void main(String[] args) {
         evaluateArguments(args);
 
-
         //1. read picture
         int[][] picture = readPic(path);
-
 
         //2. Define json object
         JSONObject json = new JSONObject();
