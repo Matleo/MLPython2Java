@@ -29,7 +29,7 @@ public class InferenceClient {
     private static final String Heroku_URI = "https://stark-savannah-40830.herokuapp.com/predict";
 
     private static String path = "";
-    private static String Server_URI = Heroku_URI; //set either to Local_URI or Heroku_URI
+    private static String Server_URI = Local_URI; //set either to Local_URI or Heroku_URI
     private static String picFile = "MNIST-5.png";//default
 
     public static void main(String[] args) {
@@ -144,7 +144,6 @@ public class InferenceClient {
 
     /**
      * Evaluates the given program parameters to determin the path of the picture used for prediction
-     *
      * @param args String[] forwarded from the program arguments
      */
     private static void evaluateArguments(String[] args) {
