@@ -73,7 +73,7 @@ public class InferenceClient {
             e.printStackTrace();
         }
 
-        
+
         try {
             //5. read out the response
             System.out.println("Response status line: " + response.getStatusLine());

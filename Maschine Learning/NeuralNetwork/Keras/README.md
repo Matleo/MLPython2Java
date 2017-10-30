@@ -1,14 +1,14 @@
 # Keras
 Keras is a high-level neural networks API, written in Python and capable of running on top of TensorFlow. Keras provides two APIs to build a neural network, the `Sequential` and the `Model`. Basically you should use a `Sequential` if your model is simple and essentially just a sequence of layers. If you are trying to build a more complex models, which includes non-sequential connections and multiple inputs/outputs, you should use the functional `Model` API.
 
-I used a `Sequential` to create my [FFNN example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential) and a `Model` to create my [CNN example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential). Additionally i created a [LSTM example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/IMDBClassifier) for IMDB Classification to validate that the export works with complex models aswell.
+I used a `Sequential` to create my [FFNN example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential) and a `Model` to create my [CNN example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Model). Additionally i created a [LSTM example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/IMDBClassifier) for IMDB Classification to validate that the export works with complex models aswell.
 
 I will assume that you are familiar with building and training a Keras model, if that is not the case, please refer to the original [documentation](https://keras.io/). 
 
 ## Model as a Service
 I evaluated two seperate options to export a Keras model from Python and reload it into Java:
 1. Save the native Keras model into a .h5 file and reload it with the [DL4J](https://deeplearning4j.org/) framework.
-2. Get the Tensorflow `session` from the model and save it as a `SavedModel`
+2. Get the Tensorflow `Session` from the Keras model and save it as a `SavedModel`
 ### 1) Native Keras + DL4J
 Before saving your model, make sure that you are on Keras 1.2.2 or lower, as ND4J v.0.9.1 does not support higher versions. This compatibility is going to change with time though.
 
@@ -31,7 +31,7 @@ It is important to note, that you can **not** use every Keras element, as the Ja
 You can find my full example for a `Sequential` [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential/train_dl4j.py), and for a `Model` [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Model/cnn_train_dl4j.py). As i was not able to use  all the Keras layers here, i seperated exporting the native Keras model and the Tensorflow `SavedModel` in seperate files. (*Note*: The LSTM example doesn't work with DL4J on v0.9.1)
 
 ### 2) Exporting a SavedModel
-As mentioned, Keras is a model-level library, providing high-level building blocks for developing deep learning models. It does not itself handle low-level operations such as tensor products, convolutions and so on . Therefore it calls the Tensorflow API to build a `Graph` and run a `Session`. We can access the `Session` by using the `Keras.backend`, which contains the backend engine, which can be `Theano` or `CNTK` aswell, but in our case is `Tensorflow`: 
+As mentioned, Keras is a model-level library, providing high-level building blocks for developing deep learning models. It does not itself handle low-level operations such as tensor products, convolutions and so on . Therefore it calls the Tensorflow API to build a `Graph` and run a `Session`. We can access the `Session` by using the module `Keras.backend`, which contains the backend engine, which could be `Theano` or `CNTK` aswell, but in our case is `Tensorflow`: 
 ```python
     #build and train model...
     from keras import backend as K
@@ -62,10 +62,10 @@ Talking about naming the tensors. I did not find a way to rename the tensorflow 
 ```python
     inputs = Input(shape=(784,), name="input_input")
 ```
-Note that i used the same name for the input layer, as the name that is assigned to the input of my `Sequential` example. That way, the signature of my `Model` [example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Model) and my `Sequential` [example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential) are identical.
+Note that i used the same value for the `name` attribute of the input layer, as the name that is assigned to the input of my `Sequential` example. That way, the signature of my `Model` [example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Model) and my `Sequential` [example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential) are identical.
 
 With the default tensor names, this is what the signature of our `SavedModel` looks like:
 
 > ![Image of SavedModel CLI Output](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/SavedModelCLI.png)
 
-To import the `SavedModel` into Python again, please refer to [this](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier). You can read about how to import the `SavedModel` into Java [here](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow).
+To import the `SavedModel` into Python again, please refer to the [usual workflow](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier). You can read about how to import the `SavedModel` into Java [here](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork).
