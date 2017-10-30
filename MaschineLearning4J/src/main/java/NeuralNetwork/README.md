@@ -1,5 +1,5 @@
 # Neural Networks Java
-In this part of the project i will describe how to use a model that was previously built, trained and exported in Python. If you have not looked at the [Python side](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork) yet, i recommend doing so.
+In this part of the project I will describe how to use a model that was previously built, trained and exported in Python. If you have not looked at the [Python side](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork) yet, I recommend doing so.
 
 ## Model as a Service
 I used two seperate methods to export a Python machine learning model:
@@ -42,20 +42,20 @@ If the service is running correctly, the output will look something like:
 ``` 
 ### How it works
 After evaluating the program parameters, the program works as follows:
-1. Read the grayscale pixels from a given picture into a 2D integer array (i have omitted the try-catch blocks for readability):
+1. Read the grayscale pixels from a given picture into a 2D integer array (i have omitted the try-catch blocks for better readability):
 ```java
 	File imgFile = new File(path); //"path" is the filepath to the .png
 	BufferedImage img = ImageIO.read(imgFile);
 	Raster raster = img.getData();
-	imgArrInt = new int[img.getHeight][img.getWidth];
- 	for (int i = 0; i < height; i++) {
-		for (int j = 0; j < width; j++) {
+	int[][] imgArrInt = new int[img.getHeight][img.getWidth];
+ 	for (int i = 0; i < img.getHeigth(); i++) {
+		for (int j = 0; j < img.getWidth(); j++) {
 			imgArrInt[i][j] = raster.getSample(j, i, 0);
 		}
 	}
 	return imgArrInt;
 ```
-*Note*: `raster.getSample(j, i, 0)` returns the value of the pixel at width=j and heigth=i. As we want to return an array of shape [heigth][width], the indices needs to be reversed.  
+*Note*: `raster.getSample(j, i, 0)` returns the value of the pixel at width=j and heigth=i. As we want to return an array of shape [heigth][width], the indices to store into the int[][] need to be reversed.  
 
 2. Convert the `int[][]` to a JSON array within a JSON object to pass it to the HTTP request, using the `json-simple` library:
 ```java

@@ -24,7 +24,7 @@ I will briefly show you how to get one of the experiments started, assuming you 
 
 ### Model as a Service
 To get started with using a pretrained machine learning model from Python in Java, you can follow this workflow:
-1. Decide which model you want to use. For this example i will use the [Feed Forward Neural Network](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel) trained with Tensorflow.
+1. Decide which model you want to use. For this example I will use the [Feed Forward Neural Network](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel) trained with Tensorflow.
 2. *optional*: Retrain the model. As every model has been initially trained and saved, this step is optional. You can train (and export) the model by simply executing the [train.py](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel/train.py) script of your model. 
 3. Run the [test.py](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel/test.py) script, which will load the saved model and make prediction against 10 saved .png files in the [data](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder. The output should look something like this: 
 	```python

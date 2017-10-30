@@ -95,7 +95,7 @@ This signature can then be inspected, using the [SavedModel CLI](https://www.ten
 **Note:** I am additionally saving some statistics in seperate json files for each of my examples (accuracy against MNSIT test set and predictions for some downloaded pictures). These statistics will later be used for validating the Java results and to see, if the predictions from both technologies match.
 
 #### Import
-In the following, i will shortly describe, how to import a SavedModel into Python, for the Java part, please refer to [here](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow).
+In the following, I will shortly describe, how to import a SavedModel into Python, for the Java part, please refer to [here](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow).
 
 The import is almost identical to what we did with `tensorflow.train.Saver()`, only one line of code is new:
 ```python
@@ -106,6 +106,6 @@ The import is almost identical to what we did with `tensorflow.train.Saver()`, o
 
 Afterwards you can grab the input and output tensors from the session, like before, and start making predictions without having to train the model again. The full code can be viewed [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/Feed%20Forward%20NN/SavedModel/test.py).
 
-You can apply the workflow to any model you like. For validation purpose, i tried saving and reloading a Convolutional Neural Network for the same MNIST example. The only thing to change was how to build the model. You can view the CNN example [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN)
+You can apply the workflow to any model you like. For validation purpose, I tried saving and reloading a Convolutional Neural Network for the same MNIST example. The only thing to change was how to build the model. You can view the CNN example [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier/CNN)
 
 For more information, please refer to the [official documentation](https://www.tensorflow.org/programmers_guide/saved_model#apis_to_build_and_load_a_savedmodel)
