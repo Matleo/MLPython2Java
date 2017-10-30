@@ -4,8 +4,12 @@ DL4j-test/
 UdacityLessons/
 Maschine Learning/Udacity_Lessons/
 Maschine Learning/NeuralNetwork/Estimator/IrisClassifier/
+Maschine Learning/NeuralNetwork/Data/IRIS_data/
+Maschine Learning/NeuralNetwork/lowLevelNN.py
 MaschineLearning4J/src/main/java/IRIS/
-MaschineLearning4J/src/main/java/DL4Jexample.java
+MaschineLearning4J/src/main/java/NeuralNetwork/DL4J/DL4Jexample.java
+*/.idea/
+Maschine Learning/NeuralNetwork/Serving/Tensorflow_Serving/
 
 # Created by https://www.gitignore.io/api/java,maven,intellij
 
@@ -63,7 +67,7 @@ fabric.properties
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
-# *.iml
+*.iml
 # modules.xml
 # .idea/misc.xml
 # *.ipr

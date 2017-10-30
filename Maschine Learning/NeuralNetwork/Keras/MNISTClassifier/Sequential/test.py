@@ -1,21 +1,36 @@
-import keras
+import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets('../../../Data/MNIST_data', one_hot=True)
+import numpy as np
 
-#unused Function to read Model from seperated model and weight Files
-def readModel():
-    from keras.models import model_from_json
-    with open("./export/model.json") as f:
-        json_string = f.read()
-    model = model_from_json(json_string)
-    model.load_weights('./export/my_model_weights.h5', by_name=True)
-    model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['categorical_accuracy'])
-    return model
-
-
-model = keras.models.load_model("./export/my_model.h5")
+def printPredictions(Pics):
+    for i in range(0, 10):
+        path = '../../../../Data/Own_dat/' + Pics + '-' + str(i) + '.png'
+        file = tf.read_file(path)
+        img = tf.image.decode_png(file, channels=1)
+        resized_image = tf.image.resize_images(img, [28, 28])
+        tensor = tf.reshape(resized_image, [-1])
+        tArray = 1 - sess.run(tensor) / 255  # von [0,255] auf [0,1] umdrehen
+        determinNumber(tArray, i)
 
 
-loss,accuracity=model.evaluate(mnist.test.images,mnist.test.labels,batch_size=len(mnist.test.images))
+def determinNumber(tArray, i):
+    inputArray = sess.run(tf.reshape(tArray, [1, 784]))
+    score = sess.run(y, feed_dict={x: inputArray, learningPhase: False})[0]
+    pred = np.argmax(score)
+    predProb = score[pred] * 100
+    print("%i: The given picture is a %d with probability of: %f%%." % (i, pred, predProb))
 
-print("accuracity on test set: %f %%"%(accuracity*100))
+if __name__=="__main__":
+    mnist = input_data.read_data_sets('../../../../Data/MNIST_data', one_hot=True)
+
+    import_dir = "./export"
+    sess = tf.Session()
+    tf.saved_model.loader.load(sess, ["serve"], import_dir)
+
+    graph = tf.get_default_graph()
+    y = graph.get_tensor_by_name("output/Softmax:0")
+    x = graph.get_tensor_by_name("input_input:0")
+    learningPhase = graph.get_tensor_by_name("dropout_1/keras_learning_phase:0")
+
+    printPredictions("MNIST")
+

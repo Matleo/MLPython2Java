@@ -14,7 +14,7 @@ def predictRating(example):
 
 
 
-model = keras.models.load_model("./export/sequential.h5")
+model = keras.models.load_model("./export/model.h5")
 
 #examples are taken from imdb.load_data at index 0(positive) and 1(negative)
 examplePos = np.array([[15,256, 4, 2, 7, 3766, 5,723, 36, 71, 43,530
@@ -30,5 +30,6 @@ exampleNeg = np.array([[125,68 ,2 ,6853 ,15 ,349 ,165 ,4362 ,98 ,5 ,4 ,228,9,43,
                       7464,1212,14,9,6,371,78,22,625,64,1382,9,8,168,145,
                       23,4,1690,15,16,4,1355,5,28,6,52,154,462,33,89,
                       78,285,16,145,95]])
+
 predictRating(examplePos)
 predictRating(exampleNeg)
