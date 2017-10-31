@@ -48,6 +48,7 @@ def saveConfig():
     # save statistics to compare with java results later:
     diction = {}
     diction["steps"] = int(steps)
+    diction["batch_size"] = int(batch_size)
     diction["accuracy"] = round(float(acc), 4)
 
     picCategories = ["Handwritten", "Computer", "MNIST", "Font"]
@@ -67,6 +68,7 @@ if __name__ == "__main__":
     mnist = input_data.read_data_sets("../../../../../Data/MNIST_data/", one_hot=True)
     print()
     steps = 1000
+    batch_size = 100
 
     x = tf.placeholder(tf.float32, [None, 784], name="input")
 
@@ -105,7 +107,7 @@ if __name__ == "__main__":
 
     # start training
     for i in range(steps):
-        batch_xs, batch_ys = mnist.train.next_batch(100)
+        batch_xs, batch_ys = mnist.train.next_batch(batch_size)
         sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys, dKeep: 0.75})
 
         if i % 500 == 0:

@@ -1,5 +1,5 @@
 # Going in Production with Python ML models
-This project was set up by Matthias Leopold as an intern at Zuehlke Engineering AG Schlieren, to gather the options to guse a trained Python machine learning model for production.
+This project was set up by Matthias Leopold as an intern at Zuehlke Engineering AG Schlieren, to gather the options to use a trained Python machine learning model for production.
 
 ## Project structure
 The project is split into two sub-projects: 

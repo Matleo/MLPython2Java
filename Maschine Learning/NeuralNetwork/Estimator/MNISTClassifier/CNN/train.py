@@ -44,6 +44,7 @@ def saveConfig():
     # statistics:
     diction = {}
     diction["steps"] = int(steps)
+    diction["batch_size"] = int(batch_size)
     diction["accuracy"] = round(float(accuracy), 4)
 
     picCategories = ["Handwritten", "Computer", "MNIST", "Font"]
@@ -102,7 +103,8 @@ def model_fn(features, labels, mode):
 if __name__ == "__main__":
     save = True
     mnist = input_data.read_data_sets("../../../../Data/MNIST_data/", one_hot=True)
-    steps = 100
+    steps = 200
+    batch_size = 50
 
     feature_columns = [tf.feature_column.numeric_column(key="inputKey", dtype=tf.float32, shape=784)]
 
@@ -112,7 +114,7 @@ if __name__ == "__main__":
     train_input_fn = tf.estimator.inputs.numpy_input_fn(
         x={"inputKey": np.array(mnist.train.images).astype(np.float32)},
         y=np.array(mnist.train.labels).astype(np.int32),
-        batch_size=100,
+        batch_size=batch_size,
         num_epochs=None,
         shuffle=True)
 

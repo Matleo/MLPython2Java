@@ -50,6 +50,7 @@ public class InferenceClient {
         String JSON_STRING = json.toJSONString();
 
 
+
         //3. create post request with json as parameter
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(Server_URI);
@@ -64,7 +65,10 @@ public class InferenceClient {
         CloseableHttpResponse response = null;
         try {
             //get response from server
+            System.out.println("\nSent the request, waiting for a response...");
             response = httpclient.execute(httpPost);
+            System.out.println("Received the response.\n");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -147,12 +151,12 @@ public class InferenceClient {
             if (!args[0].contains(".png")) args[0] = args[0] + ".png";
             if (new File(args[0]).isFile() && Files.getFileExtension(args[0]).equals("png")) {
                 path = args[0];
-                System.out.println("Infering the webservice with given picture at: " + path);
+                System.out.println("Addressing the webservice with given picture at: " + path);
             } else {
                 File f = new File(picDir + args[0]);
                 if (f.isFile() && Files.getFileExtension(picDir + args[0]).equals("png")) {
                     path = picDir + args[0];
-                    System.out.println("Infering the webservice with given picture at: " + path);
+                    System.out.println("Addressing the webservice with given picture at: " + path);
                 } else {
                     System.out.println("The argument that you passed is invalid.");
                     System.out.println("It must be a .png file contained in directory: " + picDir + ", or a valid absolute path.");
@@ -161,11 +165,11 @@ public class InferenceClient {
             }
         } else {
             path = picDir + picFile;
-            System.out.println("Infering the webservice with default picture: " + path);
+            System.out.println("Addressing the webservice with default picture: " + path);
         }
 
         if (Server_URI.equals(Heroku_URI)) {
-            System.out.println("Infering the webservice hosted on Heroku. As I am using the free version, Heroku might be unusually slow to respond.");
+            System.out.println("Addressing the webservice hosted on Heroku. As I am using the free version, Heroku might be unusually slow to respond.");
         }
     }
 }

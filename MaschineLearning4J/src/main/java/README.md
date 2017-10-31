@@ -2,7 +2,7 @@
 ## Model as a Service
 For details on how to fully reload a previously built and trained model from Python into Java, please refer to the [NeuralNetwork](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork) or [RandomForest](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/RandomForest) directory.
 ## Inference as a Service
-After you have built and served a RESTful API for making predictions of given images (as done [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving) or [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest/serve.py)), you can use the [InferenceClient.java](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/InferenceClient.java) to send such a request. This will post a 2-dimensional integer array, representing the grayscale pixels of an image and get the prediction of what number is most likely displayed as response. Notice that you can either serve the Neural Network or the Random Forest example. Both will respond the same way to this request and on the same URL.
+After you have built and served a RESTful API for making predictions of given images (as done [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving) or [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest/serve.py)), you can use the [InferenceClient.java](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/InferenceClient.java) to send such a request. This will post a 2-dimensional integer array, representing the grayscale pixels of an image and get the prediction of what number is most likely displayed as response. Notice that you can either serve a Neural Network or the Random Forest example. Both will respond the same way to this request and on the same URL.
 ### Dependency
 Firstly, you will have to add the `apache httpclient` and `json-simple` dependency to your pom.xml:
 ```maven
@@ -22,15 +22,35 @@ Firstly, you will have to add the `apache httpclient` and `json-simple` dependen
 
 As Program parameter you can pass in either an absolute path name to a .png file, or the name of a .png located inside the [Data/Own_dat](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder. If you do not pass any parameter, the prediction request is going to be sent with a default picture. 
 
-If the service is running correctly, the output will look something like:
+If the service is running correctly, the output will look something like this :
 ```java
-	Infering the webservice with default picture: ../Maschine Learning/Data/Own_dat/MNIST-5.png
-	Response status line: HTTP/1.1 200 OK
+	Addressing the webservice with default picture: ../Maschine Learning/Data/Own_dat/MNIST-5.png
+
+	Sent the request, waiting for a response...
+	Received the response.
+
+	Response status line: HTTP/1.0 200 OK
 	Response content: {
-		"prediction": 5, 
-		"probability": 90.8744752407074
-	}
+		"_modelMetaData": {
+			"_modelType": "Estimator Convolutional Neural Network", 
+			"accuracy": 0.9749, 
+			"batch_size": 50, 
+			"steps": 200
+		}, 
+		"_prediction": 0, 
+		"_probability": 100.0
+}
 ``` 
+Notice that the "Response content" will slightly vary, depending on which model you are currently serving. In the above example i was using my example CNN, built with `Tensorflow.Estimator`. 
+
+Response content interpretation: 
+* `_modelMetaData`: will be present for every model, containing model describing paramers
+	* `_accuracy`: will be present for every model and describes the accuracy of the model on the test MNIST test data
+	* `_modelType`: will also be present for every model, describing the type of model
+	* `batch_size`: is specifit to Tensorflow or Estimator Neural Networks and describes the size of one batch, used for training
+	* `steps`: is also specific to Tensorflow or Estimator Neural Networks and describes the amount of batches used for training
+* `_prediction`: will be present for every model, containing the actual predicted number for the sent picture
+* `_probability`: will also be present for every model and describes how certain the model prediction is
 ### How it works
 After evaluating the program parameters, the program works as follows:
 1. Read the grayscale pixels from a given picture into a 2D integer array (i have omitted the try-catch blocks for better readability):

@@ -65,6 +65,7 @@ def saveConfig():
     # statistics:
     diction = {}
     diction["steps"] = steps
+    diction["batch_size"] = batch_size
     diction["accuracy"] = round(float(acc), 4)
 
     picCategories = ["Handwritten", "Computer", "MNIST", "Font"]
@@ -83,6 +84,7 @@ if __name__ == "__main__":
     save = True
     mnist = input_data.read_data_sets('../../../../Data/MNIST_data', one_hot=True)
     steps = 500
+    batch_size = 50
 
     # Create the model
     x = tf.placeholder(tf.float32, [None, 784], name="input")
@@ -128,7 +130,7 @@ if __name__ == "__main__":
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         for i in range(steps):
-            batch = mnist.train.next_batch(50)
+            batch = mnist.train.next_batch(batch_size)
             # alle 100 runs ausgabe
             if i % 100 == 0:
                 train_accuracy = accuracy.eval(feed_dict={x: batch[0], y_: batch[1], keep_prob: 1.0})

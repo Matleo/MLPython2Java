@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from sklearn.externals import joblib
 import cv2  # pip install opencv-python
 import numpy as np
+from sklearn.datasets import fetch_mldata
+import random
 
 app = Flask(__name__)
 
@@ -38,7 +40,8 @@ def predictPic(pngArray, clf):
     score = clf.predict_proba([pngArray])[0]
     predProb = round(score[prediction] * 100, 2)
 
-    return jsonify(prediction=int(prediction), probability=float(predProb))
+    params = app.config["modelMetaData"]
+    return jsonify(_modelMetaData=params, _prediction=int(prediction), _probability=float(predProb))
 
 
 def reshapePic(pngArray):
@@ -51,9 +54,40 @@ def reshapePic(pngArray):
 def load_model():
     file = 'export.pkl'
     clf = joblib.load(file)
-
     app.config["clf"] = clf
 
+    allParams = clf.get_params(False)
+    params = {}
+    params["_modelType"] = str(type(clf))
+    params["min_samples_split"] = allParams["min_samples_split"]
+    params["n_estimators"] = allParams["n_estimators"]
+    params["criterion"] = allParams["criterion"]
+
+    train_data,test_data = load_mnist(10000)
+    params["_accuracy"] = clf.score(test_data["data"],test_data["target"])
+
+
+    app.config["modelMetaData"] = params
+
+def load_mnist(test_sample_size):
+    custom_data_home = "/tmp/mnist_sklearn"
+    mnist =fetch_mldata("MNIST original", data_home=custom_data_home) #pixel values as int(0,255) where 0 is white
+    mnist.data = mnist.data.astype(float) #convert to float
+    for i in range(len(mnist.data)):
+        mnist.data[i] = mnist.data[i]/255
+    return split_data(mnist,test_sample_size)
+
+def split_data(mnist, test_sample_size):
+    random.seed(123)
+    indices = random.sample(range(len(mnist.data)),test_sample_size) # random indices in range(mnist.length)
+    test_data = {}
+    test_data["data"] = mnist.data[indices]
+    test_data["target"] = mnist.target[indices]
+
+    train_data = {}
+    train_data["data"] = np.delete(mnist.data,indices, axis=0)
+    train_data["target"] = np.delete(mnist.target,indices)
+    return train_data,test_data
 
 if __name__ == "__main__":
     load_model()
