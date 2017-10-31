@@ -32,8 +32,8 @@ If the service is running correctly, the output will look something like this :
 	Response status line: HTTP/1.0 200 OK
 	Response content: {
 		"_modelMetaData": {
+			"_accuracy": 0.9749, 
 			"_modelType": "Estimator Convolutional Neural Network", 
-			"accuracy": 0.9749, 
 			"batch_size": 50, 
 			"steps": 200
 		}, 
@@ -47,7 +47,7 @@ Response content interpretation:
 * `_modelMetaData`: will be present for every model, containing model describing paramers
 	* `_accuracy`: will be present for every model and describes the accuracy of the model on the test MNIST test data
 	* `_modelType`: will also be present for every model, describing the type of model
-	* `batch_size`: is specifit to Tensorflow or Estimator Neural Networks and describes the size of one batch, used for training
+	* `batch_size`: is specific to Tensorflow or Estimator Neural Networks and describes the size of one batch, used for training
 	* `steps`: is also specific to Tensorflow or Estimator Neural Networks and describes the amount of batches used for training
 * `_prediction`: will be present for every model, containing the actual predicted number for the sent picture
 * `_probability`: will also be present for every model and describes how certain the model prediction is
