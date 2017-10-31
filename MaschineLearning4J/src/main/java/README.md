@@ -39,7 +39,7 @@ If the service is running correctly, the output will look something like this :
 		}, 
 		"_prediction": 0, 
 		"_probability": 100.0
-}
+	}
 ``` 
 Notice that the "Response content" will slightly vary, depending on which model you are currently serving. In the above example i was using my example CNN, built with `Tensorflow.Estimator`. 
 
