@@ -89,7 +89,7 @@ public class TensorflowUtilities {
      * @param path the full path of where to find the picture
      * @return float Array with each float in (0,1), where 1 represents black and 0 is white
      */
-    protected static float[] readPic(String path) {
+    public static float[] readPic(String path) {
         File imgFile = new File(path);
         float[] imgArr = new float[784];
         try {

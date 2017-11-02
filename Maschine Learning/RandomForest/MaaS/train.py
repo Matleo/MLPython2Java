@@ -33,14 +33,16 @@ if __name__ == "__main__":
     train_data, test_data = load_mnist(10000)
     print("Loaded MNIST data and split into train and test data.")
 
+    clf = RandomForestClassifier(n_estimators=5, min_samples_split=50)
     mnist_pipeline = PMMLPipeline([
-        ("classifier", RandomForestClassifier(n_estimators=5, min_samples_split=50))
+        ("classifier", clf)
     ])
     print("Fitting training data into the RandomForest (this might take a while) ...")
     t0 = time()
     mnist_pipeline.fit(train_data["data"], train_data["target"])
     print("The training took %s seconds to finish.\n" % (round(time() - t0, 2)))
 
+    #featureImportance = clf.feature_importances_
 
     sklearn2pmml(mnist_pipeline, "RandomForestMNIST.pmml", with_repr = True)
 

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class IRISClassifier {
-    public final static String file = "../Maschine Learning/RandomForest/MaaS/RandomForestIris.pmml";
+    public final static String file = "../Maschine Learning/RandomForest/MaaS/Iris/RandomForestIris.pmml";
     public final static float[] IRISSample = {4.5f, 1.7f, 4.9f, 2.5f};//Iris-virginica
 
 
