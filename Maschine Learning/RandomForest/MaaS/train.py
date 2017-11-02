@@ -5,7 +5,7 @@ from time import time
 import random
 from sklearn2pmml import PMMLPipeline
 from sklearn2pmml import sklearn2pmml
-
+import json
 
 
 def load_mnist(test_sample_size):
@@ -15,6 +15,7 @@ def load_mnist(test_sample_size):
     for i in range(len(mnist.data)):
         mnist.data[i] = mnist.data[i] / 255
     return split_data(mnist, test_sample_size)
+
 
 def split_data(mnist, test_sample_size):
     random.seed(123)
@@ -28,12 +29,40 @@ def split_data(mnist, test_sample_size):
     return train_data, test_data
 
 
+def getPredictions(picCat):
+    predictions = []
+    for i in range(10):
+        path = '../../Data/Own_dat/' + picCat + '-' + str(i) + '.json'
+
+        with open(path) as file:
+            pngArray = json.load(file)["pixelValues"]
+
+        prediction = int(clf.predict([pngArray])[0])
+        predictions.append(prediction)
+    return predictions
+
+
+def saveStatistics(test_data):
+    dic = {}
+    dic["accuracy"] = clf.score(test_data["data"], test_data["target"])
+
+    picPredictions = {}
+    picCats = ["MNIST", "Computer", "Handwritten", "Font"]
+    for picCat in picCats:
+        picPredictions[picCat] = getPredictions(picCat)
+    dic["picPredictions"] = picPredictions
+
+    with open("./statistics.json", "w") as outfile:
+        json.dump(dic, outfile)
+
 
 if __name__ == "__main__":
     train_data, test_data = load_mnist(10000)
     print("Loaded MNIST data and split into train and test data.")
 
-    clf = RandomForestClassifier(n_estimators=5, min_samples_split=50)
+    # training takes 497s for (1000,50) -> pmml is 1,2gb big
+    # training takes 38s for (100,50) -> pmml is 0,12gb big
+    clf = RandomForestClassifier(n_estimators=10, min_samples_split=50)
     mnist_pipeline = PMMLPipeline([
         ("classifier", clf)
     ])
@@ -42,7 +71,8 @@ if __name__ == "__main__":
     mnist_pipeline.fit(train_data["data"], train_data["target"])
     print("The training took %s seconds to finish.\n" % (round(time() - t0, 2)))
 
-    #featureImportance = clf.feature_importances_
+    featureImportance = clf.feature_importances_
 
-    sklearn2pmml(mnist_pipeline, "RandomForestMNIST.pmml", with_repr = True)
+    sklearn2pmml(mnist_pipeline, "RandomForestMNIST.pmml", with_repr=True)
 
+    saveStatistics(test_data)

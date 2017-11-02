@@ -27,7 +27,7 @@ def split_data(mnist, test_sample_size):
 
 def printPredictions(pics):
     for i in range(10):
-        path = '../Data/Own_dat/' + pics + '-' + str(i) + '.png'
+        path = '../../Data/Own_dat/' + pics + '-' + str(i) + '.png'
 
         pngArray = cv2.imread(path,0)
         pngArray= cv2.resize(pngArray,(28,28))

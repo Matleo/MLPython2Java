@@ -8,6 +8,8 @@ Maschine Learning/NeuralNetwork/Data/IRIS_data/
 Maschine Learning/NeuralNetwork/lowLevelNN.py
 Maschine Learning/RandomForest/IaaS/export.pkl
 Maschine Learning/RandomForest/MaaS/Iris/
+Maschine Learning/RandomForest/MaaS/RandomForestMNIST.pmml
+Maschine Learning/RandomForest/MaaS/statistics.json
 
 MaschineLearning4J/src/main/java/RandomForest/IRISClassifier.java
 MaschineLearning4J/src/main/java/NeuralNetwork/DL4J/DL4Jexample.java
