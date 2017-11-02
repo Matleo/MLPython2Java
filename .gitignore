@@ -9,7 +9,7 @@ Maschine Learning/NeuralNetwork/lowLevelNN.py
 Maschine Learning/RandomForest/Iaas/export.pkl
 Maschine Learning/RandomForest/MaaS/Iris/
 
-MaschineLearning4J/src/main/java/RandomForest/IRISClassifier
+MaschineLearning4J/src/main/java/RandomForest/IRISClassifier.java
 MaschineLearning4J/src/main/java/NeuralNetwork/DL4J/DL4Jexample.java
 */.idea/
 Maschine Learning/NeuralNetwork/Serving/Tensorflow_Serving/
