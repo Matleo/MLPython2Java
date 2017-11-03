@@ -8,7 +8,7 @@ The project is split into two sub-projects:
 
 Each sub-project itself is ordered by model type. The following models were considered *(links go to the Python part)*:
 * [Artificial Neural Networks](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork)
-* [TODO: Random Forest]()
+* [Random Forest](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest)
 
 In general, two seperate approaches were evaluated:
 1. **Model as a Service**: The whole ML model is supposed to be transfered from Python to Java, to execute predictions directly in Java
