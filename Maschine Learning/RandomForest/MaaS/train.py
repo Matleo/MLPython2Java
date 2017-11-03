@@ -6,6 +6,7 @@ import random
 from sklearn2pmml import PMMLPipeline
 from sklearn2pmml import sklearn2pmml
 import json
+import os
 
 
 def load_mnist(test_sample_size):
@@ -52,17 +53,22 @@ def saveStatistics(test_data):
         picPredictions[picCat] = getPredictions(picCat)
     dic["picPredictions"] = picPredictions
 
-    with open("./statistics.json", "w") as outfile:
+    with open(export_dir + "statistics_" + str(n_estimators) + ".json", "w") as outfile:
         json.dump(dic, outfile)
 
 
 if __name__ == "__main__":
+    n_estimators = 1000
+    export_dir = "./export/"
+    if not os.path.exists(export_dir):
+        os.makedirs(export_dir)
+
     train_data, test_data = load_mnist(10000)
     print("Loaded MNIST data and split into train and test data.")
 
-    # training takes 497s for (1000,50) -> pmml is 1,2gb big
+    # training takes 345s for (1000,50) -> pmml is 1,2gb big
     # training takes 38s for (100,50) -> pmml is 0,12gb big
-    clf = RandomForestClassifier(n_estimators=10, min_samples_split=50)
+    clf = RandomForestClassifier(n_estimators=n_estimators, min_samples_split=50)
     mnist_pipeline = PMMLPipeline([
         ("classifier", clf)
     ])
@@ -71,8 +77,8 @@ if __name__ == "__main__":
     mnist_pipeline.fit(train_data["data"], train_data["target"])
     print("The training took %s seconds to finish.\n" % (round(time() - t0, 2)))
 
-    featureImportance = clf.feature_importances_
+    # featureImportance = clf.feature_importances_
 
-    sklearn2pmml(mnist_pipeline, "RandomForestMNIST.pmml", with_repr=True)
+    sklearn2pmml(mnist_pipeline, export_dir + "RandomForestMNIST_" + str(n_estimators) + ".pmml", with_repr=True)
 
     saveStatistics(test_data)

@@ -28,7 +28,10 @@ def split_data(mnist, test_sample_size):
 
 
 def save_model():
-    joblib.dump(clf, 'export.pkl')
+    export_file = 'export.pkl'
+    joblib.dump(clf, export_file)
+    print("Saved Configuration to dir: %s" % export_file)
+
 
 
 if __name__ == "__main__":

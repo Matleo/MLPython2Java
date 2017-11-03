@@ -133,7 +133,7 @@ public class TensorflowUtilities {
      * @return returns whether the maps contain equal content
      */
     public static boolean compareMaps(Map<String, int[]> mapJ, Map<String, int[]> mapP) {
-        System.out.println("\n\nComparing Java and Python picture predictions...");
+        System.out.println("\nComparing Java and Python picture predictions...");
         boolean match = true;
         if(mapJ.size()!=mapP.size()){
             System.out.println("The size of the maps don't match!");
@@ -150,7 +150,7 @@ public class TensorflowUtilities {
 
         if (match) {
             System.out.println("***Success***");
-            System.out.println("The Python and Java predictions match!");
+            System.out.println("The Python and Java predictions match!\n");
             return true;
         } else {
             System.out.println("***Failure***");
@@ -161,6 +161,7 @@ public class TensorflowUtilities {
                 System.out.println("    Java   :" + Arrays.toString(mapJ.get(key)));
                 System.out.println("    Python :" + Arrays.toString(mapP.get(key)));
             }
+            System.out.println();
             return false;
         }
     }

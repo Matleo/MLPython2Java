@@ -39,15 +39,16 @@ def printPredictions(pics):
         predProb = round(score[prediction] *100,2)
         print("%i: The given picture is a %d with probability of: %f%%." % (i, prediction, predProb))
 
-train_data,test_data = load_mnist(10000)
 
-file='export.pkl'
-clf = joblib.load(file)
-print("Loaded classifier from saved file: %s"% file)
+if __name__ =="__main__":
+    train_data,test_data = load_mnist(10000)
 
+    pickled_clf = 'export.pkl'
+    clf = joblib.load(pickled_clf)
+    print("Loaded classifier from saved file: %s" % pickled_clf)
 
-print("Evaluating the accuracy against the test data...")
-accuracy = clf.score(test_data["data"],test_data["target"])
-print("The accuracy of the RandomForest on the test data is: %f%%"%(accuracy*100))
+    print("Evaluating the accuracy against the test data...")
+    accuracy = clf.score(test_data["data"], test_data["target"])
+    print("The accuracy of the RandomForest on the test data is: %f%%" % (accuracy * 100))
 
-printPredictions("MNIST")
+    printPredictions("MNIST")

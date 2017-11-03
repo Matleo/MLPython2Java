@@ -28,7 +28,7 @@ def predict_example():
 
     picName = "MNIST"
     i = 0
-    path = '../Data/Own_dat/' + picName + '-' + str(i) + '.png'
+    path = '../../Data/Own_dat/' + picName + '-' + str(i) + '.png'
     pngArray = cv2.imread(path, 0)  # int(0,255) where 255 is white
     reshaped_array = reshapePic(pngArray)
 
@@ -58,36 +58,38 @@ def load_model():
 
     allParams = clf.get_params(False)
     params = {}
-    params["_modelType"] = str(type(clf))
+    params["_modelType"] = clf.__class__.__name__
     params["min_samples_split"] = allParams["min_samples_split"]
     params["n_estimators"] = allParams["n_estimators"]
     params["criterion"] = allParams["criterion"]
 
-    train_data,test_data = load_mnist(10000)
-    params["_accuracy"] = clf.score(test_data["data"],test_data["target"])
-
+    train_data, test_data = load_mnist(10000)
+    params["_accuracy"] = clf.score(test_data["data"], test_data["target"])
 
     app.config["modelMetaData"] = params
 
+
 def load_mnist(test_sample_size):
     custom_data_home = "/tmp/mnist_sklearn"
-    mnist =fetch_mldata("MNIST original", data_home=custom_data_home) #pixel values as int(0,255) where 0 is white
-    mnist.data = mnist.data.astype(float) #convert to float
+    mnist = fetch_mldata("MNIST original", data_home=custom_data_home)  # pixel values as int(0,255) where 0 is white
+    mnist.data = mnist.data.astype(float)  # convert to float
     for i in range(len(mnist.data)):
-        mnist.data[i] = mnist.data[i]/255
-    return split_data(mnist,test_sample_size)
+        mnist.data[i] = mnist.data[i] / 255
+    return split_data(mnist, test_sample_size)
+
 
 def split_data(mnist, test_sample_size):
     random.seed(123)
-    indices = random.sample(range(len(mnist.data)),test_sample_size) # random indices in range(mnist.length)
+    indices = random.sample(range(len(mnist.data)), test_sample_size)  # random indices in range(mnist.length)
     test_data = {}
     test_data["data"] = mnist.data[indices]
     test_data["target"] = mnist.target[indices]
 
     train_data = {}
-    train_data["data"] = np.delete(mnist.data,indices, axis=0)
-    train_data["target"] = np.delete(mnist.target,indices)
-    return train_data,test_data
+    train_data["data"] = np.delete(mnist.data, indices, axis=0)
+    train_data["target"] = np.delete(mnist.target, indices)
+    return train_data, test_data
+
 
 if __name__ == "__main__":
     load_model()

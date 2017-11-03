@@ -50,7 +50,6 @@ public class InferenceClient {
         String JSON_STRING = json.toJSONString();
 
 
-
         //3. create post request with json as parameter
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(Server_URI);
@@ -95,6 +94,7 @@ public class InferenceClient {
 
     /**
      * Unused function. Prints given pixels to "saved.png" file at project root
+     *
      * @param pixels2d int[height][width] array, containing grayscale values
      */
     private static void printPicArray(int[][] pixels2d) {
@@ -144,6 +144,7 @@ public class InferenceClient {
 
     /**
      * Evaluates the given program parameters to determin the path of the picture used for prediction
+     *
      * @param args String[] forwarded from the program arguments
      */
     private static void evaluateArguments(String[] args) {
