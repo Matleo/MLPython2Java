@@ -1,11 +1,17 @@
 # Serving a Random Forest model with flask
 
-This document will walk you through on how to train, use, and serve a Random Forest machine learning model with `sklearn` and `flask`.
+This document will walk you through on how to train, use, and serve a Random Forest machine learning model with `sklearn` and `flask` on the MNIST dataset.
 
 Serving a Random Forest model will be similar to serving a Neural Network, so you might want to read [this](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Serving), before continuing, to make yourself familiar with the `flask` framework.
+## Prerequisites
+To prepare the input for our model, I am using the OpenCV-Python module, which you can install, using `pip`:
+```bash
+	pip install opencv-python
+```
+
 
 ## Training
-Firstly you will want to get the MNIST dataset, which i will not get into too much, but for my [example](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/RandomForest/IaaS/train.py) this happens in the`load_mnist()` function, which uses the `fetch_mldata()` function from `sklearn.datasets`:
+Firstly you will want to get the MNIST dataset, which i will not get into too much, but for my [example](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/RandomForest/IaaS/train.py) this happens in the `load_mnist()` function, which uses the `fetch_mldata()` function from `sklearn.datasets`:
 ```python
 	train_data, test_data = load_mnist(10000) #size of test_data is 10000
 ```
@@ -22,7 +28,7 @@ Fitting the forest is just as easy:
 	clf.fit(train_data["data"], train_data["target"])
 ```
 
-After fitting the forest you can use the classifier to predict a new image, either calling the `predict()` function, getting the predicted number of the image, or calling the `predict_proba()` function which returns the score array, containing the probabilities for all numbers:
+After fitting the forest you could use the classifier to predict a new image, either calling the `predict()` function, getting the predicted number of the image, or calling the `predict_proba()` function which returns the score array, containing the probabilities for all numbers:
 ```python
 	#pngArray = read_array_pixel_values_from_png(...)
 	prediction = clf.predict(pngArray)
@@ -41,7 +47,7 @@ You can easily reload from this file aswell:
 	clf = pickle.load("export.pkl")
 ```
 
-Since serializing a big Random Forest can take a long time, I used the `sklearn.externals.joblib` for my example, which uses `pickle` itself, but can serialize `numpy` arrays quicker. You can use this module just like `pickle`:
+Since serializing a big Random Forest can take a long time, I used the `sklearn.externals.joblib` for my example, which uses `pickle` internally, but can serialize `numpy` arrays a bit quicker. You can use this module just like `pickle`:
 ```python
 	joblib.dump(clf, "export.pkl") #save
 	...
@@ -53,7 +59,7 @@ I have designed this program in a way, that it uses the same API as if you would
 
 
 ### Load the model
-Firstly you will want to reload the pickled `RandomForestClassifier` and store it into the `app.config`, so that you can acces it later:
+Firstly you will want to reload the pickled `RandomForestClassifier` and store it into the `app.config`, so that you can access it later:
 ```python
 	clf = joblib.load("export.pkl")
 	app.config["clf"] = clf
@@ -70,7 +76,7 @@ For my example, I additionally store some meta data about the classifier in the 
 	train_data, test_data = load_mnist(10000)
 	params["_accuracy"] = clf.score(test_data["data"], test_data["target"])
 
-    app.config["modelMetaData"] = params
+	app.config["modelMetaData"] = params
 ```
 
 ### Build a RESTful API
@@ -82,17 +88,17 @@ My example apllication will again respond to two routes:
 #### How /predict works: 
 This route will expect a JSON as request parameter, containing a 2-dimensional integer array, representing the pixel values of a grayscale picture. Inside the 2D array, each array in the second dimension will contain the pixel information of a *row* of the picture (so the array will be of shape: [heigth][length])
 
-##### Get request parameter
+##### Get request parameter:
 After getting the JSON array from the request, you will need to change it's datatype, because our image processing module `cv2` cannot handle the default of `np.int32`:
 ```python
 	@app.route("/predict", methods=['POST'])
 	def predict():
 		json = request.get_json()
-        reqArray = json["picArray"]
+		reqArray = json["picArray"]
 		pngArray = np.array(reqArray).astype(np.uint8)
 ```
 
-##### Reshape parameters
+##### Reshape parameters:
 Afterwards you will want to reshape the array, in order to fit into the pretrained classifier. Our classifier expects a batch of 784-vectors, where each value is a floating point in (0,1), where 0 represents white and 1 represents black. So the reshaping consists of 4 steps:
 1. Resize the array to 28x28: 
 ```python
@@ -111,7 +117,7 @@ Afterwards you will want to reshape the array, in order to fit into the pretrain
 	reshaped_Array = [reshaped_Array]
 ```
 
-##### Return prediction
+##### Return prediction:
 Now we can use the prepared input parameter (`reshaped_array`) for prediction, using the previously loaded Random Forest (`clf`). As shown earlier, you can make use of the functions `predict()` and `predict_proba()`:
 ```python
 	prediction = int(clf.predict(pngArray)[0])
@@ -144,8 +150,11 @@ This resulting JSON will look something like:
 To start the `flask` application and serve it to `localhost:8000`, use:
 ```python
 	app = Flask(__name__)
+	#define routes...
 	app.run(debug=True, port=8000)
 ```
+
+You can view my full example here: [training](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/RandomForest/IaaS/train.py), [serving](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/RandomForest/IaaS/serve.py).
 
 For an example client that uses this prediction service, refer to [this](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java).
 

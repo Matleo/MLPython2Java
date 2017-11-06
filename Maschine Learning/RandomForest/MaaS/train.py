@@ -6,7 +6,6 @@ import random
 from sklearn2pmml import PMMLPipeline
 from sklearn2pmml import sklearn2pmml
 import json
-import os
 
 
 def load_mnist(test_sample_size):
@@ -74,8 +73,6 @@ if __name__ == "__main__":
     t0 = time()
     mnist_pipeline.fit(train_data["data"], train_data["target"])
     print("The training took %s seconds to finish.\n" % (round(time() - t0, 2)))
-
-    # featureImportance = clf.feature_importances_
 
     sklearn2pmml(mnist_pipeline, export_dir + "RandomForestMNIST_" + str(n_estimators) + ".pmml", with_repr=True)
 
