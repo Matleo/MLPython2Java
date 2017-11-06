@@ -83,22 +83,6 @@ public class RandomForestWrapper {
     }
 
     /**
-     * Predicts one bunch of pictures according to Category
-     *
-     * @param picCat String in ("MNIST"/"Computer"/"Font"/"Handwritten"), describing the category of pictures
-     * @return int[] of predictions for the pictures, where int[0] is the prediction for picture-0
-     */
-    private int[] getPicCatPredictions(String picCat) {
-        int[] predictions = new int[10];
-        for (int i = 0; i < 10; i++) {
-            String path = this.picDir + picCat + "-" + i + ".json";
-            int prediction = predict(path, true);
-            predictions[i] = prediction;
-        }
-        return predictions;
-    }
-
-    /**
      * Reads out the result object
      *
      * @param results return value of the evaluator.evaluate() function
@@ -106,12 +90,13 @@ public class RandomForestWrapper {
      */
     private int readResult(Map<FieldName, ?> results) {
         List<TargetField> targetFields = this.evaluator.getTargetFields();
-        TargetField targetField = targetFields.get(0);
+        TargetField targetField = targetFields.get(0);//we only have one output value
         FieldName targetFieldName = targetField.getName();
 
         //ProbabilityDistribution{result=7.0, probability_entries=[0.0=0.0, 1.0=0.0, 2.0=0.0, 3.0=0.0, 4.0=0.0, 5.0=0.0, 6.0=0.0, 7.0=1.0, 8.0=0.0, 9.0=0.0]}
         ProbabilityDistribution targetFieldValue = (ProbabilityDistribution) results.get(targetFieldName);
-        int prediction = ((Double) targetFieldValue.getResult()).intValue();
+        Object predictionObj = targetFieldValue.getResult();
+        int prediction = ((Double) predictionObj).intValue();
         return prediction;
     }
 
@@ -157,6 +142,21 @@ public class RandomForestWrapper {
 
         boolean match = TensorflowUtilities.compareMaps(picPredictionsJ, picPredictionsP);
         return match;
+    }
+    /**
+     * Predicts one bunch of pictures according to Category
+     *
+     * @param picCat String in ("MNIST"/"Computer"/"Font"/"Handwritten"), describing the category of pictures
+     * @return int[] of predictions for the pictures, where int[0] is the prediction for picture-0
+     */
+    private int[] getPicCatPredictions(String picCat) {
+        int[] predictions = new int[10];
+        for (int i = 0; i < 10; i++) {
+            String path = this.picDir + picCat + "-" + i + ".json";
+            int prediction = predict(path, true);
+            predictions[i] = prediction;
+        }
+        return predictions;
     }
 
     /**

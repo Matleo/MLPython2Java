@@ -18,7 +18,7 @@ public class MNISTClassifier {
     public static void main(String[] args) {
         evaluateArguments(args);
 
-        System.out.println("Creating an evaluator from given PMML file: " + pmmlFile + ". \nDepending on the size of the RandomForest, this might take a while...");
+        System.out.println("Creating an evaluator from PMML file: " + pmmlFile + ". \nDepending on the size of the RandomForest, this might take a while...");
         long time = System.nanoTime();
         RandomForestWrapper randomForest = new RandomForestWrapper(pmmlFile,picDir);
         long timeDifference = (System.nanoTime() - time) / 1000000;
@@ -33,7 +33,7 @@ public class MNISTClassifier {
         time = System.nanoTime();
         int prediction = randomForest.predict(picPath, false);
         timeDifference = (System.nanoTime() - time) / 1000000;
-        System.out.println("The prediction call for given png, using the Random Forest, took " + timeDifference + "ms. (includes reading the pixel information)");
+        System.out.println("The prediction call for given png, using the Random Forest, took " + timeDifference + "ms. (including reading the pixel information)");
         //if only prediction: 10->1ms | 100->4ms |1000->17ms (loading is approximatly 160ms)
         System.out.println("--> The given picture at \"" + picPath + "\" is probably a: " + prediction);
     }
@@ -46,13 +46,11 @@ public class MNISTClassifier {
         switch (args.length) {
             case 0:
                 picPath = picDir + picName;
-                System.out.println("Will use default picture to predict its number: " + picPath);
                 break;
             case 1:
                 if (args[0].equals("--noEval")) {
                     eval = false;
                     picPath = picDir + picName;
-                    System.out.println("Will use default picture to predict its number: " + picPath);
                 } else {
                     setPicPath(args[0]);
                 }

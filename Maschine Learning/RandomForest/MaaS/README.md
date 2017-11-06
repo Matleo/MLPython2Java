@@ -18,7 +18,7 @@ Firstly, you will have to build your `RandomForestClassifier`, and build a `skle
 Notice that you can extend the `PMMLPipeline`, by passing in a `sklearn_pandas.DataFrameMapper`, a `PCA` operation and one or more `sklearn.feature_selection` operations (see the official [example](https://github.com/jpmml/sklearn2pmml)).
 
 ## Parsing PMML
-After creating the pipeline you can call the `fit()` function, passing in the appropriate data:
+After creating the pipeline you can call the `fit()` function on the pipline, passing in the appropriate data:
 ```python
 	mnist_pipeline.fit(train_data["data"], train_data["target"])
 ```
@@ -32,8 +32,8 @@ But instead of doing this, we now want to export the trained `RandomForestClassi
 	export_file = "RandomForestMNIST.pmml"
 	sklearn2pmml(mnist_pipeline, export_file)
 ```
-This will initiate the process to create the PMML representation of the classifier and may take a while to finish. 
+This will initiate the process to create the PMML representation of the classifier and store it to the newly created "RandomForestMNIST.pmml" file in the working directory. This might take a while to finish. 
 
-Note that I am saving some more statistics in my example, which include the predictions of some stored pictures in the Data/Own_dat directory. These predictions will later be compared with the Java results, to determine if the import worked correctly.
+Note that I am saving some more statistics in my [example](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/RandomForest/MaaS/train.py), which include the predictions of some stored pictures in the Data/Own_dat directory. These predictions will later be compared with the Java results, to determine if the import worked correctly.
 
 To read on about how to import the created PMML into Java and start using it to make predictions, please go [here](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/RandomForest).
