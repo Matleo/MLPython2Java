@@ -10,20 +10,16 @@ app = Flask(__name__)
 
 @app.route("/predict", methods=['POST'])
 def predict():
-    if not "modelType" in app.config:
-        load_model()
-    clf = app.config.get("clf")
-
     json = request.get_json()
     picArray = np.array(json["picArray"]).astype(np.uint8)  # need to change dtype, because cv2 cant handle np.int32
     reshaped_Array = reshapePic(picArray)
+
+    clf = app.config.get("clf")
     return predictPic(reshaped_Array, clf)
 
 
 @app.route("/")
 def predict_example():
-    if not "clf" in app.config:
-        load_model()
     clf = app.config.get("clf")
 
     picName = "MNIST"
@@ -36,19 +32,19 @@ def predict_example():
 
 
 def predictPic(pngArray, clf):
-    prediction = int(clf.predict([pngArray])[0])
-    score = clf.predict_proba([pngArray])[0]
+    prediction = int(clf.predict(pngArray)[0])
+    score = clf.predict_proba(pngArray)[0]
     predProb = round(score[prediction] * 100, 2)
 
     params = app.config["modelMetaData"]
-    return jsonify(_modelMetaData=params, _prediction=int(prediction), _probability=float(predProb))
+    return jsonify(_modelMetaData=params, _prediction=prediction, _probability=predProb)
 
 
 def reshapePic(pngArray):
     reshaped_Array = cv2.resize(pngArray, (28, 28))
     reshaped_Array = 1 - reshaped_Array / 255
     reshaped_Array = reshaped_Array.flatten()
-    return reshaped_Array
+    return [reshaped_Array]
 
 
 def load_model():

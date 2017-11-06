@@ -60,8 +60,6 @@ def saveStatistics(test_data):
 if __name__ == "__main__":
     n_estimators = 1000
     export_dir = "./export/"
-    if not os.path.exists(export_dir):
-        os.makedirs(export_dir)
 
     train_data, test_data = load_mnist(10000)
     print("Loaded MNIST data and split into train and test data.")
