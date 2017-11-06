@@ -19,13 +19,15 @@ import java.util.Map;
 
 public class RandomForestWrapper {
     private ModelEvaluator<?> evaluator;
+    private String picDir;
 
     /**
-     * Loads the Evaluator from defined PMML file and stores it as object attribute
+     * Loads the Evaluator from defined PMML file, stores it as object attribute, and saves the picDir
      *
      * @param pmmlFile String to the file, where the .pmml of the Randomforest is stored
+     * @parma picDir String to the directory, where the example pictures are stored
      */
-    public RandomForestWrapper(String pmmlFile) {
+    public RandomForestWrapper(String pmmlFile, String picDir) {
         InputStream is = null;
         try {
             is = new FileInputStream(pmmlFile);
@@ -45,6 +47,8 @@ public class RandomForestWrapper {
 
         ModelEvaluator<?> modelEvaluator = modelEvaluatorFactory.newModelEvaluator(pmml);
         this.evaluator = modelEvaluator;
+
+        this.picDir = picDir;
     }
 
 
@@ -82,13 +86,12 @@ public class RandomForestWrapper {
      * Predicts one bunch of pictures according to Category
      *
      * @param picCat String in ("MNIST"/"Computer"/"Font"/"Handwritten"), describing the category of pictures
-     * @param picDir String of directory Data/Own_dat where the pictures are contained
      * @return int[] of predictions for the pictures, where int[0] is the prediction for picture-0
      */
-    private int[] getPicCatPredictions(String picCat, String picDir) {
+    private int[] getPicCatPredictions(String picCat) {
         int[] predictions = new int[10];
         for (int i = 0; i < 10; i++) {
-            String path = picDir + picCat + "-" + i + ".json";
+            String path = this.picDir + picCat + "-" + i + ".json";
             int prediction = predict(path, true);
             predictions[i] = prediction;
         }
@@ -118,10 +121,9 @@ public class RandomForestWrapper {
      * Python predictions in the statisticsFile
      *
      * @param statisticsFile String to the .json file where the python predictions are stored
-     * @param picDir         directory to the Data/Own_dat folder
      * @return boolean wheter the predictions match
      */
-    protected boolean compareResults(String statisticsFile, String picDir) {
+    protected boolean compareResults(String statisticsFile) {
         JSONParser parser = new JSONParser();
         Map<String, int[]> picPredictionsJ = new HashMap<>();
         Map<String, int[]> picPredictionsP = new HashMap<>();
@@ -141,7 +143,7 @@ public class RandomForestWrapper {
                 }
 
                 //make own prediction on pictures
-                int[] predictionsJ = getPicCatPredictions(picCat, picDir);//make java predictions
+                int[] predictionsJ = getPicCatPredictions(picCat);//make java predictions
 
                 picPredictionsP.put(picCat, predictionsP);
                 picPredictionsJ.put(picCat, predictionsJ);

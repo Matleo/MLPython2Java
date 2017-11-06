@@ -20,14 +20,14 @@ public class MNISTClassifier {
 
         System.out.println("Creating an evaluator from given PMML file: " + pmmlFile + ". \nDepending on the size of the RandomForest, this might take a while...");
         long time = System.nanoTime();
-        RandomForestWrapper randomForest = new RandomForestWrapper(pmmlFile);
+        RandomForestWrapper randomForest = new RandomForestWrapper(pmmlFile,picDir);
         long timeDifference = (System.nanoTime() - time) / 1000000;
         System.out.println("Finished creating the evaluator! Took " + timeDifference + "ms to finish.");
         //10->3,3s | 100->5,2s | 1000->40s
 
         if (eval) {
             String statisticsFile = importDir + "statistics_" + n_estimators + ".json";
-            randomForest.compareResults(statisticsFile, picDir);
+            randomForest.compareResults(statisticsFile);
         }
 
         time = System.nanoTime();
