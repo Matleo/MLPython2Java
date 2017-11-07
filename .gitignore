@@ -2,10 +2,19 @@ jpmml-tensorflow/
 micro-nn/
 DL4j-test/
 UdacityLessons/
+
+Maschine Learning/Data/IRIS_data/
 Maschine Learning/NeuralNetwork/Estimator/IrisClassifier/
 Maschine Learning/NeuralNetwork/Data/IRIS_data/
 Maschine Learning/NeuralNetwork/lowLevelNN.py
-MaschineLearning4J/src/main/java/IRIS/
+Maschine Learning/RandomForest/IaaS/export.pkl
+Maschine Learning/RandomForest/MaaS/Iris/
+Maschine Learning/RandomForest/MaaS/export/RandomForestMNIST_100.pmml
+Maschine Learning/RandomForest/MaaS/export/RandomForestMNIST_1000.pmml
+Maschine Learning/RandomForest/MaaS/export/statistics_100.json
+Maschine Learning/RandomForest/MaaS/export/statistics_1000.json
+
+MaschineLearning4J/src/main/java/RandomForest/IRISClassifier.java
 MaschineLearning4J/src/main/java/NeuralNetwork/DL4J/DL4Jexample.java
 */.idea/
 Maschine Learning/NeuralNetwork/Serving/Tensorflow_Serving/

@@ -77,6 +77,6 @@ As we want to respond to the incoming request with a JSON, we can use the `flask
     return jsonify(prediction=int(pred), probability=float(predProb))
 ```
 
-For an example client that uses this prediction service, refer to [this](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/NeuralNetwork/InferenceClient.java).
+For an example client that uses this prediction service, refer to [this](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/InferenceClient.java).
 
 **Note**: If you are looking to serve a model for production that is going to be retrained frequently, may require serving multiple versions simultaneously and/or is expected to receive an extremly high amount of requests, you might want to get yourself into [Tensorflow Serving](https://www.tensorflow.org/serving/) instead of using Flask. This is a seperate and very mighty module of Tensorflow, specifically created to serve Tensorflow models, which comes with a big overhead and plumbing to get started though.

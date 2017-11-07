@@ -65,14 +65,14 @@ public class TensorflowUtilities {
      * @param path the full path of where to find the picture
      * @return float Array with each float in (0,1), where 1 represents black and 0 is white
      */
-    protected static float[] readJsonPic(String path) {
+    public static float[] readJsonPic(String path) {
         JSONParser parser = new JSONParser();
         float[] picArr = new float[784];
         try {
             Object obj = parser.parse(new FileReader(path));
             JSONObject jsonObject = (JSONObject) obj;
 
-            JSONArray pic = (JSONArray) jsonObject.get("results");
+            JSONArray pic = (JSONArray) jsonObject.get("pixelValues");
 
             for (int i = 0; i < pic.size(); i++) {
                 picArr[i] = ((Double) pic.get(i)).floatValue();
@@ -89,7 +89,7 @@ public class TensorflowUtilities {
      * @param path the full path of where to find the picture
      * @return float Array with each float in (0,1), where 1 represents black and 0 is white
      */
-    protected static float[] readPic(String path) {
+    public static float[] readPic(String path) {
         File imgFile = new File(path);
         float[] imgArr = new float[784];
         try {
@@ -132,8 +132,8 @@ public class TensorflowUtilities {
      * @param mapP map containing Python predictions
      * @return returns whether the maps contain equal content
      */
-    protected static boolean compareMaps(Map<String, int[]> mapJ, Map<String, int[]> mapP) {
-        System.out.println("\n\nComparing Java and Python picture predictions...");
+    public static boolean compareMaps(Map<String, int[]> mapJ, Map<String, int[]> mapP) {
+        System.out.println("\nComparing Java and Python picture predictions...");
         boolean match = true;
         if(mapJ.size()!=mapP.size()){
             System.out.println("The size of the maps don't match!");
@@ -150,17 +150,18 @@ public class TensorflowUtilities {
 
         if (match) {
             System.out.println("***Success***");
-            System.out.println("The python and java predictions match!");
+            System.out.println("The Python and Java predictions match!\n");
             return true;
         } else {
             System.out.println("***Failure***");
-            System.out.println("The python and java predictions dont match");
+            System.out.println("The Python and Java predictions dont match");
             System.out.println("Printing out the prediction...");
             for (String key : mapJ.keySet()) {
                 System.out.println("Category \"" + key + "\":");
                 System.out.println("    Java   :" + Arrays.toString(mapJ.get(key)));
                 System.out.println("    Python :" + Arrays.toString(mapP.get(key)));
             }
+            System.out.println();
             return false;
         }
     }

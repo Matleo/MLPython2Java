@@ -1,5 +1,5 @@
 # Going in Production with Python ML models
-This project was set up by Matthias Leopold as an intern at Zuehlke Engineering AG Schlieren, to gather the options to guse a trained Python machine learning model for production.
+This project was set up by Matthias Leopold as an intern at Zuehlke Engineering AG Schlieren, to gather the options to use a trained Python machine learning model for production.
 
 ## Project structure
 The project is split into two sub-projects: 
@@ -8,14 +8,14 @@ The project is split into two sub-projects:
 
 Each sub-project itself is ordered by model type. The following models were considered *(links go to the Python part)*:
 * [Artificial Neural Networks](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork)
-* [TODO: Random Forest]()
+* [Random Forest](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest)
 
 In general, two seperate approaches were evaluated:
 1. **Model as a Service**: The whole ML model is supposed to be transfered from Python to Java, to execute predictions directly in Java
 2. **Inference as a Service**: The ML model is supposed to be deployed from Python and an inference service is supposed to be made available
 
 ## Getting started
-I will briefly show you how to get one of the experiments started, assuming you have cloned this repository and installed Java, Maven, Python and Pip already.
+I will briefly show you how to get one of the Neural Network experiments started, assuming you have cloned this repository and installed Java, Maven, Python and Pip already.
 1. Set up your Python environment (might be done in a `virtualenv`): 
 ```bash
 	pip install tensorflow keras flask
@@ -52,14 +52,23 @@ To get started with using a pretrained machine learning model from Python in Jav
 
 ### Inference as a Service
 The following workflow will demonstrate, how to serve a pretrained neural network model and use it to provide a RESTful API:
-1. Decide which model you want to use and pass it as script parameter to the [flask application](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving/Flask_Serving.py) like this: `--model <value>`. The `<value>` parameter can be any of: `t_ffnn` / `t_cnn` / `e_ffnn` / `e_cnn` / `k_ffnn` / `k_cnn`, where for example `t_ffnn` will load the feed forward neural network that was trained with Tensorflow. `t_ffnn` is the default value if you do not pass any.
+1. Decide which model you want to use and pass it as script parameter to the [flask application](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving/Flask_Serving.py) like this: `--model <value>`. The `<value>` parameter can be any of: `t_ffnn` / `t_cnn` / `e_ffnn` / `e_cnn` / `k_ffnn` / `k_cnn`, where for example `t_ffnn` will load the feed forward neural network that was trained with Tensorflow. `t_ffnn` will be the default value if you do not pass any.
 2. Run the [flask application](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving/Flask_Serving.py), to provide a RESTful API locally on port 8000. 
-3. Make a request to the API by sending a 2-dimensional integer array, representing a grayscale image. You can use the [InferenceClient](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/NeuralNetwork/InferenceClient.java) Java application for sending such a request. Pass in an absolute path to a .png or the filename of a .png contained in the [Data/Own_dat](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder, as program argument. If no program argument is passed, the prediction will be done with a default picture.
+3. Make a request to the API by sending a 2-dimensional integer array, representing a grayscale image. You can use the [InferenceClient](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/InferenceClient.java) Java application for sending such a request. Pass in an absolute path to a .png or the filename of a .png contained in the [Data/Own_dat](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder, as program argument. If no program argument is passed, the prediction will be done with a default picture.
 
 ## Prerequisites
 * Python 3.6.2
-* Tensorflow 1.3
-* Keras 2.0.8
-* Flask 0.12.2
+	* Flask 0.12.2
+	* Keras 2.0.8
+	* Opencv-python 3.3.0.10
+	* Pip 9.0.1
+	* Scikit-learn 0.19.0
+	* Sklearn2pmml 0.26.0
+	* Tensorflow 1.3
 * Java 1.8
-* **TODO**
+	* Apache httpclient 4.5.2
+	* Google's json-simple 1.1.1
+	* Maven 3.5.0
+	* Pmml-evaluator 1.3.9
+	* Tensorflow 1.3.0
+	* Thumbnailator 0.4.8

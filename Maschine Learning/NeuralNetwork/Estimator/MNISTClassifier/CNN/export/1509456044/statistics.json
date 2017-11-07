@@ -1,0 +1,1 @@
+{"steps": 200, "batch_size": 50, "accuracy": 0.9749, "picPredictions": {"Handwritten": [0, 7, 2, 3, 4, 5, 6, 2, 8, 3], "Computer": [9, 1, 2, 3, 9, 5, 6, 7, 8, 7], "MNIST": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], "Font": [0, 1, 2, 3, 4, 5, 5, 2, 8, 9]}}

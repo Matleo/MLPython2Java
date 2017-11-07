@@ -51,7 +51,6 @@ public class MNISTClassifier {
 
     /**
      * Assign correct values to importdir, predictPicFile and modelType, according to input program arguments
-     *
      * @param args program arguments forwarded in the main method
      */
     private static void evaluateArguments(String[] args) {

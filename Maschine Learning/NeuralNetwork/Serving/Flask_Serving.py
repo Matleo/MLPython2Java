@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import tensorflow as tf
 import numpy as np
 import os
+import json
 
 app = Flask(__name__)
 tf.app.flags.DEFINE_string('model', "t_ffnn", 'SavedModel to load for prediction')
@@ -62,8 +63,9 @@ def predictPic(picArray, model, graph, sess):
 
     pred = np.argmax(score)
     predProb = score[pred] * 100
+    params = app.config["modelMetaData"]
 
-    return jsonify(prediction=int(pred), probability=float(predProb))
+    return jsonify(_modelMetaData=params, _prediction=int(pred), _probability=float(predProb))
 
 
 def getImportDir(model):
@@ -86,19 +88,33 @@ def getImportDir(model):
     if model == "k_cnn":
         return "../Keras/MNISTClassifier/Model/export"
 
+def getModelFullname(model):
+    if model == "t_ffnn":
+        return "Tensorflow Feed Forward Neural Network"
+    if model == "t_cnn":
+        return "Tensorflow Convolutional Neural Network"
+    if model == "e_ffnn":
+        return "Estimator Feed Forward Neural Network"
+    if model == "e_cnn":
+        return "Estimator Convolutional Neural Network"
+    if model == "k_ffnn":
+        return "Keras Feed Forward Neural Network"
+    if model == "k_cnn":
+        return "Keras Convolutional Neural Network"
+    print("ERROR: You passed in a wrong model name, it needs to be in {t_ffnn, t_cnn, e_ffnn, e_cnn, k_ffnn, k_cnn}")
 
 def reshapePic(pic):
-    #1. As Tensorflow expects the input Tensor to be channel last, we need to wrap every pixels value into an array individually
+    # 1. As Tensorflow expects the input Tensor to be channel last, we need to wrap every pixels value into an array individually
     for i in range(len(pic)):
         for j in range(len(pic[i])):
             pic[i][j] = [pic[i][j]]
 
-    resized_image = tf.image.resize_images(pic, [28, 28]) #2. resize to 28x28
-    tensor = tf.reshape(resized_image, [-1]) #3. flatten
+    resized_image = tf.image.resize_images(pic, [28, 28])  # 2. resize to 28x28
+    tensor = tf.reshape(resized_image, [-1])  # 3. flatten
 
     with tf.Session() as sess:
         tArray = 1 - sess.run(tensor) / 255  # 4. reverse [0,255] to [0,1]
-        reshaped_Array = sess.run(tf.reshape(tArray, [1, 784])) #make batch of size 1
+        reshaped_Array = sess.run(tf.reshape(tArray, [1, 784]))  # make batch of size 1
     return reshaped_Array
 
 
@@ -107,10 +123,21 @@ def load_model(model):
     import_dir = getImportDir(model)
     tf.saved_model.loader.load(sess, ["serve"], import_dir)
     graph = tf.get_default_graph()
-
     app.config["modelType"] = model
     app.config["session"] = sess
     app.config["graph"] = graph
+
+    with open(import_dir+"/statistics.json") as file:
+        data = json.load(file)
+    params = {}
+    params["_modelType"] = getModelFullname(model)
+    if model in ["t_ffnn","t_cnn","e_ffnn","e_cnn"]:
+        params["steps"] = data["steps"]
+        params["batch_size"] = data["batch_size"]
+    else:
+        params["epochs"] = data["epochs"]
+    params["_accuracy"] = data["accuracy"]
+    app.config["modelMetaData"] = params
 
 
 if __name__ == "__main__":
