@@ -9,7 +9,7 @@ import json
 
 
 def load_mnist(test_sample_size):
-    custom_data_home = "/tmp/mnist_sklearn"
+    custom_data_home = "../../Data/mnist_sklearn"
     mnist = fetch_mldata("MNIST original", data_home=custom_data_home)  # pixel values as int(0,255) where 0 is white
     mnist.data = mnist.data.astype(float)  # convert to float
     for i in range(len(mnist.data)):
@@ -57,7 +57,7 @@ def saveStatistics(test_data):
 
 
 if __name__ == "__main__":
-    n_estimators = 1000
+    n_estimators = 10
     export_dir = "./export/"
 
     train_data, test_data = load_mnist(10000)

@@ -7,7 +7,7 @@ from sklearn.externals import joblib
 
 
 def load_mnist(test_sample_size):
-    custom_data_home = "/tmp/mnist_sklearn"
+    custom_data_home = "../../Data/mnist_sklearn"
     mnist = fetch_mldata("MNIST original", data_home=custom_data_home)  # pixel values as int(0,255) where 0 is white
     mnist.data = mnist.data.astype(float)  # convert to float
     for i in range(len(mnist.data)):

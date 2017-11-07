@@ -3,6 +3,7 @@ micro-nn/
 DL4j-test/
 UdacityLessons/
 
+Maschine Learning/Data/IRIS_data/
 Maschine Learning/NeuralNetwork/Estimator/IrisClassifier/
 Maschine Learning/NeuralNetwork/Data/IRIS_data/
 Maschine Learning/NeuralNetwork/lowLevelNN.py

@@ -1,5 +1,5 @@
 # Using a saved Random Forest in Java
-In the following I will describe, how to load a PMML file, which represents a `sklearn.ensemble.RandomForestClassifier` into Java and start making predictions there. If you haven't read about how to perform the export from Python to the PMML file, please read [this](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest/MaaS)
+In the following I will describe, how to load a PMML file, which represents a `sklearn.ensemble.RandomForestClassifier` into Java and start making predictions there. If you haven't read about how to perform the export from Python to the PMML file, please read [this](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest/MaaS).
 ## Project setup
 ### Prerequesites
 We will be using the [JPMML-Evaluator](https://github.com/jpmml/jpmml-evaluator), to read the PMML file into Java. 
@@ -46,20 +46,20 @@ The prediction call for given png, using the Random Forest, took 194ms. (includi
 
 ## How it works
 ### Loading an Evaluator from PMML
-When instantiating a `RandomForestWrapper.java`, you have to pass the constructor a String to the PMML file, from where to load the saved model. From that file, the `Evaluator` gets loaded like this (I have omitted the try-catch blogs for readability):
+When instantiating a `RandomForestWrapper.java`, you will have to pass a String to the constructor, representing the path of the PMML file from where to load the saved Random Forest. From that file, the `Evaluator` can be loaded as follows: (I have omitted the try-catch blogs for readability)
 ```java
-	InputStream is = new FileInputStream(pmmlFile);
+	InputStream is = new FileInputStream(pmmlFilepath);
 	PMML pmml = org.jpmml.model.PMMLUtil.unmarshal(is);
 	ModelEvaluatorFactory modelEvaluatorFactory = ModelEvaluatorFactory.newInstance();
 	ModelEvaluator<?> modelEvaluator = modelEvaluatorFactory.newModelEvaluator(pmml);
-	this.evaluator = modelEvaluator;
+	this.evaluator = modelEvaluator; //class attribute
 ```
 
 ### Making a prediction with the Evaluator
 After creating the `Evaluator`, we can now use it to pass input parameters to our previously trained model, and get the output value prediction. As a reminder, [this](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest/MaaS) is how we have built our Random Forest model.
 
 #### Preparing inputArguments
-Our model wants to be fed with a 784-vector, containing the grayscale pixel values of a picture, displaying a digit. So at first we will have to read the pixel information into an `float[]`. We can accomplish this, reusing the `readPic(String pic)` function from our [TensorflowUtilities](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow/MNIST/TensorflowUtilities.java) class. Now we have to feed this float[] to our previously loaded `Evaluator`:
+Our model wants to be fed with a 784-vector, containing the grayscale pixel values of a picture, displaying a digit. So at first we will have to read the pixel information into a `float[]`. We can accomplish this, reusing the `readPic(String pic)` function from our [TensorflowUtilities](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow/MNIST/TensorflowUtilities.java) class. Now we have to feed this float[] to our previously loaded `Evaluator`:
 ```java
 	float[] picture = TensorflowUtilities.readPic(picPath);
 	List<InputField> inputFields = this.evaluator.getInputFields(); //inputFields are named x1-x784
@@ -73,6 +73,7 @@ Our model wants to be fed with a 784-vector, containing the grayscale pixel valu
 		inputArguments.put(inputFieldName, inputFieldValue);
 	}
 ```
+**Note**: `inputFields` contains `InputFields` with names between `x1` and `x784`, but not every value will be present. So `inputFields.length < 784`. This originates from our Random Forest model, trained on the MNIST dataset. Not every pixel of the input png files are relevant, for example the border of every picture will be white, so we do not generate any information of that. In particular, the `feature_importance` of these pixels is 0. That is why those pixels, or features, are not included in the PMML file.
 
 #### Evaluate and read out results
 After we have prepared the data that we want to feed into our model, we can now actually evaluate the model and read the prediction:
@@ -90,4 +91,10 @@ After we have prepared the data that we want to feed into our model, we can now 
 ```
 
 #### Comparing Java and Python predictions
-**TODO**
+In order to know if the entire export and import of the Python model was succesfull, I am comparing the predictions for the saved pictures in the [Data/Own_dat](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder. 
+
+One problem I ran into was that reading the grayscale pixel values of a png file in Python and Java will give you different results, which makes it impossible to correctly compare the Java and Python models. Therefore, I used this Python [script](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/Data/Own_dat/saveJsons.py), to read the png files into JSON arrays, so that I could later use these JSON arrays as input for the Python and Java model for comparison. 
+
+As I saved the predictions from the original Python model into a `statistics.json` file, I can now read these predictions, make new predictions in Java, using the `Evaluator` just like above, and finally compare these predictions.
+
+If all of the 40 predictions match, I think it is safe to say that the model transfer was successfull and the Java `Evaluator` represents the original `RandomForestClassifier` properly.
