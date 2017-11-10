@@ -81,6 +81,23 @@ public class RandomForestWrapper {
 
         return arguments;
     }
+    private Map<FieldName, FieldValue> loadInputParameter(float[] input) {
+        float[] picture = input;
+
+        List<InputField> inputFields = this.evaluator.getInputFields(); //{InputField{name=xi, dataType=FLOAT, opType=CONTINUOUS}}; i in int(1,784); if feature_importance of that pixel is 0, the feature is not included. so inputFields.length<784
+
+        Map<FieldName, FieldValue> arguments = new LinkedHashMap<>();
+        for (int i = 0; i < inputFields.size(); i++) {
+            FieldName inputFieldName = inputFields.get(i).getName();//xi with i in int(1,784)
+            int index = Integer.valueOf(inputFieldName.toString().substring(1)); //i in int(1,784)
+
+            Object rawValue = picture[index - 1]; //-1 because indices of DataFields are in int(1,784) and array indices are in int(0,783)
+            FieldValue inputFieldValue = inputFields.get(i).prepare(rawValue);
+            arguments.put(inputFieldName, inputFieldValue);
+        }
+
+        return arguments;
+    }
 
     /**
      * Reads out the result object
@@ -168,6 +185,13 @@ public class RandomForestWrapper {
      */
     protected int predict(String picPath, boolean loadJson) {
         Map<FieldName, FieldValue> inputParameter = loadInputParameter(picPath, loadJson);
+
+        Map<FieldName, ?> results = this.evaluator.evaluate(inputParameter);
+
+        return readResult(results);
+    }
+    protected int predict(float[] input) {
+        Map<FieldName, FieldValue> inputParameter = loadInputParameter(input);
 
         Map<FieldName, ?> results = this.evaluator.evaluate(inputParameter);
 
