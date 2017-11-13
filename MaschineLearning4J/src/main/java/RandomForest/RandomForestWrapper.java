@@ -81,6 +81,7 @@ public class RandomForestWrapper {
 
         return arguments;
     }
+
     private Map<FieldName, FieldValue> loadInputParameter(float[] input) {
         float[] picture = input;
 
@@ -113,7 +114,12 @@ public class RandomForestWrapper {
         //ProbabilityDistribution{result=7.0, probability_entries=[0.0=0.0, 1.0=0.0, 2.0=0.0, 3.0=0.0, 4.0=0.0, 5.0=0.0, 6.0=0.0, 7.0=1.0, 8.0=0.0, 9.0=0.0]}
         ProbabilityDistribution targetFieldValue = (ProbabilityDistribution) results.get(targetFieldName);
         Object predictionObj = targetFieldValue.getResult();
-        int prediction = ((Double) predictionObj).intValue();
+        int prediction = -1;
+        if (predictionObj instanceof Double) { //if python PMML
+            prediction = ((Double) predictionObj).intValue();
+        } else { //if R PMML
+            prediction = Integer.valueOf((String) predictionObj);
+        }
         return prediction;
     }
 
@@ -160,6 +166,7 @@ public class RandomForestWrapper {
         boolean match = TensorflowUtilities.compareMaps(picPredictionsJ, picPredictionsP);
         return match;
     }
+
     /**
      * Predicts one bunch of pictures according to Category
      *
@@ -190,6 +197,7 @@ public class RandomForestWrapper {
 
         return readResult(results);
     }
+
     protected int predict(float[] input) {
         Map<FieldName, FieldValue> inputParameter = loadInputParameter(input);
 

@@ -2,45 +2,65 @@
 In the following I will describe, how to load a PMML file, which represents a `sklearn.ensemble.RandomForestClassifier` into Java and start making predictions there. If you haven't read about how to perform the export from Python to the PMML file, please read [this](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest/MaaS).
 ## Project setup
 ### Prerequesites
-We will be using the [JPMML-Evaluator](https://github.com/jpmml/jpmml-evaluator), to read the PMML file into Java. 
+We will be using the [JPMML-Evaluator](https://github.com/jpmml/jpmml-evaluator), to read the PMML file into Java, and the [Commons CLI](http://commons.apache.org/proper/commons-cli/index.html), to simplify evaluating the program input arguments.
 
-If you are using maven, you can install the library by adding the following dependency to your `pom.xml`:
+If you are using maven, you can install these libraries by adding the following dependencies to your `pom.xml`:
 ```maven
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-evaluator</artifactId>
 	<version>1.3.9</version>
 </dependency>
+<dependency>
+	<groupId>commons-cli</groupId>
+	<artifactId>commons-cli</artifactId>
+	<version>1.4</version>
+</dependency>
 ```
 
 ### Class structure
 
 * **MNISTClassifier.java**:
-The main class for the MNIST classification, to execute loading the whole model from the PMML file and making a prediction using the `JPMML Evaluator`.
+The main class for the MNIST classification, to execute loading the whole model from the PMML file, calling for a prediction using the `JPMML Evaluator` and launching a benchmark test.
 * **RandomForestWrapper.java**:
 This class implements the *Model as a Service* idea. It loads an `Evaluator` from a given PMML file and offers methods to predict the displayed digit of a given png file or compare the Java and Python results, to determin wheter the import was succesfull.
+* **BenchmarkTest.java**: This classes only usage is to run a benchmark test on the loaded `Evaluator` to measure it's performance.
 
 ## Usage
-You can either run the `MNISTClassifier.main()` method without passing any program arguments, or pass in the full path to a valid png file, or pass in the name of a png file that is contained in the [Data/Own_Dat](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder. 
+You can run the `MNISTClassifier.main()` method without passing any program arguments, or pass in a number of optional parameters, according to this `help`:
+```java
+usage: MNISTClassifier
+ -b,--benchmark-test   pass, if you want to run and print the benchmark
+                       test
+ -c,--compare          pass, if you want the results from Python and Java
+                       to be compared for sameness. This action cannot be
+                       performed for the R-technology
+ -h,--help             print this info message again
+ -n,--n-trees <arg>    number of decision trees that were used to create
+                       the PMML. Please check for which number of trees,
+                       you have a valid PMML file on your system. Default
+                       value will be 50
+ -p,--picture <arg>    name of the picture, to predict it's displayed
+                       digit. <Arg> can either be a full path or a file in
+                       the Data/Own_dat directory of this project. Default
+                       value will be Data/Own_dat/MNIST-7.png
+ -r,--use-R            pass, if the pmml you want to load is from a model,
+                       created with R
+```
 
-The program will do the following 3 things:
+The program will do the following 4 things:
 1. Load an `org.jpmml.evaluator.Evaluator` from the PMML file
 2. *optional:* Compare the previously saved Python example results with the Java results, calculated by the `Evaluator`
 3. Predict the number of the given png file
-
-If you don't want to compare the Java and Python results and only use the program for prediction, pass in `--noEval` as program argument.
+4. *optional:* Run prediction for 2000 MNSIT datapoints, calculate various statistics and print these to a `benchmark.html` file in this directory.
 
 If you do not pass in any program arguments, the console output should look like following: 
 ```java
-Creating an evaluator from PMML file: ../Maschine Learning/RandomForest/MaaS/export/RandomForestMNIST_10.pmml. 
+Creating an evaluator from PMML file: ../Maschine Learning/RandomForest/MaaS/export/RandomForestMNIST_50.pmml. 
 Depending on the size of the RandomForest, this might take a while...
-Finished creating the evaluator! Took 3495ms to finish.
+Finished creating the evaluator! Took 4428ms to finish.
 
-Comparing Java and Python picture predictions...
-***Success***
-The Python and Java predictions match!
-
-The prediction call for given png, using the Random Forest, took 194ms. (including reading the pixel information)
+The prediction call for given png, using the Random Forest, took 523ms. (reading the pixel information included)
 --> The given picture at "../Maschine Learning/Data/Own_dat/MNIST-7.png" is probably a: 7
 ```
 
