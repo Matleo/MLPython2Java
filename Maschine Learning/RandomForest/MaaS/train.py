@@ -57,7 +57,7 @@ def saveStatistics(test_data):
 
 
 if __name__ == "__main__":
-    n_estimators = 10
+    n_estimators = 500
     export_dir = "./export/"
 
     train_data, test_data = load_mnist(10000)

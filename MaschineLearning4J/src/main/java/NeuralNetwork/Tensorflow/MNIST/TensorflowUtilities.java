@@ -150,7 +150,7 @@ public class TensorflowUtilities {
 
         if (match) {
             System.out.println("***Success***");
-            System.out.println("The Python and Java predictions match!\n");
+            System.out.println("The Python and Java predictions match!");
             return true;
         } else {
             System.out.println("***Failure***");
