@@ -21,23 +21,23 @@ Afterwards, storing the session into the application configuration can be done b
 ```
 
 ## Providing a RESTful API
-My example apllication will respond to two routes: 
+My example application will respond to two routes: 
 * When calling `localhost:8000/`, you will get a JSON returned, representing the prediction for the [Data/Own_dat/MNIST-0.png](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/Data/Own_dat/MNIST-0.png) file, this route is used for demonstration purposes only. 
-* The important route is `localhost:8000/predict`, which is used for the actual prediction request. It will expect a JSON as request parameter, containing a 2-dimensional integer array, representing the pixel values of a grayscale picture. Inside the 2D array, each array in the second dimension should contain the pixel information of a row of the picture (so the array should be of shape: [heigth][length])
+* The important route is `localhost:8000/predict`, which is used for the actual prediction request. It will expect a JSON as request parameter, containing a 2-dimensional integer array, representing the pixel values of a grayscale picture. Inside the 2D array, each array in the second dimension should contain the pixel information of a row of the picture (so the array should be of shape: [height][length])
 
 ### Define application and route
 With flask, you can create your application by calling the `Flask()` constructor:
 ```python
 	app = Flask(__name__)
 ```
-Afterwards you can add a new route, by adding a function decorator. The function will then be executed, if the assosiated route is called:
+Afterwards you can add a new route, by adding a function decorator. The function will then be executed, if the associated route is called:
 ```python
     @app.route("/predict", methods=['POST'])
     def predict():
 		...
 ```
 
-A requests parameter can be accessed by using the `flask.request` object. We are expecting an array with the name "picArray" inside a JSON to be passed. We can acces the array with:
+A requests parameter can be accessed by using the `flask.request` object. We are expecting an array with the name "picArray" inside a JSON to be passed. We can access the array with:
 ```python
     json = request.get_json()
     picArray = json["picArray"]
@@ -79,4 +79,4 @@ As we want to respond to the incoming request with a JSON, we can use the `flask
 
 For an example client that uses this prediction service, refer to [this](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/InferenceClient.java).
 
-**Note**: If you are looking to serve a model for production that is going to be retrained frequently, may require serving multiple versions simultaneously and/or is expected to receive an extremly high amount of requests, you might want to get yourself into [Tensorflow Serving](https://www.tensorflow.org/serving/) instead of using Flask. This is a seperate and very mighty module of Tensorflow, specifically created to serve Tensorflow models, which comes with a big overhead and plumbing to get started though.
+**Note**: If you are looking to serve a model for production that is going to be retrained frequently, may require serving multiple versions simultaneously and/or is expected to receive an extremely high amount of requests, you might want to get yourself into [Tensorflow Serving](https://www.tensorflow.org/serving/) instead of using Flask. This is a separate and very mighty module of Tensorflow, specifically created to serve Tensorflow models, which comes with a big overhead and plumbing to get started though.

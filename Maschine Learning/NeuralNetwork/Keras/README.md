@@ -6,7 +6,7 @@ I used a `Sequential` to create my [FFNN example](https://github.com/Matleo/MLPy
 I will assume that you are familiar with building and training a Keras model, if that is not the case, please refer to the original [documentation](https://keras.io/). 
 
 ## Model as a Service
-I evaluated two seperate options to export a Keras model from Python and reload it into Java:
+I evaluated two separate options to export a Keras model from Python and reload it into Java:
 1. Save the native Keras model into a .h5 file and reload it with the [DL4J](https://deeplearning4j.org/) framework.
 2. Get the Tensorflow `Session` from the Keras model and save it as a `SavedModel`
 ### 1) Native Keras + DL4J
@@ -24,11 +24,11 @@ Reloading the model into Python is just as easy:
 ```
 
 
-The interesting part happes at the [Java part](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/DL4J). 
+The interesting part happens at the [Java part](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/DL4J). 
 
-It is important to note, that you can **not** use every Keras element, as the Java import with DL4J only supports a restricted amount of [features](https://deeplearning4j.org/keras-supported-features). This list of features will be available with DL4J v.0.9.2 which is not stable at the moment. I used DL4J v.0.9.1, where there were fewer options available. Because of this reason and because using an additional (small) framework can often be unsafe, I reccomend using the second method, to extract the Tensorflow `Session` and export a `SavedModel`.
+It is important to note, that you can **not** use every Keras element, as the Java import with DL4J only supports a restricted amount of [features](https://deeplearning4j.org/keras-supported-features). This list of features will be available with DL4J v.0.9.2 which is not stable at the moment. I used DL4J v.0.9.1, where there were fewer options available. Because of this reason and because using an additional (small) framework can often be unsafe, I recommend using the second method, to extract the Tensorflow `Session` and export a `SavedModel`.
 
-You can find my full example for a `Sequential` [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential/train_dl4j.py), and for a `Model` [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Model/cnn_train_dl4j.py). As I was not able to use  all the Keras layers here, I seperated exporting the native Keras model and the Tensorflow `SavedModel` in seperate files. (*Note*: The LSTM example doesn't work with DL4J on v0.9.1)
+You can find my full example for a `Sequential` [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Sequential/train_dl4j.py), and for a `Model` [here](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Keras/MNISTClassifier/Model/cnn_train_dl4j.py). As I was not able to use  all the Keras layers here, I separate exporting the native Keras model and the Tensorflow `SavedModel` in separate files. (*Note*: The LSTM example doesn't work with DL4J on v0.9.1)
 
 ### 2) Exporting a SavedModel
 As mentioned, Keras is a model-level library, providing high-level building blocks for developing deep learning models. It does not itself handle low-level operations such as tensor products, convolutions and so on . Therefore it calls the Tensorflow API to build a `Graph` and run a `Session`. We can access the `Session` by using the module `Keras.backend`, which contains the backend engine, which could be `Theano` or `CNTK` aswell, but in our case is `Tensorflow`: 
@@ -56,7 +56,7 @@ The execution of the export works just as usual:
     builder.save()
 ```
 
-Just to be clear, adding the signature is not particularly mandatory, everything will work just the same if you do not, as long as you know the names of the tensors. But if that is not the case it is very usefull to inspect the `SavedModel` using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel). You will need to know the exact names of the input and output Tensors to reuse the model in Java.
+Just to be clear, adding the signature is not particularly mandatory, everything will work just the same if you do not, as long as you know the names of the tensors. But if that is not the case it is very useful  to inspect the `SavedModel` using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel). You will need to know the exact names of the input and output Tensors to reuse the model in Java.
 
 Talking about naming the tensors. I did not find a way to rename the tensorflow input and output tensors using the Keras API, this means that we will have to work with the default names that Tensorflow assigns to these Tensor. The only tensor I was able to rename is the input tensor of a Keras `Model`, since you can specify the input as an `Input` layer:
 ```python

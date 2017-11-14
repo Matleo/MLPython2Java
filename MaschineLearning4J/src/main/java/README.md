@@ -44,7 +44,7 @@ If the service is running correctly, the output will look something like this :
 Notice that the "Response content" will slightly vary, depending on which model you are currently serving. In the above example i was using my example CNN, built with `Tensorflow.Estimator`. 
 
 Response content interpretation: 
-* `_modelMetaData`: will be present for every model, containing model describing paramers
+* `_modelMetaData`: will be present for every model, containing model describing parameters
 	* `_accuracy`: will be present for every model and describes the accuracy of the model on the test MNIST test data
 	* `_modelType`: will also be present for every model, describing the type of model
 	* `batch_size`: is specific to Tensorflow or Estimator Neural Networks and describes the size of one batch, used for training
@@ -66,7 +66,7 @@ After evaluating the program parameters, the program works as follows:
 	}
 	return imgArrInt;
 ```
-*Note*: `raster.getSample(j, i, 0)` returns the value of the pixel at width=j and heigth=i. As we want to return an array of shape [heigth][width], the indices to store into the int[][] need to be reversed.  
+*Note*: `raster.getSample(j, i, 0)` returns the value of the pixel at width=j and height=i. As we want to return an array of shape [height][width], the indices to store into the int[][] need to be reversed.  
 
 2. Convert the `int[][]` to a JSON array within a JSON object to pass it to the HTTP request, using the `json-simple` library:
 ```java

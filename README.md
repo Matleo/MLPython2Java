@@ -10,8 +10,8 @@ Each sub-project itself is ordered by model type. The following models were cons
 * [Artificial Neural Networks](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork)
 * [Random Forest](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest)
 
-In general, two seperate approaches were evaluated:
-1. **Model as a Service**: The whole ML model is supposed to be transfered from Python to Java, to execute predictions directly in Java
+In general, two separate approaches were evaluated:
+1. **Model as a Service**: The whole ML model is supposed to be transferred  from Python to Java, to execute predictions directly in Java
 2. **Inference as a Service**: The ML model is supposed to be deployed from Python and an inference service is supposed to be made available
 
 ## Getting started
@@ -51,7 +51,7 @@ To get started with using a pretrained machine learning model from Python in Jav
 	For more information on how to use this program, please pass in `-h` as program parameter or refer to the [README](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow) 
 
 ### Inference as a Service
-The following workflow will demonstrate, how to serve a pretrained neural network model and use it to provide a RESTful API:
+The following workflow will show how to serve a pretrained neural network model and use it to provide a RESTful API:
 1. Decide which model you want to use and pass it as script parameter to the [flask application](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving/Flask_Serving.py) like this: `--model <value>`. The `<value>` parameter can be any of: `t_ffnn` / `t_cnn` / `e_ffnn` / `e_cnn` / `k_ffnn` / `k_cnn`, where for example `t_ffnn` will load the feed forward neural network that was trained with Tensorflow. `t_ffnn` will be the default value if you do not pass any.
 2. Run the [flask application](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Serving/Flask_Serving.py), to provide a RESTful API locally on port 8000. 
 3. Make a request to the API by sending a 2-dimensional integer array, representing a grayscale image. You can use the [InferenceClient](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/InferenceClient.java) Java application for sending such a request. Pass in an absolute path to a .png or the filename of a .png contained in the [Data/Own_dat](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder, as program argument. If no program argument is passed, the prediction will be done with a default picture.

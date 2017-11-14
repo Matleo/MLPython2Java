@@ -1,7 +1,7 @@
 # Using a saved Random Forest in Java
 In the following I will describe, how to load a PMML file, which represents a `sklearn.ensemble.RandomForestClassifier` into Java and start making predictions there. If you haven't read about how to perform the export from Python to the PMML file, please read [this](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest/MaaS).
 ## Project setup
-### Prerequesites
+### Prerequisites
 We will be using the [JPMML-Evaluator](https://github.com/jpmml/jpmml-evaluator), to read the PMML file into Java, and the [Commons CLI](http://commons.apache.org/proper/commons-cli/index.html), to simplify evaluating the program input arguments.
 
 If you are using maven, you can install these libraries by adding the following dependencies to your `pom.xml`:
@@ -23,7 +23,7 @@ If you are using maven, you can install these libraries by adding the following 
 * **MNISTClassifier.java**:
 The main class for the MNIST classification, to execute loading the whole model from the PMML file, calling for a prediction using the `JPMML Evaluator` and launching a benchmark test.
 * **RandomForestWrapper.java**:
-This class implements the *Model as a Service* idea. It loads an `Evaluator` from a given PMML file and offers methods to predict the displayed digit of a given png file or compare the Java and Python results, to determin wheter the import was succesfull.
+This class implements the *Model as a Service* idea. It loads an `Evaluator` from a given PMML file and offers methods to predict the displayed digit of a given png file or compare the Java and Python results, to determine whether the import was succesful.
 * **BenchmarkTest.java**: This classes only usage is to run a benchmark test on the loaded `Evaluator` to measure it's performance.
 
 ## Usage
@@ -111,7 +111,7 @@ After we have prepared the data that we want to feed into our model, we can now 
 ```
 
 #### Comparing Java and Python predictions
-In order to know if the entire export and import of the Python model was succesfull, I am comparing the predictions for the saved pictures in the [Data/Own_dat](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder. 
+In order to know if the entire export and import of the Python model was succesful, I am comparing the predictions for the saved pictures in the [Data/Own_dat](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder. 
 
 One problem I ran into was that reading the grayscale pixel values of a png file in Python and Java will give you different results, which makes it impossible to correctly compare the Java and Python models. Therefore, I used this Python [script](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/Data/Own_dat/saveJsons.py), to read the png files into JSON arrays, so that I could later use these JSON arrays as input for the Python and Java model for comparison. 
 

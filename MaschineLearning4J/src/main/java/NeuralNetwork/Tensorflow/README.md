@@ -38,10 +38,10 @@ Valid arguments include:
 This class implements the *Model as a Service* idea. Here we are actually using the Tensorflow Java API, to reload a `SavedModel`. Afterwards we can make predictions using the loaded model and evaluate if the model produces just the same results, as if we would use the original Python model, by comparing the accuracy on the MNIST dataset and the predictions of a bunch of saved .png files.
 
 #### MNIST/TensorflowUtilities.java:
-This class contains a few utility functions to be used by the other classes, like converting a `Tensor` to a `float[]` and the other way around, reading a .png file into a `float[]` or providing an equivalent funtion to the `numpy.argmax()`.
+This class contains a few utility functions to be used by the other classes, like converting a `Tensor` to a `float[]` and the other way around, reading a .png file into a `float[]` or providing an equivalent function  to the `numpy.argmax()`.
 
 #### IMDBClassifier.java:
-Small additionaly example, to load the created [LSTM](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/IMDBClassifier), trained with the [IMDB dataset](https://keras.io/datasets/#imdb-movie-reviews-sentiment-classification). The purpose of this example is to show that it is possible to export complex models using the `SavedModel`.
+Small additional example, to load the created [LSTM](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras/IMDBClassifier), trained with the [IMDB dataset](https://keras.io/datasets/#imdb-movie-reviews-sentiment-classification). The purpose of this example is to show that it is possible to export complex models using the `SavedModel`.
 ## Model as a Service
 
 As stated, the whole action of loading and using a `SavedModel` to make predictions happens in the `SavedModel.java` class, using the Tensorflow Java API.
@@ -52,7 +52,7 @@ The only thing we really need to load from the `SavedModel` is it's `Session`. A
     this.session = sb.session();
 ```
 * `importdir` is a `String`, containing the path of the directory of where to load the `SavedModel` from
-* `modelTag` is a `String`, containing the tag of the appropriate `MetaGraph`, which we want to load from the `SavedModel`. In my example, this will always be the constant String `"serve"`, which I used to save the `SavedModels`.
+* `modelTag` is a `String`, containing the tag of the associated `MetaGraph`, which we want to load from the `SavedModel`. In my example, this will always be the constant String `"serve"`, which I used to save the `SavedModels`.
 
 Now, to use the loaded `Session` for inference, let me remind you, that it is very important to know the exact names of the input and output tensors inside the `SavedModel`. Depending on which technology you used to save your `SavedModel`, you might have been able specify these names explicitly (`Tensorflow` or `Estimator`), or else if you used `Keras`, you will have to inspect the `SavedModel` and find the corresponding names, using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel).
 
