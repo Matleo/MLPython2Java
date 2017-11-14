@@ -1,6 +1,6 @@
 # Tensorflow Estimator API
 
-The `tensorflow.estimator` framework is a high level API, sitting on top of the low level tensorflow API. Tensorflow 1.3 currently includes the `tf.estimator` and the `tf.contrib.learn.Estimator`. Don't use the second module, as it is deprecated.  
+The `tensorflow.estimator` framework is a high level API, sitting on top of the low-level Tensorflow API. Tensorflow 1.3 currently includes the `tf.estimator` and the `tf.contrib.learn.Estimator`. Don't use the second module, as it is deprecated.  
 ## Building a model with Estimator
 ### Premade  Estimators
 Tensorflow comes with a few premade, general Estimators for regression or classification problems using either a linear model or a dense neural network. You can find a guide on how to create a model with a premade Estimator [here](https://www.tensorflow.org/programmers_guide/estimators). 
@@ -11,16 +11,16 @@ I created my [Feed Forward Neural Network](https://github.com/Matleo/MLPython2Ja
 If you are looking to build a specific NN model, these premade Estimators probably won't fit your needs. This will most likely be the case if you need more granular control over model configuration, such as 
 * the ability to customize the loss function used for optimization
 * or to specify different activation functions for each neural network layer
-* or even to use different neural network layers, other then dense layers
+* or even to use different neural network layers, other than dense layers
 
 In this case you will want to take a look [here](https://www.tensorflow.org/extend/estimators), this guide helps you to build your own model_fn(), which is the heart of every Estimator, defining the network layers, activation functions, the loss function and the optimizer.
 
 I created my [Convolutional Neural Network](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/CNN) for the MNIST dataset with a customized `Estimator`.
 
 ## Model as a Service
-Now followes the interesting part, where I describe, how to save a model, which was created using an `Estimator`. As suggested in the [Tensorflow README.md](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier), we will be using Tensorflow's `SavedModel` structure, to serialize and save our trained model. 
+Now follows the interesting part, where I describe, how to save a model, which was created using an `Estimator`. As suggested in the [Tensorflow README.md](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Tensorflow/MNISTClassifier), we will be using Tensorflow's `SavedModel` structure, to serialize and save our trained model. 
 
-At first I thought this was going to be pretty easy, since `Estimator` is built on top of `Tensorflow`, one would assume that I could extract the Tensorflow session and save the model in the exact same manner, as did with the low level Tensorflow model, but sadly this is not the case. The `Estimator` framework is specifically designed to be used for serving a model with [Tensorflow Serving](https://www.tensorflow.org/serving/), which made things a bit harder than expected.
+At first I thought this was going to be pretty easy, since `Estimator` is built on top of `Tensorflow`, one would assume that I could extract the Tensorflow session and save the model in the exact same manner, as did with the low-level Tensorflow model, but sadly this is not the case. The `Estimator` framework is specifically designed to be used for serving a model with [Tensorflow Serving](https://www.tensorflow.org/serving/), which made things a bit harder than expected.
 
 ### DNNClassifier model
 Saving a trained model in theory is not very hard and can be done with the following lines of code: 
@@ -52,14 +52,14 @@ export_outputs = {
 ```
 Where `spec.export_outputs["serving_default"].scores` grabs the tensor from the original DNNClassifier, so we essentially just replaced the `ClassificationOutput` object with a `PredictOutput` object and then renamed the output tensors. 
 
-These eplicitly declared names are again important for the import of the model, so that we can later get the output vector of the probability for each number by getting the tensor by name "output", and the associated class name vector by name "class". (*Note*: for the MNIST example, the class output vector is not very usefull)
+These explicitly declared names are again important for the import of the model, so that we can later get the output vector of the probability for each number by getting the tensor by name "output", and the associated class name vector by name "class". (*Note*: for the MNIST example, the class output vector is not very useful)
 
 Notice, how we did not pass any `signature ` to the `SavedModel`, as the `Estimator` takes care of that automatically. If we inspect the `SavedModel` using the [SavedModel CLI](https://www.tensorflow.org/programmers_guide/saved_model#cli_to_inspect_and_execute_savedmodel), we can see the connection between the signature map keys ("inputKey" , "class" , "scores"), and the tensor names ("input:0" , "class:0" , "output:0"):
 
 > ![SavedModel CLI output picture](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/FFNN/SavedModelCLI_example.png)
 
 
-Now we have saved a regular `SavedModel` from our adjusted, premade DNNClassifier, which can be imported as usual. There is nothing that seperates this `SaveModel` from a "normal" SavedModel, constructed with the low level tensorflow API. Just as a quick reminder, this is the way you want to reimport the model into Python:
+Now we have saved a regular `SavedModel` from our adjusted, premade DNNClassifier, which can be imported as usual. There is nothing that separates this `SaveModel` from a "normal" SavedModel, constructed with the low-level Tensorflow API. Just as a quick reminder, this is the way you want to re-import the model into Python:
 ```python
     import_super_dir = "./export/"
     timestamp=os.listdir(import_super_dir)[0]
@@ -85,7 +85,7 @@ The workflow to save your model, built with a customized Estimator where you wro
 
 I am going to assume that you know how to build a `model_fn()`, if that is not the case, please check my [CNN example](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Estimator/MNISTClassifier/CNN) for the MNIST dataset and the [official documentation](https://www.tensorflow.org/extend/estimators).
 
-When constructing your `model_fn()`, you only need to make one adaption in order to being able to save your model to a `SavedModel`. You must specify the `export_outputs` element of the `tf.estimator.EstimatorSpec` return value, if the `model_fn()` is called in prediction mode. The `export_outputs` is a dict of {name: output} describing the output signatures to be exported, where output is any `ExportOutput`, such as `PredictOutput` or `ClassificationOutput`. As explained earlier, the `ClassificationOutput` doesn't really work for our purpose, so I am going with a `PredictOutput`:
+When constructing your `model_fn()`, you only need to make one adaption in order to being able to save your model to a `SavedModel`. You must specify the `export_outputs` element of the `tf.estimator.EstimatorSpec` return value, if the `model_fn()` is called in prediction mode. The `export_outputs` is a dictionary of {name: output} describing the output signatures to be exported, where output is any `ExportOutput`, such as `PredictOutput` or `ClassificationOutput`. As explained earlier, the `ClassificationOutput` doesn't really work for our purpose, so I am going with a `PredictOutput`:
 ```python
     if mode == tf.estimator.ModeKeys.PREDICT:
         predictions = {"score": tf.identity(output_layer, "output")} #rename the output_layer to "output"

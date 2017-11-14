@@ -81,15 +81,15 @@ For my example, I additionally store some meta data about the classifier in the 
 
 ### Build a RESTful API
 
-My example apllication will again respond to two routes:
+My example application will again respond to two routes:
 
 * When calling `localhost:8000/`, you will get a JSON returned, representing the prediction for the Data/Own_dat/MNIST-0.png file. This route is used for demonstration purposes only.
 * The actually important route is `localhost:8000/predict`, which is used for the actual prediction request. 
 #### How /predict works: 
-This route will expect a JSON as request parameter, containing a 2-dimensional integer array, representing the pixel values of a grayscale picture. Inside the 2D array, each array in the second dimension will contain the pixel information of a *row* of the picture (so the array will be of shape: [heigth][length])
+This route will expect a JSON as request parameter, containing a 2-dimensional integer array, representing the pixel values of a grayscale picture. Inside the 2D array, each array in the second dimension will contain the pixel information of a *row* of the picture (so the array will be of shape: [height][length])
 
 ##### Get request parameter:
-After getting the JSON array from the request, you will need to change it's datatype, because our image processing module `cv2` cannot handle the default of `np.int32`:
+After getting the JSON array from the request, you will need to change its datatype, because our image processing module `cv2` cannot handle the default of `np.int32`:
 ```python
 	@app.route("/predict", methods=['POST'])
 	def predict():
@@ -99,7 +99,7 @@ After getting the JSON array from the request, you will need to change it's data
 ```
 
 ##### Reshape parameters:
-Afterwards you will want to reshape the array, in order to fit into the pretrained classifier. Our classifier expects a batch of 784-vectors, where each value is a floating point in (0,1), where 0 represents white and 1 represents black. So the reshaping consists of 4 steps:
+Afterwards you will want to reshape the array, in order to fit into the pre-trained classifier. Our classifier expects a batch of 784-vectors, where each value is a floating point in (0,1), where 0 represents white and 1 represents black. So the reshaping consists of 4 steps:
 1. Resize the array to 28x28: 
 ```python
 	reshaped_Array = cv2.resize(pngArray, (28, 28))
@@ -126,7 +126,7 @@ Now we can use the prepared input parameter (`reshaped_array`) for prediction, u
 ```
 As a different classifier could return more than one output value as the result of a prediction, the `sklearn` functions will always return a list of values. Since we know that our model will only return one output value, we can just access the first value of the list. 
 
-Finally we can send a HTTP response to the calling client, containing the meta information about the classifier and the prediction results as a JSON:
+Finally we can send an HTTP response to the calling client, containing the meta information about the classifier and the prediction results as a JSON:
 ```python
 	params = app.config["modelMetaData"]
 	return jsonify(_modelMetaData=params, _prediction=prediction, _probability=predProb)

@@ -1,7 +1,7 @@
 # Keras + DL4J
-This was my first approach to export a `Keras` model and import it into Java, using the `DL4J` framework. As explained [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras), I do not recommend using `Keras` and `DL4J`, as there is the possibility to extract the `Tensorflow Session` from the `Keras` model and save it as a `SavedModel`. Anyways this might be usefull at a later point in time.
+This was my first approach to export a `Keras` model and import it into Java, using the `DL4J` framework. As explained [here](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/NeuralNetwork/Keras), I do not recommend using `Keras` and `DL4J`, as there is the possibility to extract the `Tensorflow Session` from the `Keras` model and save it as a `SavedModel`. Anyways this might be useful at a later point in time.
 
-### Prerequisits
+### Prerequisites
 Add the following dependencies to your `pom.xml`:
 ```xml
     <dependency>
@@ -27,7 +27,7 @@ Add the following dependencies to your `pom.xml`:
 ```
 
 ### Import
-After defining the directory in which to find the saved .h5 file, importing a `Keras Sequential` is done with this oneliner:
+After defining the directory in which to find the saved .h5 file, importing a `Keras Sequential` is done with this one-liner:
 ```java
     MultiLayerNetwork network = KerasModelImport.importKerasSequentialModelAndWeights(importFile);
 

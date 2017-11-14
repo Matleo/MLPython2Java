@@ -18,7 +18,7 @@ Firstly, you will have to build your `RandomForestClassifier`, and build a `skle
 Notice that you can extend the `PMMLPipeline`, by passing in a `sklearn_pandas.DataFrameMapper`, a `PCA` operation and one or more `sklearn.feature_selection` operations (see the official [example](https://github.com/jpmml/sklearn2pmml)).
 
 ## Parsing PMML
-After creating the pipeline you can call the `fit()` function on the pipline, passing in the appropriate data:
+After creating the pipeline you can call the `fit()` function on the pipline, passing in the data:
 ```python
 	mnist_pipeline.fit(train_data["data"], train_data["target"])
 ```
