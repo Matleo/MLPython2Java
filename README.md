@@ -11,7 +11,7 @@ Each sub-project itself is ordered by model type. The following models were cons
 * [Random Forest](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/RandomForest)
 
 In general, two separate approaches were evaluated:
-1. **Model as a Service**: The whole ML model is supposed to be transferred  from Python to Java, to execute predictions directly in Java
+1. **Model as a Service**: The whole ML model is supposed to be transfered from Python to Java, to execute predictions directly in Java
 2. **Inference as a Service**: The ML model is supposed to be deployed from Python and an inference service is supposed to be made available
 
 ## Getting started
@@ -41,12 +41,13 @@ To get started with using a pretrained machine learning model from Python in Jav
 	```
 4. Now that everything runs in Python as it should, we can start using the saved model for predictions in Java. For that you can run the execution class [MNISTClassifier](https://github.com/Matleo/MLPython2Java/blob/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow/MNIST/MNISTClassifier.java). If you don't pass any program arguments, it will load the saved model from the Tensorflow Feed Forward Neural Network, calculate the accuracy of the model with the MNIST dataset, classify a few previously saved .png files from the [data](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder and compare the results against the Python results. If everything worked correctly, the tail of the output will look something like:
 	```java
-    	***Success***
-		The calculated accuracy on the MNIST dataset in Java and Python match
-
-		Comparing Java and Python picture predictions...
-		***Success***
+	Comparing Java and Python results:
+	***Success***
+		The calculated accuracy on the MNIST dataset in Java and Python match!
+	***Success***
 		The Python and Java predictions match!
+
+	The import of the model was successfully completed!
     ```
 	For more information on how to use this program, please pass in `-h` as program parameter or refer to the [README](https://github.com/Matleo/MLPython2Java/tree/develop/MaschineLearning4J/src/main/java/NeuralNetwork/Tensorflow) 
 

@@ -108,7 +108,7 @@ public class SavedModel {
      */
     protected boolean evaluate(String importDir, String picDir) throws IOException {
 
-        System.out.println("\nEvaluating against the MNSIT Dataset...");
+        System.out.println("\nCalculating Java results of the MNSIT Dataset(this might take a while)...");
         Evaluation evaluator = new Evaluation(10); //create an evaluation object with 10 possible classes
         DataSetIterator mnistTest = new MnistDataSetIterator(1, false, 123);
 
@@ -161,13 +161,14 @@ public class SavedModel {
             e.printStackTrace();
         }
 
-        System.out.println(evaluator.stats());
+        //System.out.println(evaluator.stats());
+        System.out.println("\nComparing Java and Python results:");
         boolean match = (javAccuracy == pyAccuracy);
         if (match) {
-            System.out.println("\n***Success***");
-            System.out.println("The calculated accuracy on the MNIST dataset in Java and Python match");
+            System.out.println("***Success***");
+            System.out.println("\tThe calculated accuracy on the MNIST dataset in Java and Python match!");
         } else {
-            System.out.println("\nSomething went wrong, the accuracy calculated in java and python don't match");
+            System.out.println("Something went wrong, the accuracy calculated in java and python don't match");
             System.out.println("Java accuracy: " + javAccuracy);
             System.out.println("Python accuracy: " + pyAccuracy);
         }
@@ -175,6 +176,7 @@ public class SavedModel {
         boolean picPredictionsMatch = TensorflowUtilities.compareMaps(picPredictionsJ, picPredictionsP);
 
         if (match && picPredictionsMatch) {
+            System.out.println("\nThe import of the model was successfully completed!");
             return true;
         } else {
             return false;

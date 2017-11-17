@@ -105,7 +105,7 @@ After we have prepared the data that we want to feed into our model, we can now 
 	TargetField targetField = targetFields.get(0); //we only have one output value
 	FieldName targetFieldName = targetField.getName();
 	
-    ProbabilityDistribution targetFieldValue = (ProbabilityDistribution) results.get(targetFieldName);
+	ProbabilityDistribution targetFieldValue = (ProbabilityDistribution) results.get(targetFieldName);
 	Object predictionObj = targetFieldValue.getResult();
 	int prediction = ((Double) predictionObj).intValue();
 ```
@@ -113,7 +113,7 @@ After we have prepared the data that we want to feed into our model, we can now 
 #### Comparing Java and Python predictions
 In order to know if the entire export and import of the Python model was succesful, I am comparing the predictions for the saved pictures in the [Data/Own_dat](https://github.com/Matleo/MLPython2Java/tree/develop/Maschine%20Learning/Data/Own_dat) folder. 
 
-One problem I ran into was that reading the grayscale pixel values of a png file in Python and Java will give you different results, which makes it impossible to correctly compare the Java and Python models. Therefore, I used this Python [script](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/Data/Own_dat/saveJsons.py), to read the png files into JSON arrays, so that I could later use these JSON arrays as input for the Python and Java model for comparison. 
+One problem I ran into was, that reading the grayscale pixel values of a png file in Python and Java will give you different results, which makes it impossible to correctly compare the Java and Python models. Therefore, I used this Python [script](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/Data/Own_dat/saveJsons.py), to read the png files into JSON arrays, so that I could later use these JSON arrays as input for the Python and Java model for comparison. 
 
 As I saved the predictions from the original Python model into a `statistics.json` file, I can now read these predictions, make new predictions in Java, using the `Evaluator` just like above, and finally compare these predictions.
 
