@@ -60,7 +60,7 @@ public class MNISTClassifier {
 
         options.addOption(new Option("h", "help", false, "print this info message again"));
         options.addOption(new Option("r", "use-R", false, "pass, if the pmml you want to load is from a model, created with R"));
-        options.addOption(new Option("n", "n-trees", true, "number of decision trees that were used to create the PMML. Please check for which number of trees, you have a valid PMML file on your system. Default value will be 50"));
+        options.addOption(new Option("n", "n-trees", true, "number of decision trees that were used to create the PMML. Please check for which number of trees, you have a valid PMML file on your system. Default value will be 10"));
         options.addOption(new Option("p", "picture", true, "name of the picture, to predict it's displayed digit. <Arg> can either be a full path or a file in the Data/Own_dat directory of this project. Default value will be Data/Own_dat/MNIST-7.png"));
         options.addOption(new Option("c", "compare", false, "pass, if you want the results from Python and Java to be compared for sameness. This action cannot be performed for the R-technology"));
         options.addOption(new Option("b", "benchmark-test", false, "pass, if you want to run and print the benchmark test"));

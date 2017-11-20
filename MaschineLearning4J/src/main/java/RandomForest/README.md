@@ -39,7 +39,7 @@ usage: MNISTClassifier
  -n,--n-trees <arg>    number of decision trees that were used to create
                        the PMML. Please check for which number of trees,
                        you have a valid PMML file on your system. Default
-                       value will be 50
+                       value will be 10
  -p,--picture <arg>    name of the picture, to predict it's displayed
                        digit. <Arg> can either be a full path or a file in
                        the Data/Own_dat directory of this project. Default
@@ -56,11 +56,11 @@ The program will do the following 4 things:
 
 If you do not pass in any program arguments, the console output should look like following: 
 ```java
-Creating an evaluator from PMML file: ../Maschine Learning/RandomForest/MaaS/export/RandomForestMNIST_50.pmml. 
+Creating an evaluator from PMML file: ../Maschine Learning/RandomForest/MaaS/export/RandomForestMNIST_10.pmml. 
 Depending on the size of the RandomForest, this might take a while...
-Finished creating the evaluator! Took 4428ms to finish.
+Finished creating the evaluator! Took 5375ms to finish.
 
-The prediction call for given png, using the Random Forest, took 523ms. (reading the pixel information included)
+The prediction call for given png, using the Random Forest, took 581ms. (reading the pixel information included)
 --> The given picture at "../Maschine Learning/Data/Own_dat/MNIST-7.png" is probably a: 7
 ```
 
