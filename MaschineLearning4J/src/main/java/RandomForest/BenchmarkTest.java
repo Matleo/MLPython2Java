@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 
 public class BenchmarkTest {
     private RandomForestWrapper randomForest;
-    private int iterations;
+    private int iterations; //how many predictions
     private long loadingTime;
     private String n_estimators;
     private List<Long> predictionTimes = new LinkedList<>();
@@ -40,6 +40,7 @@ public class BenchmarkTest {
         this.loadingTime = loadingTime;
     }
 
+    //run predictions (as many as passed with "iterations")
     public void run() {
         System.out.println("\nRunning benchmark test now...");
         DataSetIterator mnistTest = null;
