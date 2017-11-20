@@ -13,7 +13,7 @@ public class MNISTClassifier {
     private final static String picName = "MNIST-7.png"; //default
     private static String picPath = picDir + picName; //default
 
-    private static String n_estimators = "50";//default
+    private static String n_estimators = "10";//default
     private static String importDir = importDirPython;//default
     private static String pmmlFile = importDir + "RandomForestMNIST_" + n_estimators + ".pmml";//default
     private static boolean compare = false; //if results in java/python should be compared
@@ -100,11 +100,11 @@ public class MNISTClassifier {
                 System.exit(1);
             }
         }
-        if (line.hasOption("e")) {
+        if (line.hasOption("c")) {
             if (importDir.equals(importDirPython)) {
                 compare = true;
             } else {
-                System.out.println("You cannot use the -e option with the R-technology. The Program will skip this step.");
+                System.out.println("You cannot use the -c option with the R-technology. The Program will skip this step.");
             }
         }
         if (line.hasOption("p")) {
