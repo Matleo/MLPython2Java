@@ -5,6 +5,7 @@ from time import time
 import random
 from sklearn2pmml import PMMLPipeline
 from sklearn2pmml import sklearn2pmml
+from sklearn.externals import joblib
 import json
 
 
@@ -57,15 +58,16 @@ def saveStatistics(test_data):
 
 
 if __name__ == "__main__":
-    n_estimators = 500
+    n_estimators = 50
+    min_split = 2
     export_dir = "./export/"
 
     train_data, test_data = load_mnist(10000)
     print("Loaded MNIST data and split into train and test data.")
 
-    # training takes 345s for (1000,50) -> pmml is 1,2gb big
-    # training takes 38s for (100,50) -> pmml is 0,12gb big
-    clf = RandomForestClassifier(n_estimators=n_estimators, min_samples_split=50)
+    # training takes 224s for n=(500,5) -> pmml is 1,88gb big
+    # training takes 22s for n=(50,2) -> pmml is 0,26gb big
+    clf = RandomForestClassifier(n_estimators=n_estimators, max_features=28, criterion="gini", min_samples_split=min_split)
     mnist_pipeline = PMMLPipeline([
         ("classifier", clf)
     ])
@@ -74,6 +76,10 @@ if __name__ == "__main__":
     mnist_pipeline.fit(train_data["data"], train_data["target"])
     print("The training took %s seconds to finish.\n" % (round(time() - t0, 2)))
 
+    # convertion takes 808s for n=(500,5)
+    # convertion takes 61s for n=(50,2)
+    t0 = time()
     sklearn2pmml(mnist_pipeline, export_dir + "RandomForestMNIST_" + str(n_estimators) + ".pmml", with_repr=True)
+    print("The convertion took %s seconds to finish.\n" % (round(time() - t0, 2)))
 
     saveStatistics(test_data)

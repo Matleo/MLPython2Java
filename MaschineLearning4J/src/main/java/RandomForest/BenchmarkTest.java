@@ -8,6 +8,7 @@ import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -17,21 +18,26 @@ import java.time.LocalDateTime;
 public class BenchmarkTest {
     private RandomForestWrapper randomForest;
     private int iterations;
+    private long loadingTime;
     private String n_estimators;
     private List<Long> predictionTimes = new LinkedList<>();
 
-    //everything in microseconds
+    //everything stored in microseconds. HTML print out is in miliseconds
     private double mean;
     private long median;
+    private long q75;
+    private long q90;
+    private long q99;
     private long min;
     private long max;
     private double std;
 
 
-    public BenchmarkTest(RandomForestWrapper rf, int iterations, String n_estimators) {
+    public BenchmarkTest(RandomForestWrapper rf, int iterations, String n_estimators, long loadingTime) {
         this.randomForest = rf;
         this.iterations = iterations;
         this.n_estimators = n_estimators;
+        this.loadingTime = loadingTime;
     }
 
     public void run() {
@@ -49,7 +55,7 @@ public class BenchmarkTest {
 
             long time0 = System.nanoTime();
             int prediction = randomForest.predict(sample);
-            long timeDiff = (System.nanoTime() - time0) / 1000; //in microsekunde
+            long timeDiff = (System.nanoTime() - time0) / 1000; //in microsecond
             predictionTimes.add(timeDiff);
         }
 
@@ -78,11 +84,31 @@ public class BenchmarkTest {
         //median:
         Long[] numArray = new Long[predictionTimes.size()];
         predictionTimes.toArray(numArray);
-        Arrays.sort(numArray);
+        Arrays.sort(numArray); //ascending
         if (numArray.length % 2 == 0)
             median = (numArray[numArray.length / 2] + numArray[numArray.length / 2 - 1]) / 2;
         else
             median = numArray[numArray.length / 2];
+
+        //q75:
+        int index75 = numArray.length - (numArray.length / 4);
+        if (numArray.length % 4 == 0)
+            q75 = (numArray[index75] + numArray[index75 - 1]) / 2;
+        else
+            q75 = numArray[index75];
+        //q90:
+        int index90 = numArray.length - (numArray.length / 10);
+        if (numArray.length % 10 == 0)
+            q90 = (numArray[index90] + numArray[index90 - 1]) / 2;
+        else
+            q90 = numArray[index90];
+        //q99:
+        int index99 = numArray.length - (numArray.length / 100);
+        if (numArray.length % 100 == 0)
+            q99 = (numArray[index99] + numArray[index99 - 1]) / 2;
+        else
+            q99 = numArray[index99];
+
 
         //min max:
         min = Collections.min(predictionTimes);
@@ -112,26 +138,37 @@ public class BenchmarkTest {
                 "    <tr style=\"text-align: right;\">" +
                 "      <th>mean</th>" +
                 "      <th>median</th>" +
+                "      <th>90%-quantile</th>" +
+                "      <th>99%-quantile</th>" +
                 "      <th>min</th>" +
                 "      <th>max</th>" +
                 "      <th>std deviation</th>" +
                 "    </tr>" +
                 "  </thead>";
+        DecimalFormat f = new DecimalFormat("##0.000");
+        System.out.println();
         htmlString += "<tbody>" +
                 "    <tr>" +
-                "      <td>" + (int) mean + "</td>" +
-                "      <td>" + median + "</td>" +
-                "      <td>" + min + "</td>" +
-                "      <td>" + max + "</td>" +
-                "      <td>" + (int) std + "</td>" +
+                "      <td>" + mean/1000 + "</td>" +
+                "      <td>" + ((double)median)/1000 + "</td>" +
+                "      <td>" + ((double)q90)/1000 + "</td>" +
+                "      <td>" + ((double)q99)/1000 + "</td>" +
+                "      <td>" + ((double)min)/1000 + "</td>" +
+                "      <td>" + ((double)max)/1000 + "</td>" +
+                "      <td>" + f.format(std/1000) + "</td>" +
                 "    </tr>" +
                 "   </tbody></table>";
-        htmlString += "<p>(All values in microseconds)</p>";
+        htmlString += "<ul>";
+        htmlString += "<li>All values in miliseconds</li>";
+        htmlString += "<li>Time was measured between having the float[] of an image and getting the prediction output</li>";
+        htmlString += "<li>Time needed to load the model from PMML to a jpmml.evaluator object: "+loadingTime+"ms </li>";
+        htmlString += "<li>"+iterations+" samples were used to calculate these statistics</li>";
+        htmlString += "</ul>";
         htmlString += "</body></html>";
 
         try {
             FileUtils.writeStringToFile(htmlFile, htmlString);
-            System.out.println("Printed benchmark results to: MaschineLearning4J/"+filepath);
+            System.out.println("Printed benchmark results to: "+filepath);
         } catch (IOException e) {
             e.printStackTrace();
         }

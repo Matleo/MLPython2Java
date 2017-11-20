@@ -26,8 +26,8 @@ public class MNISTClassifier {
         System.out.println("Creating an evaluator from PMML file: " + pmmlFile + ". \nDepending on the size of the RandomForest, this might take a while...");
         long time = System.nanoTime();
         RandomForestWrapper randomForest = new RandomForestWrapper(pmmlFile, picDir);
-        long timeDifference = (System.nanoTime() - time) / 1000000;
-        System.out.println("Finished creating the evaluator! Took " + timeDifference + "ms to finish.");
+        long loadingTimeDifference = (System.nanoTime() - time) / 1000000;
+        System.out.println("Finished creating the evaluator! Took " + loadingTimeDifference + "ms to finish.");
         //10->3,3s | 100->5,2s | 1000->40s
 
         if (compare) {
@@ -37,13 +37,13 @@ public class MNISTClassifier {
 
         time = System.nanoTime();
         int prediction = randomForest.predict(picPath, false);
-        timeDifference = (System.nanoTime() - time) / 1000000;
+        long timeDifference = (System.nanoTime() - time) / 1000000;
         System.out.println("\nThe prediction call for given png, using the Random Forest, took " + timeDifference + "ms. (reading the pixel information included)");
         //if only prediction: 10->1ms | 100->4ms |1000->17ms (loading is approximatly 160ms)
         System.out.println("--> The given picture at \"" + picPath + "\" is probably a: " + prediction);
 
         if (benchmark) {
-            BenchmarkTest test = new BenchmarkTest(randomForest, 2000, n_estimators);
+            BenchmarkTest test = new BenchmarkTest(randomForest, 2000, n_estimators, loadingTimeDifference);
             test.run();
         }
     }
@@ -85,7 +85,11 @@ public class MNISTClassifier {
             pmmlFile = importDir + "RandomForestMNIST_" + n_estimators + ".pmml";
         }
         if (line.hasOption("n")) {
-            pmmlFile = importDir + "RandomForestMNIST_" + line.getOptionValue("n") + ".pmml";
+            String n = line.getOptionValue("n");
+            if(Integer.valueOf(n)>50){
+                System.out.println("[Warning]: Running this program with a big random forest might require you to increase the JVM's memory size using the JVM -Xmx argument...\n");
+            }
+            pmmlFile = importDir + "RandomForestMNIST_" + n + ".pmml";
             File f = new File(pmmlFile);
             if (f.exists() && !f.isDirectory()) {
                 n_estimators = line.getOptionValue("n");

@@ -32,7 +32,7 @@ But instead of doing this, we now want to export the trained `RandomForestClassi
 	export_file = "RandomForestMNIST.pmml"
 	sklearn2pmml(mnist_pipeline, export_file)
 ```
-This will initiate the process to create the PMML representation of the classifier and store it to the newly created "RandomForestMNIST.pmml" file in the working directory. This might take a while to finish. 
+This will initiate the process to create the PMML representation of the classifier and store it to the newly created "RandomForestMNIST.pmml" file in the working directory. This might take a while to finish. When trying to convert a very big random forest (happend for n_estimators=500, min_samples_split=2), your JVM might run out of heap memory space. In this case, you will need to use the [jpmml-sklearn](https://github.com/jpmml/jpmml-sklearn) Java command line application directly, and increase the heap space by adding the `-Xmx` argument.
 
 Note that I am saving some more statistics in my [example](https://github.com/Matleo/MLPython2Java/blob/develop/Maschine%20Learning/RandomForest/MaaS/train.py), which include the predictions of some stored pictures in the Data/Own_dat directory. These predictions will later be compared with the Java results, to determine if the import worked correctly.
 

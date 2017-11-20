@@ -64,6 +64,8 @@ The prediction call for given png, using the Random Forest, took 523ms. (reading
 --> The given picture at "../Maschine Learning/Data/Own_dat/MNIST-7.png" is probably a: 7
 ```
 
+Depending on the size of your random forest, the resulting computational cost can be excessively high. As you might have read [here](https://github.com/IndustrialML/Python2Java/tree/master/Maschine%20Learning/RandomForest/MaaS#parsing-pmml), parsing a large random forest to PMML will require you to increase the JVM's heap memory size. The same goes for using such a random forest and can be achieved by passing the `-Xmx` argument to the JVM, for a random forest with 500 trees, increasing the size to 12GB worked fine.
+
 ## How it works
 ### Loading an Evaluator from PMML
 When instantiating a `RandomForestWrapper.java`, you will have to pass a String to the constructor, representing the path of the PMML file from where to load the saved Random Forest. From that file, the `Evaluator` can be loaded as follows: (I have omitted the try-catch blogs for readability)
