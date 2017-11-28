@@ -5,7 +5,6 @@ from time import time
 import random
 from sklearn2pmml import PMMLPipeline
 from sklearn2pmml import sklearn2pmml
-from sklearn.externals import joblib
 import json
 
 

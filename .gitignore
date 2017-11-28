@@ -15,6 +15,7 @@ Maschine Learning/RandomForest/MaaS/export/*.json
 !Maschine Learning/RandomForest/MaaS/export/statistics_10.json
 MaschineLearning4J/src/main/java/RandomForest/IRISClassifier.java
 MaschineLearning4J/src/main/java/NeuralNetwork/DL4J/DL4Jexample.java
+MaschineLearning4J/src/main/java/AzureInferenceClient.java
 */.idea/
 Maschine Learning/NeuralNetwork/Serving/Tensorflow_Serving/
 
